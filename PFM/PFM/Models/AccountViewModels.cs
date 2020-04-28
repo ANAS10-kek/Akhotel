@@ -6,24 +6,8 @@ namespace PFM.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Courrier électronique")]
+        [Display(Name = "USer Name")]
         public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Phone]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
     }
 
     public class ExternalLoginListViewModel

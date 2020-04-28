@@ -11,7 +11,6 @@ namespace PFM.Models
     public class ApplicationUser : IdentityUser
     {
 
-        [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
