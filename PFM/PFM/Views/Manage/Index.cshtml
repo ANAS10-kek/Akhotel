@@ -1,87 +1,90 @@
-﻿@model PFM.Models.IndexViewModel
+﻿@model PFM.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Gérer";
+    ViewBag.Title = "Mange Account";
 }
+<div class="container-lg my-5">
+    <div class="container col-lg-12 d-flex">
 
-<h2>@ViewBag.Title.</h2>
+        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
+            <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
+                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
+                <li class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center">
+                    <span class="text-dark"><i class="fas fa-user-cog pr-2 "></i>Genral</span>
+                    @if (Model.PhoneNumber == null || Model.Email == null)
+                    {
+                        <span class="badge badge-danger badge-pill">!</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
+                    }
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Changer les paramètres de votre compte</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Mot de passe :</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Changer votre mot de passe", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Créer", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>Connexions externes :</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Gérer", "ManageLogins") ]
-        </dd>
-        @*
-            Les numéros de téléphone peuvent être utilisés comme second facteur de vérification dans un système d'authentification à 2 facteurs.
-             
-             Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
-                pour plus de détails sur la configuration de cette application ASP.NET afin qu'elle prenne en charge l'utilisation de l'authentification à 2 facteurs à l'aide de SMS.
-             
-             Décommentez le bloc suivant après avoir configuré l'authentification à 2 facteurs
-        *@
-        @*  
-            <dt>Numéro de téléphone :</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span class="text-dark"><i class="fas fa-user-shield pr-2"></i>Security</span>
+                    @if (Model.PasswordHash == null)
                     {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Supprimer" class="btn-link" />]</text>
+                        <span class="badge badge-danger badge-pill">!</span>
                     }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
-        <dt>Authentification à 2 facteurs :</dt>
-        <dd>
-            <p>
-                Aucun fournisseur d'authentification à deux facteurs n'est configuré. Consultez <a href="https://go.microsoft.com/fwlink/?LinkId=403804">cet article</a>
-                pour plus de détails sur la configuration de cette application ASP.NET afin qu'elle prenne en charge l'authentification à deux facteurs.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    else
                     {
-                        @Html.AntiForgeryToken()
-                        <text>Activé
-                        <input type="submit" value="Désactiver" class="btn btn-link" />
-                        </text>
+                        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
                     }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-9 container pt-3">
+            <h2>General Account Settings</h2>
+            <hr />
+            <ul class="list-group col-lg-12 p-0 m-0">
+                <li class="list-group-item py-3 col-lg-12  px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                    <span class="pl-1 font-weight-bold col">Username</span>
+                    <span class="col text-center">@Html.DisplayFor(m => m.UserName)</span>
+                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                </li>
+
+                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                    <span class="pl-1 font-weight-bold col">Phone Number</span>
+                    @if (Model.PhoneNumber == null)
                     {
-                        @Html.AntiForgeryToken()
-                        <text>Désactivé
-                        <input type="submit" value="Activer" class="btn btn-link" />
-                        </text>
+                        <span class="col text-center text-danger">
+                        Empty    <i class="fas fa-exclamation-circle "></i>
+                        </span>
                     }
-                }*@
-        </dd>
-    </dl>
+                    else
+                    {
+                        <span class="col text-center text-dark">
+                            @Html.DisplayFor(m => m.PhoneNumber)
+                        </span>
+                    }
+
+                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                </li>
+
+                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                    <span class="pl-1 font-weight-bold col">Email</span>
+                    @if (Model.Email == null)
+                    {
+                        <span class="col text-center text-danger">
+                            <i class="fas fa-exclamation-circle "></i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="col text-center text-dark">
+                            @Html.DisplayFor(m => m.Email)
+                        </span>
+                    }
+                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                </li>
+                <li class="list-group-item py-3 px-2  d-flex justify-content-between" style="background-color: #e8e7e3;">
+                    <span class="pl-1 font-weight-bold col">Other informations</span>
+                    <span class="col text-center">Your Address,country,City...</span>
+                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>

@@ -4,9 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mon application ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - AK Hotel</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Long+Cang&display=swap" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet" />
@@ -40,10 +39,8 @@
                 <li class="nav-item  pr-3">
                     <a class="nav-link " href="About.html">About</a>
                 </li>
-
-
             </ul>
-            @Html.Partial("_LoginPartial",new PFM.Models.IndexViewModel())
+            @Html.Partial("_LoginPartial", new PFM.Models.IndexViewModel())
         </div>
     </nav>
     <div class="body-content m-0 p-0">
@@ -164,11 +161,9 @@
             </div>
         </footer>
     </section>
-    @Html.Partial("_OngletContact", new PFM.Models.MailViewModel())
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Html.Partial("_OngletContact",new PFM.Models.MailViewModel())
     <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
 </body>
 </html>

@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Register";
 }
-<link href="~/Content/style-offers.css" rel="stylesheet" />
-
+<link href="~/Content/StylePageInscription.css" rel="stylesheet" />
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal col-md-6 m-auto py-5 mt-4", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -16,34 +15,25 @@
         Please fill out the user form for this site below and click on the Register button to confirm the connection.
     </p>
     <div class="div-form col-lg-12  p-0">
-        @Html.LabelFor(m => m.Email, new { @class = "required labelinput" })
-        @Html.TextBoxFor(m => m.Email, new { @class = "col-lg-12",@disabled="true" })
-    </div>
-    <div class="div-form col-lg-12  p-0">
-        @Html.LabelFor(m => m.UserName, new { @class = "required labelinput" })
-        @Html.TextBoxFor(m => m.UserName, new { @class = "col-lg-12" })
-    </div>
-    <div class="div-form col-lg-12 p-0">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "required labelinput" })
-        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "col-lg-12 " })
-    </div>
-    <div class="div-form col-lg-12 p-0">
-        @Html.LabelFor(m => m.Password, new { @class = "required labelinput" })
-        <div class="input-group col-lg-12 p-0">
-            @Html.PasswordFor(m => m.Password, new { @class = "passinput" })
-            <span class="input-group-append p-0">
-                <span class="icon-pass input-group-text px-4"></span>
-            </span>
+        <div class="div-form col-lg-12 p-0 ">
+            @Html.LabelFor(m => m.Email, new { @class = "required labelinput" })
+            <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Email, new { @class = "input100" })
+            </div>
+        </div>
+        <div class="div-form col-lg-12 p-0 ">
+            @Html.LabelFor(m => m.Username, new { @class = "required labelinput" })
+            <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Username, new { @class = "input100" })
+            </div>
         </div>
     </div>
     <div class="div-form col-lg-12 p-0">
         <label></label>
-        <button class="btn font-weight-bold col-lg- d-flex justify-content-center align-items-center w-100" style="background-color:#DF6C4F;height:43px;color:white;font-size:1.3rem;" type="submit"><span>Register</span></button>
+        <button class="btn font-weight-bold col-lg- d-flex justify-content-center align-items-center w-100" style="background-color:#DF6C4F;height:43px;color:white;font-size:1.3rem;" type="submit"><span>Continue</span></button>
     </div>
 }
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 <script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/MyScripts/DisplayPassword.js"></script>

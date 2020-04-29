@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -49,29 +50,39 @@ namespace PFM.Controllers
                 _userManager = value;
             }
         }
-
+        private ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(string id)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été changé."
-                : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a été défini."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Votre fournisseur d'authentification à 2 facteurs a été défini."
-                : message == ManageMessageId.Error ? "Une erreur s'est produite."
-                : message == ManageMessageId.AddPhoneSuccess ? "Votre numéro de téléphone a été ajouté."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Votre numéro de téléphone a été supprimé."
-                : "";
+            id = User.Identity.GetUserId().ToString() ;
+            //    ViewBag.StatusMessage =
+            //        message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été changé."
+            //        : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a été défini."
+            //        : message == ManageMessageId.SetTwoFactorSuccess ? "Votre fournisseur d'authentification à 2 facteurs a été défini."
+            //        : message == ManageMessageId.Error ? "Une erreur s'est produite."
+            //        : message == ManageMessageId.AddPhoneSuccess ? "Votre numéro de téléphone a été ajouté."
+            //        : message == ManageMessageId.RemovePhoneSuccess ? "Votre numéro de téléphone a été supprimé."
+            //        : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            //    var userId = User.Identity.GetUserId();
+            //    var model = new IndexViewModel
+            //    {
+            //        HasPassword = HasPassword(),
+            //        PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+            //        TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+            //        Logins = await UserManager.GetLoginsAsync(userId),
+            //        BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            //    };
+            if (id == null)
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser model = db.Users.Find(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
             return View(model);
         }
 

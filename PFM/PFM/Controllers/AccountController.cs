@@ -87,7 +87,7 @@ namespace PFM.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Tentative de connexion non valide.");
+                    ModelState.AddModelError("", "Invalid connection attempt.h");
                     return View(model);
             }
         }
@@ -130,7 +130,7 @@ namespace PFM.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Code non valide.");
+                    ModelState.AddModelError("", "Invalid code.");
                     return View(model);
             }
         }
@@ -297,7 +297,6 @@ namespace PFM.Controllers
             {
                 return View();
             }
-
             // Générer le jeton et l'envoyer
             if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
@@ -331,7 +330,7 @@ namespace PFM.Controllers
                     // Si l'utilisateur n'a pas de compte, invitez alors celui-ci à créer un compte
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email,UserName=loginInfo.DefaultUserName});
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Username=loginInfo.DefaultUserName,Email=loginInfo.Email});
             }
         }
 
@@ -354,8 +353,8 @@ namespace PFM.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber=model.PhoneNumber};
-                var result = await UserManager.CreateAsync(user,model.Password);
+                var user = new ApplicationUser { UserName = model.Username,Email=model.Email };
+                var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     if (result.Succeeded)

@@ -6,8 +6,13 @@ namespace PFM.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "USer Name")]
+        [Display(Name = "Courrier électronique")]
+        [EmailAddress]
         public string Email { get; set; }
+ 
+        [Required]
+        [Display(Name = "UserName")]
+        public string Username { get; set; }
     }
 
     public class ExternalLoginListViewModel
