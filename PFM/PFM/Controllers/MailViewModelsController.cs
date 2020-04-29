@@ -72,10 +72,6 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
-
-        // POST: MailViewModels/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email_M,Name_M,Subject_M,Message_M")] MailViewModel mailViewModel)
@@ -88,7 +84,6 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
-
         // GET: MailViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,7 +98,6 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
-
         // POST: MailViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
