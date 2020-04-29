@@ -8,30 +8,7 @@
 
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
-                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
-                <li class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center">
-                    <span class="text-dark"><i class="fas fa-user-cog pr-2 "></i>Genral</span>
-                    @if (Model.PhoneNumber == null || Model.Email == null)
-                    {
-                        <span class="badge badge-danger badge-pill">!</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
-                    }
-
-                </li>
-                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                    <span class="text-dark"><i class="fas fa-user-shield pr-2"></i>Security</span>
-                    @if (Model.PasswordHash == null)
-                    {
-                        <span class="badge badge-danger badge-pill">!</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
-                    }
-                </li>
+                @Html.Partial("_MenuRightSide",new PFM.Models.ApplicationUser())
             </ul>
         </div>
         <div class="col-lg-9 container pt-3">
@@ -41,7 +18,7 @@
                 <li class="list-group-item py-3 col-lg-12  px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col">Username</span>
                     <span class="col text-center">@Html.DisplayFor(m => m.UserName)</span>
-                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                    <span class="col text-right">@Html.ActionLink("Edit", "editUsername", "Manage")</span>
                 </li>
 
                 <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">

@@ -425,6 +425,8 @@
     <Content Include="Views\Shared\_OngletContact.cshtml" />
     <Content Include="Views\EatDrink\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Manage\_MenuRightSide.cshtml" />
+    <Content Include="Views\Manage\editUsername.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

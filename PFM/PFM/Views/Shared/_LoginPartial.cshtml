@@ -12,24 +12,43 @@
             </li>
             <li class="nav-item pr-3"><a class="nav-link" title="Logout" href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt"></i></a></li>
         </ul>*@
-        <div class="dropdown navbar-nav">
+    <div class="dropdown navbar-nav">
+        @if (Model.PhoneNumber == null || Model.Email == null)
+        {
             <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @User.Identity.GetUserName().Substring(0, 2).ToUpper()
+                <span class="badge badge-danger badge-pill">!</span>
             </button>
             <div class="dropdown-menu" style="left: -250% !important;" aria-labelledby="dropdownMenuButton">
                 <span class="d-flex pl-1 align-items-center">
                     <i class="far fa-2x fa-id-badge"></i>
-                    @Html.ActionLink("Mange profil", "Index", "Manage",routeValues:User.Identity.GetUserId().ToString(), htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
+                    @Html.ActionLink("Mange profil", "Index", "Manage", routeValues: User.Identity.GetUserId().ToString(), htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
                 </span>
                 <div class="dropdown-divider"></div>
                 <span class="d-flex pl-1 align-items-center">
                     <i class="fas fa-2x fa-sign-out-alt"></i>
                     <a class="dropdown-item" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                 </span>
-               
-               
             </div>
-        </div>
+        }
+        else
+        {
+            <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @User.Identity.GetUserName().Substring(0, 2).ToUpper()
+            </button>
+            <div class="dropdown-menu" style="left: -250% !important;" aria-labelledby="dropdownMenuButton">
+                <span class="d-flex pl-1 align-items-center">
+                    <i class="far fa-2x fa-id-badge"></i>
+                    @Html.ActionLink("Mange profil", "Index", "Manage", routeValues: User.Identity.GetUserId().ToString(), htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
+                </span>
+                <div class="dropdown-divider"></div>
+                <span class="d-flex pl-1 align-items-center">
+                    <i class="fas fa-2x fa-sign-out-alt"></i>
+                    <a class="dropdown-item" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                </span>
+            </div>
+        }
+    </div>
     }
 }
 else
