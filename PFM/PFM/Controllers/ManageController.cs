@@ -53,9 +53,9 @@ namespace PFM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(string id)
+        public ActionResult Index(string id)
         {
-            id = User.Identity.GetUserId().ToString() ;
+            id = User.Identity.GetUserId().ToString();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

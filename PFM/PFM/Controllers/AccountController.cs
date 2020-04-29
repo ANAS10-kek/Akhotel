@@ -259,7 +259,6 @@ namespace PFM.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -267,6 +266,7 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
+            ControllerContext.HttpContext.Session.RemoveAll();
             // Demandez une redirection vers le fournisseur de connexions externe
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
@@ -313,7 +313,7 @@ namespace PFM.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Register");
+                return RedirectToAction("Login");
             }
             // Connecter cet utilisateur à ce fournisseur de connexion externe si l'utilisateur possède déjà une connexion
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
