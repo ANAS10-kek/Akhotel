@@ -419,7 +419,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
@@ -442,6 +441,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Manage\_MenuRightSide.cshtml" />
     <Content Include="Views\Manage\editUsername.cshtml" />
+    <Content Include="Views\Manage\editPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

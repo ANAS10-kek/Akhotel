@@ -3,8 +3,21 @@
 @{
     ViewBag.Title = "Edit Username";
 }
+<style>
+    .div-form input {
+        color: #403866;
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        background: transparent;
+        height: 40px;
+        padding: 0 10px 0 38px;
+        outline: none;
+        border: none;
+    }
+</style>
 <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
-<div class="container-lg my-5">
+<div class="container-lg mt-5">
     <div class="container col-lg-12 d-flex">
 
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
@@ -12,20 +25,28 @@
                 @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
             </ul>
         </div>
-        <div class="col-lg-9 container pt-3">
+        <div class="col-lg-9 container pt-1">
             <h2>General Account Settings</h2>
             <hr />
-
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
+            @using (Html.BeginForm("editUsername", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-5 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
             {
+                @Html.AntiForgeryToken()
+                <h4 class="pb-5">Your Current user is : <span style="color:#9cd9ee;">
+                          @Html.DisplayFor(m=>m.UserName)</span> </h4>
                 <div class="div-form col-lg-12 p-0 ">
-                    @Html.LabelFor(m => m.UserName, new { @class = "required labelinput" })
-                    <div class="wrap-input100 validate-input">
-                        @Html.EditorFor(m => m.UserName, new { @class = "input100 w-100" })
+                    @Html.LabelFor(m => m.UserName, new { @class = "required labelinput py-2" })
+                    <div class="wrap-input100 validate-input" style="width:70% !important">
+                        @Html.EditorFor(m => m.UserName, new { @class = "input100", @id = "input100", @style = "width:50% !important" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                     </div>
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
                 </div>
-                <button class="btn" type="submit">Preview of change</button>
+                <div class="row col-lg-8 d-flex justify-content-around mt-5 pt-4">
+                    <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+                    @Html.ActionLink("Cancel","Index", "Manage",new {@class= "btn btn-secondary" });
+                </div>
+
             }
-            </div>
+        </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -33,9 +34,9 @@ namespace PFM.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -316,8 +317,32 @@ namespace PFM.Controllers
         }
         public ActionResult editUsername()
         {
-            return View("editUsername");
+            var model = db.Users.Find(User.Identity.GetUserId());
+            return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult editUsername(ApplicationUser user)
+        {
+            var model = db.Users.Find(User.Identity.GetUserId());
+            if (user.UserName == null)
+            {
+                return RedirectToAction("editUsername");
+            }
+            else
+            {
+                model.UserName = user.UserName;
+            }
+            db.SaveChanges();
+            return View(model);
+        }
+        public ActionResult editPhoneNumber()
+        {
+            var model = db.Users.Find(User.Identity.GetUserId());
+            return View(model);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -330,7 +355,7 @@ namespace PFM.Controllers
             base.Dispose(disposing);
         }
 
-#region Programmes d'assistance
+        #region Programmes d'assistance
         // Utilisé pour la protection XSRF lors de l'ajout de connexions externes
         private const string XsrfKey = "XsrfId";
 
@@ -381,6 +406,6 @@ namespace PFM.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

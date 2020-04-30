@@ -1,0 +1,48 @@
+﻿@model PFM.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Edit Username";
+}
+<style>
+    .div-form input {
+        color: #403866;
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        background: transparent;
+        height: 40px;
+        padding: 0 10px 0 38px;
+        outline: none;
+        border: none;
+    }
+</style>
+<link href="~/Content/StylePageInscription.css" rel="stylesheet" />
+<div class="container-lg mt-5">
+    <div class="container col-lg-12 d-flex">
+
+        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
+            <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
+                @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+            </ul>
+        </div>
+        <div class="col-lg-9 container pt-1">
+            <h2>General Account Settings</h2>
+            <hr />
+            @if (Model.PhoneNumber == null)
+            {
+                @Html.Partial("AddPhoneNumber",new PFM.Models.AddPhoneNumberViewModel());
+
+            }
+            else
+            {
+                <br />
+                @Html.ActionLink("Change", "AddPhoneNumber")
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Supprimer" class="btn-link" />
+                }
+            }
+        </div>
+    </div>
+</div>
