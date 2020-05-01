@@ -386,7 +386,7 @@ namespace PFM.Controllers
         {
             return View();
         }
-
+        ApplicationDbContext db = new ApplicationDbContext();
         protected override void Dispose(bool disposing)
         {
             if (disposing)

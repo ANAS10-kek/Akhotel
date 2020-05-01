@@ -1,38 +1,9 @@
-﻿@model PFM.Models.IndexViewModel
-@using Microsoft.AspNet.Identity
-    
+﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto" }))
     {
-        @Html.AntiForgeryToken()
-        @*<ul class="navbar-nav ml-auto">
-            <li class="nav-item pr-3">
-                @Html.ActionLink(User.Identity.GetUserName().Substring(0, 2), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
-            </li>
-            <li class="nav-item pr-3"><a class="nav-link" title="Logout" href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt"></i></a></li>
-        </ul>*@
-    <div class="dropdown navbar-nav">
-        @if (Model.PhoneNumber == null || Model.Email == null)
-        {
-            <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @User.Identity.GetUserName().Substring(0, 2).ToUpper()
-                <span class="badge badge-danger badge-pill">!</span>
-            </button>
-            <div class="dropdown-menu" style="left: -250% !important;" aria-labelledby="dropdownMenuButton">
-                <span class="d-flex pl-1 align-items-center">
-                    <i class="far fa-2x fa-id-badge"></i>
-                    @Html.ActionLink("Mange profil", "Index", "Manage", routeValues: User.Identity.GetUserId().ToString(), htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
-                </span>
-                <div class="dropdown-divider"></div>
-                <span class="d-flex pl-1 align-items-center">
-                    <i class="fas fa-2x fa-sign-out-alt"></i>
-                    <a class="dropdown-item" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-                </span>
-            </div>
-        }
-        else
-        {
+        <div class="dropdown navbar-nav">
             <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @User.Identity.GetUserName().Substring(0, 2).ToUpper()
             </button>
@@ -47,8 +18,7 @@
                     <a class="dropdown-item" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                 </span>
             </div>
-        }
-    </div>
+        </div>
     }
 }
 else
@@ -57,15 +27,15 @@ else
         <li class="nav-item pr-3">
             @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new
             {
-                id = "registerLink",
-       @class = "nav-link"
+            id = "registerLink",
+            @class = "nav-link"
             })
         </li>
         <li class="nav-item pr-3">
-            @Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new
+            @Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new
             {
-                id = "loginLink",
-        @class = "nav-link"
+            id = "loginLink",
+            @class = "nav-link"
             })
         </li>
     </ul>

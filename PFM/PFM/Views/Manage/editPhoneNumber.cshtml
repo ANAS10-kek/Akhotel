@@ -1,5 +1,4 @@
 ﻿@model PFM.Models.ApplicationUser
-@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Edit Username";
 }
@@ -15,33 +14,108 @@
         outline: none;
         border: none;
     }
+    .btnback {
+        background-color: #9cd9ee !important;
+        color:white;
+        font-size:1.5rem;
+        justify-self:center;
+        letter-spacing:1px !important;
+    }
 </style>
 <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
 <div class="container-lg mt-5">
     <div class="container col-lg-12 d-flex">
+        @if (ViewData["JavaScriptFunction"] == null)
+        {
 
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
+        {
+            <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'PhoneNumber is Already exists'
+                    });</script>
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
+        {
+            <script>
+                    Swal.fire({
+                position: 'center',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })</script>
+        }
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
-                @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
+                @if (Model.PhoneNumber == null || Model.Email == null || Model.PasswordHash == null || !Model.EmailConfirmed || Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
+                {
+                    @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+                }
+                else
+                {
+                    @Html.Partial("_MenuRightSide_v2", new PFM.Models.ApplicationUser())
+                }
             </ul>
         </div>
         <div class="col-lg-9 container pt-1">
-            <h2>General Account Settings</h2>
+            <div class="d-flex align-content-center p-0">
+                @Html.ActionLink("Back", "Index","Manage", new { @class = "btn btnback mr-3 px-1 py-0 font-weight-bold" })
+                <h2>General Account Settings</h2>
+            </div>
+          
             <hr />
             @if (Model.PhoneNumber == null)
             {
-                @Html.Partial("AddPhoneNumber",new PFM.Models.AddPhoneNumberViewModel());
-
+                using (Html.BeginForm("editPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4 class="pb-4">
+                        Add your Number Phone <span style="color:#9cd9ee;">
+                        </span>
+                    </h4>
+                    <div class="div-form col-lg-12 p-0 ">
+                        <label class="required labelinput py-2">Number phone</label>
+                        <div class="wrap-input100 validate-input" style="width:70% !important">
+                            @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100", @id = "input100", @style = "width:50% !important" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                    </div>
+                    <div class="row col-lg-8 d-flex justify-content-around mt- pt-4">
+                        <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Add</button>
+                        @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+                    </div>
+                }
             }
             else
             {
-                <br />
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                using (Html.BeginForm("editPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" value="Supprimer" class="btn-link" />
+                    <h4 class="pb-4">
+                        Your Current PhoneNumber is : <span style="color:#9cd9ee;">
+                            @Html.DisplayFor(m => m.PhoneNumber)
+                        </span>
+                    </h4>
+                    <label class="required labelinput py-2">Number phone</label>
+                    <div class="div-form col-lg-12 d-flex p-0 ">
+                        <div class="wrap-input100 validate-input col-lg-6 mr-5" style="width:50% !important;">
+                            @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100", @id = "input100", @style = "width:50% !important" })
+                        </div>
+                        <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+                    </div>
                 }
+                <div class="row col-lg-10 d-flex justify-content-lg-end mt-5 pt-5 pt-4">
+                    <span class="mt-4 pt-4 mr-2 ">@Html.Partial("RemovePhoneNumber")</span>
+                    <span class="mt-4 pt-4 mr-5 pr-5">
+                        @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+                    </span>
+                </div>
             }
         </div>
     </div>

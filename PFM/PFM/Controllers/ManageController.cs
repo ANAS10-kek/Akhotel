@@ -54,21 +54,20 @@ namespace PFM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /Manage/Index
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            id = User.Identity.GetUserId().ToString();
-            if (id == null)
+            if (User.Identity.GetUserId() == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser model = db.Users.Find(id);
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
             if (model == null)
             {
                 return HttpNotFound();
             }
             return View(model);
         }
-
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -94,37 +93,121 @@ namespace PFM.Controllers
         }
 
         //
-        // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
+        // GET: /Manage/editEmail
+        public ActionResult editEmail()
         {
-            return View();
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
+            return View(model);
         }
-
-        //
-        // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        public async Task<ActionResult> editEmail(ApplicationUser model)
         {
-            if (!ModelState.IsValid)
+            bool find = false;
+            if (ModelState.IsValid)
             {
-                return View(model);
-            }
-            // Générer le jeton et l'envoyer
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
-            {
-                var message = new IdentityMessage
+
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(m => m.Id == id).Single();
+                foreach (var us in db.Users)
                 {
-                    Destination = model.Number,
-                    Body = "Votre code de sécurité est : " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
+                    if (us.Email == model.Email)
+                    {
+                        find = true;
+                        break;
+                    }
+                }
+                if (!find)
+                {
+
+                    user.Email = model.Email;
+                    user.EmailConfirmed = false;
+                    db.SaveChanges();
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                    ViewData["JavaScriptFunction"] = "successALert();";
+                    return View(user);
+
+                }
+                else if (find)
+                {
+                    if (user.Email == model.Email)
+                    {
+                        ViewData["JavaScriptFunction"] = "successALert();";
+                    }
+                    else
+                    {
+                        ViewData["JavaScriptFunction"] = "errorAlert();";
+                    }
+                    return View(user);
+                }
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            return View();
+        }
+        // POST: /Manage/AddPhoneNumber
+        public ActionResult editPhoneNumber()
+        {
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult editPhoneNumber(ApplicationUser model)
+        {
+            bool find = false;
+            if (ModelState.IsValid)
+            {
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(m => m.Id == id).Single();
+                foreach (var us in db.Users)
+                {
+                    if (us.PhoneNumber == model.PhoneNumber)
+                    {
+                        find = true;
+                        break;
+                    }
+                }
+                if (!find)
+                {
+                    user.PhoneNumber = model.PhoneNumber;
+                    db.SaveChanges();
+                    ViewData["JavaScriptFunction"] = "successALert();";
+                    return View(user);
+                }
+                else if (find)
+                {
+                    if (user.PhoneNumber == model.PhoneNumber)
+                    {
+                        ViewData["JavaScriptFunction"] = "successALert();";
+                    }
+                    else
+                    {
+                        ViewData["JavaScriptFunction"] = "errorAlert();";
+                    }
+                    return View(user);
+                }
+            }
+            return View();
+            #region
+            // Générer le jeton et l'envoyer
+            //var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            //if (UserManager.SmsService != null)
+            //{
+            //    var message = new IdentityMessage
+            //    {
+            //        Destination = model.Number,
+            //        Body = "Votre code de sécurité est : " + code
+            //    };
+            //    await UserManager.SmsService.SendAsync(message);
+            //}
+            //return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            #endregion
         }
 
-        //
+        #region enableTowFactory
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -153,15 +236,15 @@ namespace PFM.Controllers
             }
             return RedirectToAction("Index", "Manage");
         }
-
-        //
+        #endregion
+        #region VerifyPhoneNumber
         // GET: /Manage/VerifyPhoneNumber
-        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
-        {
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
-            // Envoyer un SMS via le fournisseur SMS afin de vérifier le numéro de téléphone
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
-        }
+        //public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
+        //{
+        //    var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
+        //    // Envoyer un SMS via le fournisseur SMS afin de vérifier le numéro de téléphone
+        //    return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+        //}
 
         //
         // POST: /Manage/VerifyPhoneNumber
@@ -187,7 +270,7 @@ namespace PFM.Controllers
             ModelState.AddModelError("", "La vérification du téléphone a échoué");
             return View(model);
         }
-
+        #endregion
         //
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
@@ -197,16 +280,22 @@ namespace PFM.Controllers
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                return RedirectToAction("editPhoneNumber", new { Message = ManageMessageId.Error });
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return RedirectToAction("editPhoneNumber", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
-
+        //// GET: /Manage/SetotherInfo
+        public ActionResult SetotherInfo()
+        {
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
+            return View(model);
+        }
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
@@ -337,12 +426,11 @@ namespace PFM.Controllers
             db.SaveChanges();
             return View(model);
         }
-        public ActionResult editPhoneNumber()
+        public ActionResult _MenuRightSide()
         {
             var model = db.Users.Find(User.Identity.GetUserId());
             return View(model);
         }
-
 
         protected override void Dispose(bool disposing)
         {

@@ -1,24 +1,10 @@
-﻿<li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
+﻿@model PFM.Models.ApplicationUser
+
 <li class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center">
     <span class="text-dark"><i class="fas fa-user-cog pr-2 "></i>Genral</span>
-    @if (Model.PhoneNumber == null || Model.Email == null)
-    {
-        <span class="badge badge-danger badge-pill">!</span>
-    }
-    else
-    {
-        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
-    }
-
+    <span class="badge badge-danger badge-pill">!</span>
 </li>
 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
     <span class="text-dark"><i class="fas fa-user-shield pr-2"></i>Security</span>
-    @if (Model.PasswordHash == null)
-    {
-        <span class="badge badge-danger badge-pill">!</span>
-    }
-    else
-    {
-        <span class="badge badge-success badge-pill"><i class="fas fa-check-circle"></i></span>
-    }
+    <span class="badge badge-danger badge-pill">!</span>
 </li>

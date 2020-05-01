@@ -1,0 +1,6 @@
+﻿ 
+@using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+@Html.AntiForgeryToken()
+<input type="submit" value="Delete" class="btn btn-danger" />
+ }

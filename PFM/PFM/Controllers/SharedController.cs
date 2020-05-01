@@ -1,4 +1,6 @@
-﻿using PFM.Models;
+﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+using PFM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,5 +56,10 @@ namespace PFM.Controllers
 
 
         }
+       //public ActionResult _LoginPartial()
+       // {
+       //     var model = db.Users.Find(User.Identity.GetUserId());
+       //     return View();
+       // }
     }
 }

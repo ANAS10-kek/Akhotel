@@ -7,8 +7,16 @@
     <div class="container col-lg-12 d-flex">
 
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
-            <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
-                @Html.Partial("_MenuRightSide",new PFM.Models.ApplicationUser())
+            <ul class="list-group col-lg-12 p-0" style="height:400px !important;">
+                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
+                @if (Model.PhoneNumber == null || Model.Email == null || Model.PasswordHash == null || !Model.EmailConfirmed || Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
+                {
+                    @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+                }
+                else
+                {
+                    @Html.Partial("_MenuRightSide_v2", new PFM.Models.ApplicationUser())
+                }
             </ul>
         </div>
         <div class="col-lg-9 container pt-3">
@@ -20,13 +28,12 @@
                     <span class="col text-center">@Html.DisplayFor(m => m.UserName)</span>
                     <span class="col text-right">@Html.ActionLink("Edit", "editUsername", "Manage")</span>
                 </li>
-
                 <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col">Phone Number</span>
                     @if (Model.PhoneNumber == null)
                     {
                         <span class="col text-center text-danger">
-                        Empty    <i class="fas fa-exclamation-circle "></i>
+                            Empty<i class="fas fa-exclamation-circle "></i>
                         </span>
                     }
                     else
@@ -53,12 +60,34 @@
                             @Html.DisplayFor(m => m.Email)
                         </span>
                     }
-                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                    <span class="col text-right">@Html.ActionLink("Edit", "editEmail", "Manage")</span>
+                </li>
+                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                    <span class="pl-1 font-weight-bold col-lg-3">Email Confirmation </span>
+                    @if (!Model.EmailConfirmed)
+                    {
+                        <span class="col-lg-9 text-danger pr-5 px-3">
+                            You need To confirm your email for our newsletter<i class="fas fa-exclamation-circle pl-5"></i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="col-lg-9 pl-5 ml-5  text-dark">
+                            Your email is confirmed
+                        </span>
+                    }
                 </li>
                 <li class="list-group-item py-3 px-2  d-flex justify-content-between" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col">Other informations</span>
-                    <span class="col text-center">Your Address,country,City...</span>
-                    <span class="col text-right">@Html.ActionLink("Edit", "", "")</span>
+                    @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
+                    {
+                        <span class="col text-center">Your Address,country,City...   <i class="fas fa-exclamation-circle "></i></span>
+                    }
+                    else
+                    {
+                        <span class="col text-center">Your Address,country,City..</span>
+                    }
+                    <span class="col text-right">@Html.ActionLink("Edit", "SetotherInfo", "Manage")</span>
                 </li>
             </ul>
         </div>

@@ -1,19 +1,37 @@
-﻿@model PFM.Models.AddPhoneNumberViewModel
+﻿@*@model PFM.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+<style>
+    .div-form input {
+        color: #403866;
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        background: transparent;
+        height: 40px;
+        padding: 0 10px 0 38px;
+        outline: none;
+        border: none;
+    }
+</style>
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Ajouter un numéro de téléphone</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Number, new { @class = "col-lg-2 control-label" })
-        <div class="col-lg-10">
-            @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+    <h4 class="pb-3">
+        Your Current PhoneNumber is : <span style="color:#9cd9ee;">
+            @Html.DisplayFor(m =>m.PhoneNumber)
+        </span>
+    </h4>
+    <div class="div-form col-lg-12 p-0 ">
+        <label class = "required labelinput py-2">Number phone</label>
+        <div class="wrap-input100 validate-input" style="width:70% !important">
+            @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100", @id = "input100", @style = "width:50% !important" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
         </div>
+        @Html.ValidationSummary("", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-            <input type="submit" class="btn btn-default" value="Envoyer" />
-        </div>
+    <div class="row col-lg-8 d-flex justify-content-around mt- pt-4">
+        <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+        @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+        <span>@Html.Partial("RemovePhoneNumber")</span>
     </div>
-}
+}*@
