@@ -56,10 +56,10 @@
             @using (Html.BeginForm("SetotherInfo", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-1 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
             {
                 @Html.AntiForgeryToken()
-                <h4 class="pb-4 col-lg-12">
+                <span class="pb-4 px-0 col-lg-12">
                     @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
                     {
-                        <span>
+                        <span class="font-weight-bold" >
                             Add your <span style="color:#9cd9ee;">
                                 Location
                             </span>:
@@ -68,31 +68,32 @@
                     }
                     else
                     {
-                        <span class="d-flex">
-                            Edit your
-                            <span style="color:#9cd9ee;" class="px-1">Location</span>:
-                            <span class="pl-2">
-                                @foreach (var item in ViewBag.CountryUser)
-                                {
-                                    @item.Text
-                                }
-                            </span>,
-                            <span>
-                                @foreach (var item in ViewBag.SateUser)
-                                {
-                                    @item.Text
-                                }
-                            </span>,
-                            <span>
-                                @foreach (var item in ViewBag.CityUser)
-                                {
-                                    @item.Text
-                                }
-                            </span>
-                        </span>
-                        <span style="font-size:large" class="px-2">Adress :  <span>@Html.DisplayFor(m => m.Address, new { @class = "adressSpan px-2" })</span></span>
+                <span class="d-flex " style="font-size:1.1rem">
+                    Edit your
+                    <span style="color:#9cd9ee; "  class="px-1 font-weight-bold">Location</span>:
+                    <span class="pl-2">
+                        @foreach (var item in ViewBag.CountryUser)
+                        {
+                            @item.Text
+                        }
+                    </span>,
+                    <span>
+                        @foreach (var item in ViewBag.SateUser)
+                        {
+                            @item.Text
+                        }
+                    </span>,
+                    <span>
+                        @foreach (var item in ViewBag.CityUser)
+                        {
+                            @item.Text
+                        }
+                    </span>.
+                    <span  class="px-2"><span class="font-weight-bold">Adress :</span> <span>@Html.DisplayFor(m => m.Address, new { @class = "adressSpan px-2" })</span></span>
+                </span>
+                       
                     }
-                </h4>
+                </span>
                 <div class="pl-5 div-form col-lg-10 p-0 ">
                     @Html.LabelFor(m => m.Address, new { @class = "required labelinput" })
                     <div class="wrap-input100 validate-input">
@@ -121,7 +122,7 @@
 
                     </div>
                 </div>
-                <div class="row col-lg-8 d-flex justify-content-around mt-3 pt-3">
+                <div class="row col-lg-8 d-flex ml-auto justify-content-around mt-3 pt-3">
                     <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
                     @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
                 </div>

@@ -121,7 +121,7 @@ namespace PFM.Controllers
                 }
                 if (!find)
                 {
-                     user.Email = model.Email;
+                    user.Email = model.Email;
                     user.EmailConfirmed = false;
                     db.SaveChanges();
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -214,13 +214,38 @@ namespace PFM.Controllers
         {
 
             string id = User.Identity.GetUserId();
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             var model = db.Users.Where(m => m.Id == id).Single();
-            int idcountry = int.Parse(model.Country);
-            int idCity = int.Parse(model.City);
-            int idcState = int.Parse(model.State);
-            ViewBag.CountryUser =new SelectList(db.Countries.Where(m => m.id == idcountry),"id","name");
-            ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
-            ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+            if (model.Country != null)
+            {
+                int idcountry = int.Parse(model.Country);
+                ViewBag.CountryUser = new SelectList(db.Countries.Where(m => m.id == idcountry), "id", "name");
+            }
+            else
+            {
+                ViewBag.CountryUser = "Empty";
+            }
+            if (model.City != null)
+            {
+                int idCity = int.Parse(model.City);
+                ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+            }
+            else
+            {
+                ViewBag.CityUser = "Empty";
+            }
+            if (model.State != null)
+            { 
+                int idcState = int.Parse(model.State); 
+                ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
+            }
+            else
+            {
+                ViewBag.SateUser = "Empty";
+            }
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
             return View(model);
@@ -229,23 +254,52 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SetotherInfo(ApplicationUser model)
         {
-           
+
             string id = User.Identity.GetUserId();
             var user = db.Users.Where(m => m.Id == id).Single();
-            user.Address = model.Address;
-            user.City = model.City;
-            user.Country = model.Country;
-            user.State = model.State;
-            db.SaveChanges();
-            int idcountry = int.Parse(model.Country);
-            int idCity = int.Parse(model.City);
-            int idcState = int.Parse(model.State);
-            ViewBag.CountryUser = new SelectList(db.Countries.Where(m => m.id == idcountry), "id", "name");
-            ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
-            ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+
+            if (model.City != null || model.Country != null || model.State != null)
+            {
+                user.City = model.City;
+                user.Country = model.Country;
+                user.State = model.State;
+                db.SaveChanges();
+            }
+            if (model.Address != null)
+            {
+                user.Address = model.Address;
+                db.SaveChanges();
+            }
+            if (model.Country != null)
+            {
+                int idcountry = int.Parse(model.Country);
+                ViewBag.CountryUser = new SelectList(db.Countries.Where(m => m.id == idcountry), "id", "name");
+            }
+            else
+            {
+                ViewBag.CountryUser = "Empty";
+            }
+            if (model.City != null)
+            {
+                int idCity = int.Parse(model.City);
+                ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+            }
+            else
+            {
+                ViewBag.CityUser = "Empty";
+            }
+            if (model.State != null)
+            {
+                int idcState = int.Parse(model.State);
+                ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
+            }
+            else
+            {
+                ViewBag.SateUser = "Empty";
+            }
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
-            
+
             return View(model);
         }
         [HttpPost]

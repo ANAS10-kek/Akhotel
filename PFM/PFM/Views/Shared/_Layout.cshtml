@@ -23,22 +23,22 @@
         <div class="collapse navbar-collapse links" style="background-color:#000000 !important" id="navbarNav">
             <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
                 <li class="nav-item active pr-3">
-                    <a>@Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                    <a>@Html.ActionLink("Home", "Index", "Home", htmlAttributes: new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item pr-3">
                     <a class="nav-link" href="eat&drink.html">Rooms & Suites</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a>@Html.ActionLink("Eat & drinks", "Index", "EatDrink", routeValues: null, htmlAttributes: new { @class = "nav-link" })</a>
+                    <a>@Html.ActionLink("Eat & drinks", "Index", "EatDrink", htmlAttributes: new { @class = "nav-link" })</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a>@Html.ActionLink("Offers", "Index", "Offers", routeValues: null, htmlAttributes: new { @class = "nav-link" })</a>
+                    <a>@Html.ActionLink("Offers", "Index", "Offers", htmlAttributes: new { @class = "nav-link" })</a>
                 </li>
                 <li class="nav-item pr-3">
                     <a class="nav-link" href="gallery.html">Gallery</a>
                 </li>
                 <li class="nav-item  pr-3">
-                    <a class="nav-link " href="About.html">About</a>
+                    <a>@Html.ActionLink("About", "About", "Home", htmlAttributes: new { @class = "nav-link" })</a>
                 </li>
             </ul>
             @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
