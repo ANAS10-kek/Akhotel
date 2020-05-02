@@ -76,23 +76,20 @@
                     <div class="div-form col-lg-6 p-0">
                         <label class="required labelinput" for="country">Country</label>
                         <div class="wrap-input100 validate-input">
-                            <select name="Country" id="Country" class="col-lg-12 input100 p-0">
-                            </select>
+                            @Html.DropDownListFor(m => m.Country, ViewBag.Countries as SelectList, "-- Select Country--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
                     <div class="div-form col-lg-6 px-1">
                         <label class="required labelinput" for="">State</label>
                         <div class="wrap-input100 validate-input">
-                            <select name="State" id="State" class="col-lg-12 input100 p-0">
-                            </select>
+                            @Html.DropDownListFor(m => m.State, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
                 </div>
                 <div class="div-form col-lg-12 p-0">
                     <label class="required labelinput" for="">City</label>
                     <div class="wrap-input100 validate-input">
-                        <select name="City" id="City" class="col-lg-12 input100">
-                        </select>
+                        @Html.DropDownListFor(m => m.City, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
                     </div>
                 </div>
                 <div class="div-form col-lg-12 p-0">
@@ -108,6 +105,10 @@
             </div>
             <diV class="div-form col-lg-11 py-4">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*@foreach (var item in new SelectList(ViewBag["a"], "id", "name"))
+                    {
+                        <span>@item.Text</span>
+                    }*@
             </diV>
         </div>
     </div>
@@ -200,5 +201,48 @@
             });
     });
 </script>
-<script src="~/Scripts/MyScripts/DropDowlist_countries.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#Country').change(function () {
+        $("#State").empty();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetStatesList")',
+            dataType: 'json',
+            data: jQuery.param({ Countries_id: $("#Country").val() }),
+
+            success: function (states) {
+                $.each(states, function (key, item) {
+                    $("#State").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert("failed to retrieve states " + ex);
+            }
+        });
+        return false;
+    });
+});
+$(document).ready(function () {
+    $('#State').change(function () {
+        $("#City").empty();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetCitiesList")',
+            dataType: 'json',
+            data: jQuery.param({ State_id: $("#State").val() }),
+
+            success: function (cities) {
+                $.each(cities, function (key, item) {
+                    $("#City").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert("failed to retrieve states " + ex);
+            }
+        });
+        return false;
+    });
+});
+</script>
 

@@ -18,5 +18,8 @@ namespace PFM.Models
         {
             return new ApplicationDbContext();
         }
+        public virtual DbSet<Countries> Countries { get; set; }
+        public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<Cities> Cities { get; set; }
     }
 }

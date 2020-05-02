@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Metadata;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -120,8 +121,7 @@ namespace PFM.Controllers
                 }
                 if (!find)
                 {
-
-                    user.Email = model.Email;
+                     user.Email = model.Email;
                     user.EmailConfirmed = false;
                     db.SaveChanges();
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -191,87 +191,7 @@ namespace PFM.Controllers
                 }
             }
             return View();
-            #region
-            // Générer le jeton et l'envoyer
-            //var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            //if (UserManager.SmsService != null)
-            //{
-            //    var message = new IdentityMessage
-            //    {
-            //        Destination = model.Number,
-            //        Body = "Votre code de sécurité est : " + code
-            //    };
-            //    await UserManager.SmsService.SendAsync(message);
-            //}
-            //return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
-            #endregion
         }
-
-        #region enableTowFactory
-        // POST: /Manage/EnableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
-        }
-
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
-        }
-        #endregion
-        #region VerifyPhoneNumber
-        // GET: /Manage/VerifyPhoneNumber
-        //public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
-        //{
-        //    var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
-        //    // Envoyer un SMS via le fournisseur SMS afin de vérifier le numéro de téléphone
-        //    return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
-        //}
-
-        //
-        // POST: /Manage/VerifyPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
-            }
-            //Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
-            ModelState.AddModelError("", "La vérification du téléphone a échoué");
-            return View(model);
-        }
-        #endregion
-        //
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -292,9 +212,55 @@ namespace PFM.Controllers
         //// GET: /Manage/SetotherInfo
         public ActionResult SetotherInfo()
         {
+
             string id = User.Identity.GetUserId();
             var model = db.Users.Where(m => m.Id == id).Single();
+            int idcountry = int.Parse(model.Country);
+            int idCity = int.Parse(model.City);
+            int idcState = int.Parse(model.State);
+            ViewBag.CountryUser =new SelectList(db.Countries.Where(m => m.id == idcountry),"id","name");
+            ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
+            ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+            var countries = db.Countries.ToList();
+            ViewBag.Countries = new SelectList(countries, "id", "name");
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetotherInfo(ApplicationUser model)
+        {
+           
+            string id = User.Identity.GetUserId();
+            var user = db.Users.Where(m => m.Id == id).Single();
+            user.Address = model.Address;
+            user.City = model.City;
+            user.Country = model.Country;
+            user.State = model.State;
+            db.SaveChanges();
+            int idcountry = int.Parse(model.Country);
+            int idCity = int.Parse(model.City);
+            int idcState = int.Parse(model.State);
+            ViewBag.CountryUser = new SelectList(db.Countries.Where(m => m.id == idcountry), "id", "name");
+            ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
+            ViewBag.CityUser = new SelectList(db.Cities.Where(m => m.id == idCity), "id", "name");
+            var countries = db.Countries.ToList();
+            ViewBag.Countries = new SelectList(countries, "id", "name");
+            
+            return View(model);
+        }
+        [HttpPost]
+        public JsonResult GetStatesList(string Countries_id)
+        {
+            int id = int.Parse(Countries_id);
+            var states = db.States.Where(m => m.Countries.id == id).ToList();
+            return Json(new SelectList(states, "id", "name"));
+        }
+        [HttpPost]
+        public JsonResult GetCitiesList(string State_id)
+        {
+            int id = int.Parse(State_id);
+            var cities = db.Cities.Where(m => m.States.id == id).ToList();
+            return Json(new SelectList(cities, "id", "name"));
         }
         //
         // GET: /Manage/ChangePassword
@@ -326,7 +292,6 @@ namespace PFM.Controllers
             AddErrors(result);
             return View(model);
         }
-
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

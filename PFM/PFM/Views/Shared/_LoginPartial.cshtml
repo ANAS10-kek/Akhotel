@@ -3,6 +3,7 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto" }))
     {
+       @Html.AntiForgeryToken()
         <div class="dropdown navbar-nav">
             <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @User.Identity.GetUserName().Substring(0, 2).ToUpper()

@@ -42,7 +42,14 @@ namespace PFM
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Connectez votre service SMS ici pour envoyer un message texte.
+            //var soapSms = new PFM.APSMX2.ASPSMSX2SoapClient("ASPSMSX2Soap");
+            //soapSms.SendSimpleTextSMS(
+            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSUSERKEY"],
+            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSPASSWORD"],
+            //    message.Destination,
+            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSORIGINATOR"],
+            //    message.Body);
+            //soapSms.Close();
             return Task.FromResult(0);
         }
     }

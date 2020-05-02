@@ -24,12 +24,17 @@
         justify-self: center;
         letter-spacing: 1px !important;
     }
+
+    .adressSpan {
+        font-size: small !important;
+    }
 </style>
 <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
 <div class="container-lg mt-5">
     <div class="container col-lg-12 d-flex">
 
-        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
+        <div class="col-lg-3 border m-0 p-0 " style="        padding: 0px !important;
+        background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
                 <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
                 @if (Model.PhoneNumber == null || Model.Email == null || Model.PasswordHash == null || !Model.EmailConfirmed || Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
@@ -48,7 +53,7 @@
                 <h2>General Account Settings</h2>
             </div>
             <hr />
-            @using (Html.BeginForm("editUsername", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-1 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
+            @using (Html.BeginForm("SetotherInfo", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-1 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
             {
                 @Html.AntiForgeryToken()
                 <h4 class="pb-4 col-lg-12">
@@ -63,40 +68,57 @@
                     }
                     else
                     {
-                        <span>
-                            Edit your <span style="color:#9cd9ee;">
-                                Location
-                            </span>:
+                        <span class="d-flex">
+                            Edit your
+                            <span style="color:#9cd9ee;" class="px-1">Location</span>:
+                            <span class="pl-2">
+                                @foreach (var item in ViewBag.CountryUser)
+                                {
+                                    @item.Text
+                                }
+                            </span>,
+                            <span>
+                                @foreach (var item in ViewBag.SateUser)
+                                {
+                                    @item.Text
+                                }
+                            </span>,
+                            <span>
+                                @foreach (var item in ViewBag.CityUser)
+                                {
+                                    @item.Text
+                                }
+                            </span>
                         </span>
+                        <span style="font-size:large" class="px-2">Adress :  <span>@Html.DisplayFor(m => m.Address, new { @class = "adressSpan px-2" })</span></span>
                     }
                 </h4>
-                <div class="div-form col-lg-8 p-0 ">
+                <div class="pl-5 div-form col-lg-10 p-0 ">
                     @Html.LabelFor(m => m.Address, new { @class = "required labelinput" })
                     <div class="wrap-input100 validate-input">
                         @Html.TextBoxFor(m => m.Address, new { @class = "col-lg-12 input100" })
                     </div>
                 </div>
-                <div class="row d-flex col-lg-12 m-0 p-0 justify-content-start">
-                    <div class="div-form col-lg-4 p-0">
+                <div class="row pl-5 d-flex col-lg-12 m-0 p-0 justify-content-start">
+                    <div class="div-form col-lg-5 p-0">
                         <label class="required labelinput" for="country">Country</label>
                         <div class="wrap-input100 validate-input">
-                            <select name="Country" id="Country" class="col-lg-12 input100 p-0">
-                            </select>
+                            @Html.DropDownListFor(m => m.Country, ViewBag.Countries as SelectList, "-- Select Country--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
-                    <div class="div-form col-lg-4 px-1">
+                    <div class="div-form col-lg-5 px-1">
                         <label class="required labelinput" for="">State</label>
                         <div class="wrap-input100 validate-input">
-                            <select name="State" id="State" class="col-lg-12 input100 p-0">
-                            </select>
+
+                            @Html.DropDownListFor(m => m.State, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
                 </div>
-                <div class="div-form col-lg-8 p-0">
+                <div class=" pl-5 div-form col-lg-10 p-0">
                     <label class="required labelinput" for="">City</label>
                     <div class="wrap-input100 validate-input">
-                        <select name="City" id="City" class="col-lg-12 input100">
-                        </select>
+                        @Html.DropDownListFor(m => m.City, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
+
                     </div>
                 </div>
                 <div class="row col-lg-8 d-flex justify-content-around mt-3 pt-3">
@@ -107,3 +129,48 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#Country').change(function () {
+        $("#State").empty();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetStatesList")',
+            dataType: 'json',
+            data: jQuery.param({ Countries_id: $("#Country").val() }),
+
+            success: function (states) {
+                $.each(states, function (key, item) {
+                    $("#State").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert("failed to retrieve states " + ex);
+            }
+        });
+        return false;
+    });
+});
+$(document).ready(function () {
+    $('#State').change(function () {
+        $("#City").empty();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetCitiesList")',
+            dataType: 'json',
+            data: jQuery.param({ State_id: $("#State").val() }),
+
+            success: function (cities) {
+                $.each(cities, function (key, item) {
+                    $("#City").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert("failed to retrieve states " + ex);
+            }
+        });
+        return false;
+    });
+});
+</script>

@@ -99,6 +99,17 @@ namespace PFM.Models
         [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
+        [Required]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public string City { get; set; }
 
     }
 

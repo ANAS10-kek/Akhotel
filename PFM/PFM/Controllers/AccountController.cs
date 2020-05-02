@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PFM.Models;
 using System.Net.Mail;
+using System.Collections.Generic;
 
 namespace PFM.Controllers
 {
@@ -140,10 +141,26 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var countries = db.Countries.ToList();
+           ViewBag.Countries= new SelectList(countries, "id", "name");
+
             return View();
         }
+        [HttpPost]
+        public JsonResult GetStatesList(string Countries_id)
+        {
+            int id = int.Parse(Countries_id);
+            var  states = db.States.Where(m => m.Countries.id == id).ToList();
+            return Json(new SelectList(states,"id","name"));
+        }
+        [HttpPost]
+        public JsonResult GetCitiesList(string State_id)
+        {
+            int id = int.Parse(State_id);
+            var cities = db.Cities.Where(m => m.States.id == id).ToList();
+            return Json(new SelectList(cities, "id", "name"));
+        }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
