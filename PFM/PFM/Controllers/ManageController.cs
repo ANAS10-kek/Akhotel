@@ -159,7 +159,7 @@ namespace PFM.Controllers
         {
             bool find = false;
             if (ModelState.IsValid)
-            {
+            { 
                 string id = User.Identity.GetUserId();
                 var user = db.Users.Where(m => m.Id == id).Single();
                 foreach (var us in db.Users)

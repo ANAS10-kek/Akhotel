@@ -1,16 +1,37 @@
-.band-eat::before
-{
-    content:" ";
-    position: absolute;
-    height: 100px;
-    border-right: #DF6C4F solid 1px;
-    background-image: url(pic/hotelthumb/hotel/photo-gallery-1.jpg) ;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+.instagram .container-fluid {
+    padding-top: 50px;
 }
-.ftco-animate
-{
-    border-right:#FFFF 10px solid;
+
+.instagram .insta-img {
+    display: block;
+    height: 200px;
+    position: relative;
+}
+
+    .instagram .insta-img .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgb(223, 108, 79, 0.7);
+        opacity: 0;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+        .instagram .insta-img .icon span {
+            color: #fff;
+            font-size: 40px;
+        }
+
+    .instagram .insta-img:hover .icon {
+        opacity: 1;
+    }
+
+.instagram .heading-section h2 {
+    font-size: 30px;
 }
