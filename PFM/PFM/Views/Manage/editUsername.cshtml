@@ -41,8 +41,10 @@
             </ul>
         </div>
         <div class="col-lg-9 container pt-1">
-            <div class="d-flex align-content-center p-0">
-                @Html.ActionLink("Back", "Index", "Manage", new { @class = "btn btnback mr-3 px-1 py-0 font-weight-bold" })
+            <div class="d-flex align-content-center pt-3 m-0">
+                <span>
+                    <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
+                </span>
                 <h2>General Account Settings</h2>
             </div>
             <hr />

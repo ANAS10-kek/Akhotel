@@ -32,7 +32,30 @@
 <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
 <div class="container-lg mt-5">
     <div class="container col-lg-12 d-flex">
+        @if (ViewData["JavaScriptFunction"] == null)
+        {
 
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
+        {
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Nothing change'
+                });</script>
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
+        {
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })</script>
+        }
         <div class="col-lg-3 border m-0 p-0 " style="        padding: 0px !important;
         background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
@@ -48,52 +71,66 @@
             </ul>
         </div>
         <div class="col-lg-9 container pt-1">
-            <div class="d-flex align-content-center p-0">
-                @Html.ActionLink("Back", "Index", "Manage", new { @class = "btn btnback mr-3 px-1 py-0 font-weight-bold" })
+            <div class="d-flex align-content-center pt-3 m-0">
+                <span>
+                   
+                    <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
+                </span>
                 <h2>General Account Settings</h2>
             </div>
             <hr />
             @using (Html.BeginForm("SetotherInfo", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-1 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
             {
                 @Html.AntiForgeryToken()
-                <span class="pb-4 px-0 col-lg-12">
-                    @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
-                    {
-                        <span class="font-weight-bold" >
-                            Add your <span style="color:#9cd9ee;">
-                                Location
-                            </span>:
-                        </span>
+        <span class="pb-4 px-0 col-lg-12">
+            @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
+            {
+                <span class="font-weight-bold">
+                    Add your <span style="color:#9cd9ee;">
+                        Location
+                    </span>:
+                </span>
 
-                    }
-                    else
-                    {
+            }
+            else
+            {
                 <span class="d-flex " style="font-size:1.1rem">
                     Edit your
-                    <span style="color:#9cd9ee; "  class="px-1 font-weight-bold">Location</span>:
+                    <span style="color:#9cd9ee; " class="px-1 font-weight-bold">Location</span>:
                     <span class="pl-2">
-                        @foreach (var item in ViewBag.CountryUser)
+                        @if (ViewBag.CountryUser != null)
                         {
-                            @item.Text
+                            foreach (var item in ViewBag.CountryUser)
+                            {
+                                @item.Text
+                            }
                         }
                     </span>,
                     <span>
-                        @foreach (var item in ViewBag.SateUser)
+                        @if (ViewBag.SateUser != null)
                         {
-                            @item.Text
+                            foreach (var item in ViewBag.SateUser)
+                            {
+                                @item.Text
+                            }
                         }
                     </span>,
                     <span>
-                        @foreach (var item in ViewBag.CityUser)
+                        @if (ViewBag.CityUser != null)
                         {
-                            @item.Text
+                            foreach (var item in ViewBag.CityUser)
+                            {
+                                @item.Text
+                            }
                         }
                     </span>.
-                    <span  class="px-2"><span class="font-weight-bold">Adress :</span> <span>@Html.DisplayFor(m => m.Address, new { @class = "adressSpan px-2" })</span></span>
+                    <br />
+
                 </span>
-                       
-                    }
-                </span>
+                <span class="px-2"><span class="font-weight-bold">Adress :</span> <span>@Html.DisplayFor(m => m.Address, new { @class = "adressSpan px-2" })</span></span>
+
+            }
+        </span>
                 <div class="pl-5 div-form col-lg-10 p-0 ">
                     @Html.LabelFor(m => m.Address, new { @class = "required labelinput" })
                     <div class="wrap-input100 validate-input">
@@ -110,7 +147,6 @@
                     <div class="div-form col-lg-5 px-1">
                         <label class="required labelinput" for="">State</label>
                         <div class="wrap-input100 validate-input">
-
                             @Html.DropDownListFor(m => m.State, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
@@ -119,10 +155,9 @@
                     <label class="required labelinput" for="">City</label>
                     <div class="wrap-input100 validate-input">
                         @Html.DropDownListFor(m => m.City, new SelectList(string.Empty, "id", "name"), "-- Select state--", new { @class = "col-lg-12 input100 p-0" })
-
                     </div>
                 </div>
-                <div class="row col-lg-8 d-flex ml-auto justify-content-around mt-3 pt-3">
+                <div class="row col-lg-8 d-flex   ml-auto justify-content-around mt-3 py-3">
                     <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
                     @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
                 </div>
