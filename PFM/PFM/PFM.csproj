@@ -582,6 +582,8 @@
     <Content Include="Views\Manage\SetotherInfo.cshtml" />
     <Content Include="Scripts\umd\popper.js.flow" />
     <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Manage\passwordSettings.cshtml" />
+    <Content Include="Views\Manage\editPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

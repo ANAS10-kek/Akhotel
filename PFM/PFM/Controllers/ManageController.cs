@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Metadata;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -93,9 +94,9 @@ namespace PFM.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
+        //a
         // GET: /Manage/editEmail
-        public ActionResult editEmail()
+        public ActionResult editEmil()
         {
             string id = User.Identity.GetUserId();
             var model = db.Users.Where(m => m.Id == id).Single();
@@ -335,7 +336,52 @@ namespace PFM.Controllers
         {
             return View();
         }
-
+        //Setting Password
+        
+        public ActionResult passwordSettings()
+        {
+            if (User.Identity.GetUserId() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            if(model.PasswordHash==null)
+            {
+                ViewData["PasswordExist"] = "no";
+            }else
+            {
+                ViewData["PasswordExist"] = "yes";
+            }
+            return View(model);
+        }//
+        //PAsswordEdit.Add
+        public ActionResult editPassword()
+        {
+            if (User.Identity.GetUserId() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string id = User.Identity.GetUserId();
+            var model = db.Users.Where(m => m.Id == id).Single();
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            if (model.PasswordHash == null)
+            {
+                ViewData["PasswordExist"] = "no";
+            }
+            else
+            {
+                ViewData["PasswordExist"] = "yes";
+            }
+            return View();
+        }
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
