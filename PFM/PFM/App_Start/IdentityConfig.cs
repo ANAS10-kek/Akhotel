@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using PFM.Models;
+using System;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace PFM
 {
@@ -21,20 +17,20 @@ namespace PFM
         public Task SendAsync(IdentityMessage message)
         {
             // Indiquez votre service de messagerie ici pour envoyer un e-mail.
-              
-                MailAddress mail = new MailAddress("test123.Anas@gmail.com");
-                MailMessage mm = new MailMessage(mail.ToString(),message.Destination) ;
-                mm.IsBodyHtml = true;
-                mm.Subject = message.Subject;
-                mm.Body = message.Body;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
-                smtp.UseDefaultCredentials = true;
-                smtp.Credentials = NetworkCred;
-                smtp.Port = 587;
-                return smtp.SendMailAsync(mm);
+
+            MailAddress mail = new MailAddress("test123.Anas@gmail.com");
+            MailMessage mm = new MailMessage(mail.ToString(), message.Destination);
+            mm.IsBodyHtml = true;
+            mm.Subject = message.Subject;
+            mm.Body = message.Body;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            return smtp.SendMailAsync(mm);
         }
     }
 
@@ -62,9 +58,9 @@ namespace PFM
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            
+
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configurer la logique de validation pour les noms d'utilisateur
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
@@ -104,7 +100,7 @@ namespace PFM
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

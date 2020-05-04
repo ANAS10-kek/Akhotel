@@ -1,12 +1,6 @@
-﻿using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
-using PFM.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PFM.Models;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PFM.Controllers
@@ -19,7 +13,6 @@ namespace PFM.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult _OngletContact(string Email_M, string Subject_M, string Message_M, string Name_M, MailViewModel mailViewModel)
         {
@@ -56,10 +49,10 @@ namespace PFM.Controllers
 
 
         }
-       //public ActionResult _LoginPartial()
-       // {
-       //     var model = db.Users.Find(User.Identity.GetUserId());
-       //     return View();
-       // }
+        //public ActionResult _LoginPartial()
+        // {
+        //     var model = db.Users.Find(User.Identity.GetUserId());
+        //     return View();
+        // }
     }
 }

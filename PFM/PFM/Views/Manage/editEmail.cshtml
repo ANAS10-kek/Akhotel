@@ -16,6 +16,7 @@
         outline: none;
         border: none;
     }
+
     .btnback {
         background-color: #9cd9ee !important;
         color: white;
@@ -25,20 +26,15 @@
     }
 </style>
 <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
-<div class="container-lg mt-5">
-    <div class="container col-lg-12 d-flex">
+<div class="mx-lg-5 mx-md-3 mx-sm-2 mt-5">
+    <div class="col-lg-12 d-flex">
 
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
                 <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
-                @if (Model.PhoneNumber == null || Model.Email == null || Model.PasswordHash == null || !Model.EmailConfirmed || Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
-                {
-                    @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
-                }
-                else
-                {
-                    @Html.Partial("_MenuRightSide_v2", new PFM.Models.ApplicationUser())
-                }
+
+                @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+
             </ul>
         </div>
         <div class="col-lg-9 container pt-1">
@@ -48,6 +44,7 @@
                 </span>
                 <h2>General Account Settings</h2>
             </div>
+            <hr />
             @if (ViewData["JavaScriptFunction"] == null)
             {
 
@@ -72,24 +69,24 @@
                         timer: 1500
                     })</script>
             }
-            @using (Html.BeginForm("editEmail", "Manage", FormMethod.Post, new { @class = "row form-horizontal col-lg-12 pt-5 pl-5 m-0 form-horizontal login100-form validate-form flex-sb flex-w", role = "form", @id = "formRegister" }))
+            @using (Html.BeginForm("editEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal col-lg-12 ml-lg-5 ml-md-3 ml-sm-1", role = "form", @id = "editEmail" }))
             {
                 @Html.AntiForgeryToken()
-                <h4 class="pb-5">
+                <h4 class="pt-3 pb-4">
                     Your Current Email: <span style="color:#9cd9ee;">
                         @Html.DisplayFor(m => m.Email)
                     </span>
                 </h4>
-                <div class="div-form col-lg-12 p-0 ">
-                    @Html.LabelFor(m => m.Email, new { @class = "required labelinput py-2" })
-                    <div class="wrap-input100 validate-input" style="width:70% !important">
-                        @Html.EditorFor(m => m.Email, new { @class = "input100", @id = "input100", @style = "width:50% !important" })
+                <div class="div-form col-lg-8 px-0 mx-0">
+                    @Html.LabelFor(m => m.Email, new { @class = "required labelinput" })
+                    <div class="wrap-input100 validate-input">
+                        @Html.EditorFor(m => m.Email, new { @class = "input100" })
                     </div>
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                 </div>
-                <div class="row col-lg-8 d-flex justify-content-around mt-5 pt-4">
-                    <button class="btn text-light" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
-                    @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" });
+                <div class="row col-lg-8 d-flex justify-content-end px-0 mx-0 pt-4">
+                    <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+                    @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
                 </div>
             }
         </div>
@@ -105,4 +102,39 @@
         });
     }
 
+</script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#editEmail').validate(
+            {
+                errorClass: 'help-block animation-slideDown text-danger',
+                errorElement: 'span',
+                errorPlacement: function (error, e) {
+                    e.parents('.div-form ').append(error);
+                },
+                highlight: function (e) {
+
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                },
+                messages: {
+                    'Email': {
+                        required: "Email is required",
+                        email: "Enter a Valid email(example@xyz.az)"
+                    }
+                }
+            });
+    });
 </script>

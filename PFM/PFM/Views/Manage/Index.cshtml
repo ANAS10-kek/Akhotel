@@ -3,9 +3,26 @@
 @{
     ViewBag.Title = "Mange Account";
 }
-<div class="container-lg my-5">
-    <div class="container col-lg-12 d-flex">
+<div class="mx-lg-5 mx-md-3 mx-sm-2 mt-5">
+    <div class="col-lg-12 d-flex">
+        @if (ViewData["JavaScriptFunction"] == null)
+        {
 
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
+        {
+            <script>
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 2200
+                })
+                window.location.href = "https://localhost:44333/Manage/Index"
+            </script>
+        }
         <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
             <ul class="list-group col-lg-12 p-0" style="height:400px !important;">
                 <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
@@ -19,7 +36,7 @@
                 }
             </ul>
         </div>
-        <div class="col-lg-9 container pt-3">
+        <div class="col-lg-9 container py-3">
             <h2>General Account Settings</h2>
             <hr />
             <ul class="list-group col-lg-12 p-0 m-0">
@@ -42,10 +59,8 @@
                             @Html.DisplayFor(m => m.PhoneNumber)
                         </span>
                     }
-
                     <span class="col text-right">@Html.ActionLink("Edit", "editPhoneNumber", "Manage")</span>
                 </li>
-
                 <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col">Email</span>
                     @if (Model.Email == null)
@@ -62,26 +77,27 @@
                     }
                     <span class="col text-right">@Html.ActionLink("Edit", "editEmail", "Manage")</span>
                 </li>
-                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                <li class="list-group-item py-3 px-2 d-flex justify-content-start" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col-lg-3">Email Confirmation </span>
                     @if (!Model.EmailConfirmed)
                     {
-                        <span class="col-lg-9 text-danger pr-5 px-3">
+                        <span class="text-danger text-center m-0 p-0 col-lg-7">
                             You need To confirm your email for our newsletter<i class="fas fa-exclamation-circle pl-5"></i>
                         </span>
                     }
                     else
                     {
-                        <span class="col-lg-9 pl-5 ml-5  text-dark">
+                        <span class="col-lg-6 text-center">
                             Your email is confirmed
                         </span>
                     }
+                    @*<span class="col"></span>*@
                 </li>
                 <li class="list-group-item py-3 px-2  d-flex justify-content-between" style="background-color: #e8e7e3;">
                     <span class="pl-1 font-weight-bold col">Other informations</span>
                     @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
                     {
-                        <span class="col text-center">Your Address,country,City...   <i class="fas fa-exclamation-circle "></i></span>
+                        <span class="col text-center text-danger">Your Address,country,City...   <i class="fas fa-exclamation-circle "></i></span>
                     }
                     else
                     {
@@ -89,6 +105,9 @@
                     }
                     <span class="col text-right">@Html.ActionLink("Edit", "SetotherInfo", "Manage")</span>
                 </li>
+                <a href='@Url.Action("RemoveAccount","Manage")' class="list-group-item py-3 px-2  d-flex justify-content-center align-items-center bg-danger btn font-weight-bold" style="color: #e8e7e3;">
+                    Remove Account<i class="fas fa-user-times pl-4"></i>
+                </a>
             </ul>
         </div>
     </div>
