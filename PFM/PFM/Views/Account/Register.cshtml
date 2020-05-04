@@ -76,7 +76,7 @@
                     <div class="div-form col-lg-6 p-0">
                         <label class="required labelinput" for="country">Country</label>
                         <div class="wrap-input100 validate-input">
-                            @Html.DropDownListFor(m => m.Country, ViewBag.Countries as SelectList, "-- Select Country--", new { @class = "col-lg-12 input100 p-0" })
+                            @Html.DropDownListFor(m => m.Country,ViewBag.Countries as SelectList, "-- Select Country--", new { @class = "col-lg-12 input100 p-0" })
                         </div>
                     </div>
                     <div class="div-form col-lg-6 px-1">
@@ -98,17 +98,15 @@
                 </div>
                 <div id="div-or"><span id="sp1"></span> <span id="sp2">OR</span><span id="sp3"> </span></div>
             </div>
+
         }
         <div class="col-lg-6 ml-auto external-login-section">
             <div class="div-form col-lg-12 ">
                 @Html.Partial("_ExternalLoginsListPartial", new PFM.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
             </div>
             <diV class="div-form col-lg-11 py-4">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @*@foreach (var item in new SelectList(ViewBag["a"], "id", "name"))
-                    {
-                        <span>@item.Text</span>
-                    }*@
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+             
             </diV>
         </div>
     </div>
@@ -117,90 +115,90 @@
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/MyScripts/DisplayPassword.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#formRegister').validate(
-            {
-                errorClass: 'help-block animation-slideDown text-danger',
-                errorElement: 'span',
-                errorPlacement: function (error, e) {
-                    e.parents('.div-form ').append(error);
-                },
-                highlight: function (e) {
+        $(document).ready(function () {
+            $('#formRegister').validate(
+                {
+                    errorClass: 'help-block animation-slideDown text-danger',
+                    errorElement: 'span',
+                    errorPlacement: function (error, e) {
+                        e.parents('.div-form ').append(error);
+                    },
+                    highlight: function (e) {
 
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-                    $(e).closest('.help-block').remove();
-                },
-                success: function (e) {
-                    e.closest('.form-group').removeClass('has-success has-error');
-                    e.closest('.help-block').remove();
-                },
-                rules: {
-                    'UserName': {
-                        required: true
+                        $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                        $(e).closest('.help-block').remove();
                     },
-                    'Email': {
-                        required: true,
-                        email: true
+                    success: function (e) {
+                        e.closest('.form-group').removeClass('has-success has-error');
+                        e.closest('.help-block').remove();
                     },
-                    'Password': {
-                        required: true,
-                        minlength: 6
+                    rules: {
+                        'UserName': {
+                            required: true
+                        },
+                        'Email': {
+                            required: true,
+                            email: true
+                        },
+                        'Password': {
+                            required: true,
+                            minlength: 6
+                        },
+                        'ConfirmPassword': {
+                            required: true,
+                            equalTo: "#Password"
+                        },
+                        'PhoneNumber': {
+                            required: true
+                        },
+                        'Address': {
+                            required: true
+                        },
+                        'Country': {
+                            required: true
+                        },
+                        'State': {
+                            required: true
+                        },
+                        'City': {
+                            required: true
+                        },
                     },
-                    'ConfirmPassword': {
-                        required: true,
-                        equalTo: "#Password"
-                    },
-                    'PhoneNumber': {
-                        required: true
-                    },
-                    'Address': {
-                        required: true
-                    },
-                    'Country': {
-                        required: true
-                    },
-                    'State': {
-                        required: true
-                    },
-                    'City': {
-                        required: true
-                    },
-                },
-                messages: {
-                    'UserName': {
-                        required: "UserName is required"
-                    },
-                    'Email': {
-                        required: "Email is required",
-                        email: "Enter a Valid email(example@xyz.az)"
-                    },
-                    'Password': {
-                        required: "Password is required",
-                        minlength: "min lenght is 6 caractere"
-                    },
-                    'ConfirmPassword': {
-                        required: "Confirm Password is required",
-                        equalTo: "Password and Confirmation Password not much"
-                    },
-                    'PhoneNumber': {
-                        required: "Phone Number is required"
-                    },
-                    'Address': {
-                        required: "Address is required"
-                    },
-                    'Country': {
-                        required: "Country is required"
-                    },
-                    'State': {
-                        required: "State is required"
-                    },
-                    'City': {
-                        required: "City is required"
+                    messages: {
+                        'UserName': {
+                            required: "UserName is required"
+                        },
+                        'Email': {
+                            required: "Email is required",
+                            email: "Enter a Valid email(example@xyz.az)"
+                        },
+                        'Password': {
+                            required: "Password is required",
+                            minlength: "min lenght is 6 caractere"
+                        },
+                        'ConfirmPassword': {
+                            required: "Confirm Password is required",
+                            equalTo: "Password and Confirmation Password not much"
+                        },
+                        'PhoneNumber': {
+                            required: "Phone Number is required"
+                        },
+                        'Address': {
+                            required: "Address is required"
+                        },
+                        'Country': {
+                            required: "Country is required"
+                        },
+                        'State': {
+                            required: "State is required"
+                        },
+                        'City': {
+                            required: "City is required"
+                        }
                     }
-                }
-            });
-    });
-</script>
+                });
+        });
+    </script>
 <script>
     $(document).ready(function () {
     $('#Country').change(function () {

@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using PFM.Models;
+using System;
 
 namespace PFM
 {
@@ -34,7 +34,7 @@ namespace PFM
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Permet à l'application de stocker temporairement les informations utilisateur lors de la vérification du second facteur dans le processus d'authentification à 2 facteurs.
@@ -54,9 +54,9 @@ namespace PFM
             //   consumerKey: "",
             //   consumerSecret: "");
 
-           app.UseFacebookAuthentication(
-              appId: "2580507488855239",
-              appSecret: "93133afcd861945dbb31d659b0aca405");
+            app.UseFacebookAuthentication(
+               appId: "2580507488855239",
+               appSecret: "93133afcd861945dbb31d659b0aca405");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

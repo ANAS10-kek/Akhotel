@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace PFM.Models
 {
@@ -9,7 +10,7 @@ namespace PFM.Models
         [Display(Name = "Courrier électronique")]
         [EmailAddress]
         public string Email { get; set; }
- 
+
         [Required]
         [Display(Name = "UserName")]
         public string Username { get; set; }
@@ -108,7 +109,7 @@ namespace PFM.Models
         public string State { get; set; }
 
         [Required]
-        [Display(Name = "State")]
+        [Display(Name = "City")]
         public string City { get; set; }
 
     }
@@ -128,7 +129,7 @@ namespace PFM.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmer le mot de passe")]
-        [Compare("Password", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

@@ -59,8 +59,15 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            //if (Request.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else
+            //{
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            //}
         }
 
         //
@@ -138,14 +145,7 @@ namespace PFM.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            var countries = db.Countries.ToList();
-           ViewBag.Countries= new SelectList(countries, "id", "name");
-
-            return View();
-        }
+       
         [HttpPost]
         public JsonResult GetStatesList(string Countries_id)
         {
@@ -162,14 +162,22 @@ namespace PFM.Controllers
         }
 
         // POST: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            var countries = db.Countries.ToList();
+            ViewBag.Countries = new SelectList(countries, "id", "name");
+
+            return View();
+        }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string country, string state, string city)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, City = city, Country = country, State = state };
+            var countries = db.Countries.ToList();
+            ViewBag.Countries = new SelectList(countries, "id", "name");
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address,Country=model.Country.ToString(), State = model.State.ToString() , City = model.State.ToString() };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -179,8 +187,8 @@ namespace PFM.Controllers
                     await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
-            }
+               AddErrors(result);
+            ViewData["Errors"] = ModelState.Values.SelectMany(v => v.Errors);
             return View(model);
         }
         [AllowAnonymous]
@@ -370,7 +378,7 @@ namespace PFM.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Username,Email=model.Email };
+                var user = new ApplicationUser { UserName = model.Username,Email=model.Email,EmailConfirmed=true };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

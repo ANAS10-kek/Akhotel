@@ -1,16 +1,12 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Metadata;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PFM.Models;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace PFM.Controllers
 {
@@ -19,17 +15,14 @@ namespace PFM.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
         public ManageController()
         {
         }
-
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -41,7 +34,6 @@ namespace PFM.Controllers
                 _signInManager = value;
             }
         }
-
         public ApplicationUserManager UserManager
         {
             get
@@ -54,21 +46,26 @@ namespace PFM.Controllers
             }
         }
         private ApplicationDbContext db = new ApplicationDbContext();
-        //
         // GET: /Manage/Index
         public ActionResult Index()
         {
-            if (User.Identity.GetUserId() == null)
+            if(!Request.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            string id = User.Identity.GetUserId();
-            var model = db.Users.Where(m => m.Id == id).Single();
-            if (model == null)
+                return RedirectToAction("Login", "Account");
+            }else
             {
-                return HttpNotFound();
+                if (User.Identity.GetUserId() == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                string id = User.Identity.GetUserId();
+                var model = db.Users.Where(m => m.Id == id).Single();
+                if (model == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(model);
             }
-            return View(model);
         }
         //
         // POST: /Manage/RemoveLogin
@@ -96,7 +93,7 @@ namespace PFM.Controllers
 
         //a
         // GET: /Manage/editEmail
-        public ActionResult editEmil()
+        public ActionResult editEmail()
         {
             string id = User.Identity.GetUserId();
             var model = db.Users.Where(m => m.Id == id).Single();
@@ -160,7 +157,7 @@ namespace PFM.Controllers
         {
             bool find = false;
             if (ModelState.IsValid)
-            { 
+            {
                 string id = User.Identity.GetUserId();
                 var user = db.Users.Where(m => m.Id == id).Single();
                 foreach (var us in db.Users)
@@ -195,7 +192,6 @@ namespace PFM.Controllers
         }
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -215,7 +211,7 @@ namespace PFM.Controllers
         {
 
             string id = User.Identity.GetUserId();
-            if(id==null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -239,8 +235,8 @@ namespace PFM.Controllers
                 ViewBag.CityUser = "Empty";
             }
             if (model.State != null)
-            { 
-                int idcState = int.Parse(model.State); 
+            {
+                int idcState = int.Parse(model.State);
                 ViewBag.SateUser = new SelectList(db.States.Where(m => m.id == idcState), "id", "name");
             }
             else
@@ -257,14 +253,14 @@ namespace PFM.Controllers
         {
             bool enter = false;
             string id = User.Identity.GetUserId();
-            if(id==null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = db.Users.Where(m => m.Id == id).Single();
 
             if (model.City != null && model.Country != null && model.State != null)
-            { 
+            {
                 user.City = model.City;
                 user.Country = model.Country;
                 user.State = model.State;
@@ -306,7 +302,7 @@ namespace PFM.Controllers
             }
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
-            if(enter)
+            if (enter)
             {
                 ViewData["JavaScriptFunction"] = "successALert();";
             }
@@ -332,12 +328,8 @@ namespace PFM.Controllers
         }
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
         //Setting Password
-        
+
         public ActionResult passwordSettings()
         {
             if (User.Identity.GetUserId() == null)
@@ -349,13 +341,6 @@ namespace PFM.Controllers
             if (model == null)
             {
                 return HttpNotFound();
-            }
-            if(model.PasswordHash==null)
-            {
-                ViewData["PasswordExist"] = "no";
-            }else
-            {
-                ViewData["PasswordExist"] = "yes";
             }
             return View(model);
         }//
@@ -374,16 +359,30 @@ namespace PFM.Controllers
             }
             if (model.PasswordHash == null)
             {
-                ViewData["PasswordExist"] = "no";
+                return RedirectToAction("SetPassword");
             }
             else
             {
-                ViewData["PasswordExist"] = "yes";
+                return RedirectToAction("ChangePassword");
             }
             return View();
         }
         //
         // POST: /Manage/ChangePassword
+        public ActionResult ChangePassword()
+        {
+            string id = User.Identity.GetUserId();
+            var Info = db.Users.Where(m => m.Id == id).Single();
+            if (Info.PasswordHash == null)
+            {
+                return RedirectToAction("SetPassword", "Manage");
+            }
+            else
+            {
+                return View();
+            }
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -392,32 +391,45 @@ namespace PFM.Controllers
             {
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (result.Succeeded)
+
+            else
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    ViewData["JavaScriptFunction"] = "successALert();";
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                AddErrors(result);
+                return View(model);
             }
-            AddErrors(result);
             return View(model);
         }
         //
-        // GET: /Manage/SetPassword
+        // POST: /Manage/SetPassword
         public ActionResult SetPassword()
         {
+            string id = User.Identity.GetUserId();
+            var Info = db.Users.Where(m => m.Id == id).Single();
+            if (Info.PasswordHash != null)
+            {
+                return RedirectToAction("ChangePassword", "Manage");
+            }
+            else
+            {
+                return View();
+            }
             return View();
         }
-
-        //
-        // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
@@ -428,15 +440,14 @@ namespace PFM.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    ViewData["JavaScriptFunction"] = "successALert();";
+                    return RedirectToAction("ChangePassword");
                 }
                 AddErrors(result);
             }
-
-            //Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+          
             return View(model);
         }
-
         //
         // GET: /Manage/ManageLogins
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
@@ -459,7 +470,6 @@ namespace PFM.Controllers
                 OtherLogins = otherLogins
             });
         }
-
         //
         // POST: /Manage/LinkLogin
         [HttpPost]
@@ -469,7 +479,6 @@ namespace PFM.Controllers
             // Demander une redirection vers le fournisseur de connexion externe afin de lier une connexion pour l'utilisateur actuel
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
-
         //
         // GET: /Manage/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
@@ -490,16 +499,40 @@ namespace PFM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult editUsername(ApplicationUser user)
+        public ActionResult editUsername(ApplicationUser model)
         {
-            var model = db.Users.Find(User.Identity.GetUserId());
-            if (user.UserName == null)
+            bool find = false;
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("editUsername");
-            }
-            else
-            {
-                model.UserName = user.UserName;
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(m => m.Id == id).Single();
+                foreach (var us in db.Users)
+                {
+                    if (us.UserName == model.UserName)
+                    {
+                        find = true;
+                        break;
+                    }
+                }
+                if (!find)
+                {
+                    user.UserName = model.UserName;
+                    db.SaveChanges();
+                    ViewData["JavaScriptFunction"] = "successALert();";
+                    return View(user);
+                }
+                else if(find)
+                {
+                    if (user.UserName == model.UserName)
+                    {
+                        ViewData["JavaScriptFunction"] = "successALert();";
+                    }
+                    else
+                    {
+                        ViewData["JavaScriptFunction"] = "errorAlert();";
+                    }
+                    return View(user);
+                }
             }
             db.SaveChanges();
             return View(model);
@@ -509,7 +542,27 @@ namespace PFM.Controllers
             var model = db.Users.Find(User.Identity.GetUserId());
             return View(model);
         }
-
+        //delete Account
+        public ActionResult RemoveAccount()
+        {
+            if (User.Identity.GetUserId() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string id = User.Identity.GetUserId();
+            var user = db.Users.Where(m => m.Id == id).Single();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            if (user != null)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                db.Users.Remove(user);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index","Home");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -571,6 +624,7 @@ namespace PFM.Controllers
             RemovePhoneSuccess,
             Error
         }
+
 
         #endregion
     }
