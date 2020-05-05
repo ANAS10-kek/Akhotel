@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using PFM.Models;
 using System.Net.Mail;
 using System.Collections.Generic;
-using Microsoft.Ajax.Utilities;
 
 namespace PFM.Controllers
 {
@@ -189,6 +188,7 @@ namespace PFM.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                AddErrors(result);
+            ViewData["Errors"] = ModelState.Values.SelectMany(v => v.Errors);
             return View(model);
         }
         [AllowAnonymous]
@@ -207,15 +207,7 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
-            if (Request.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
-            else
-            {
-                return View();
-            }
-          
+            return View();
         }
 
         //
@@ -228,7 +220,7 @@ namespace PFM.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null)
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
                     return View("ForgotPasswordConfirmation");
@@ -237,7 +229,7 @@ namespace PFM.Controllers
                 // Envoyer un message électronique avec ce lien
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 await UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
+                 await UserManager.SendEmailAsync(user.Id, "Réinitialiser le mot de passe", "Réinitialisez votre mot de passe en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -250,29 +242,14 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
-            if (Request.IsAuthenticated)
-            {
-                return RedirectToAction("passwordSettings", "Manage");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (Request.IsAuthenticated)
-            {
-                return RedirectToAction("passwordSettings", "Manage");
-            }
-            else
-            {
-                return code == null ? View("Error") : View();
-            }
-           
+            return code == null ? View("Error") : View();
         }
         //
         // POST: /Account/ResetPassword
@@ -305,15 +282,7 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
-
-            if (Request.IsAuthenticated)
-            {
-                return RedirectToAction("passwordSettings", "Manage");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
         //
         // POST: /Account/ExternalLogin

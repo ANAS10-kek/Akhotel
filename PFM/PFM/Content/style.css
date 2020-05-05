@@ -4,11 +4,10 @@
     box-sizing: border-box;
     user-select: none;
 }
-
-h1, h2, h3, h4 {
+h1,h2,h3,h4
+{
     text-transform: capitalize;
 }
-
 body {
     margin: 0px;
     padding: 0px;
@@ -17,15 +16,15 @@ body {
 }
 
 nav {
+
     margin-top: 0%;
     height: 50px;
     /*opacity:1;*/
 }
-
-#my_nav {
+#my_nav
+{
     z-index: 2;
 }
-
 #s_nav {
     color: #DF6C4F;
 }
@@ -35,23 +34,26 @@ nav {
 }
 
 .links {
+
     font-size: 1.1rem;
 }
-
-.showcase {
+.showcase
+{
     height: 80vh;
     background-image: url(../pic/showcase.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-}
 
+}
 .title-showcase h1 {
+
     font-size: 5rem;
     color: whitesmoke;
     text-shadow: 1px #DF6C4F;
     text-transform: capitalize;
+
 }
 
 .links ul li a::after {
@@ -64,8 +66,10 @@ nav {
 }
 
 .links ul li a:hover::after {
+
     width: 100%;
     background-color: #DF6C4F;
+
 }
 
 #list_ser {
@@ -73,17 +77,17 @@ nav {
     font-size: medium;
 }
 
-    #list_ser li {
-        font-size: 1.3rem;
-    }
+#list_ser li {
+    font-size: 1.3rem;
+}
 
 .service_cont {
     word-wrap: break-word;
 }
 
-    .service_cont i {
-        color: #DF6C4F;
-    }
+.service_cont i {
+    color: #DF6C4F;
+}
 
 .room-div {
     height: max-content;
@@ -104,9 +108,9 @@ nav {
     background-size: cover;
 }
 
-    .room-suite h4 {
-        color: #DF6C4F;
-    }
+.room-suite h4 {
+    color: #DF6C4F;
+}
 
 .car_inner {
     height: max-content;
@@ -117,6 +121,7 @@ nav {
 /* galery */
 .instagram .container-fluid {
     padding-top: 50px;
+
 }
 
 .instagram .insta-img {
@@ -125,29 +130,29 @@ nav {
     position: relative;
 }
 
-    .instagram .insta-img .icon {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgb(223, 108, 79, 0.7);
-        opacity: 0;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        -webkit-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-    }
+.instagram .insta-img .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(223, 108, 79, 0.7);
+    opacity: 0;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
 
-        .instagram .insta-img .icon span {
-            color: #fff;
-            font-size: 40px;
-        }
+.instagram .insta-img .icon span {
+    color: #fff;
+    font-size: 40px;
+}
 
-    .instagram .insta-img:hover .icon {
-        opacity: 1;
-    }
+.instagram .insta-img:hover .icon {
+    opacity: 1;
+}
 
 .instagram .heading-section h2 {
     font-size: 30px;
@@ -155,34 +160,40 @@ nav {
 
 /* fooooter */
 .ftco-footer-widget ul li a {
+
     text-decoration: none;
     color: #DF6C4F;
     font-weight: 400;
     padding-bottom: 20px;
 }
 
-    .ftco-footer-widget ul li a::after {
-        content: ' ';
-        display: block;
-        width: 0;
-        height: 2px;
-        background-color: #DF6C4F;
-        transition: all 0.5s linear;
-    }
+.ftco-footer-widget ul li a::after {
+    content: ' ';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #DF6C4F;
+    transition: all 0.5s linear;
+}
 
 .ftco-footer-widget .ree ul li a:hover::after {
+
     width: 100%;
     background-color: #DF6C4F;
+
 }
 
 .ftco-footer-widget .bee li a:hover::after {
+
     width: 40%;
     background-color: #DF6C4F;
+
 }
 
 .ftco-footer-widget .ree ul li a span i {
     padding-right: 10px;
     color: #000000;
+
 }
 
 .ftco-footer-widget .see li a span i:hover {
@@ -194,56 +205,58 @@ nav {
 }
 
 #send_email {
+    
     transition: all .5s linear;
 }
-
-.btn_display {
+.btn_display
+{
     color: white;
+    
     cursor: pointer;
 }
-
-.div_cacher {
-    display: none;
+.div_cacher
+{
+   display: none;
 }
-
-.sec_onglet_contact {
+.sec_onglet_contact
+{
     transition: all .5s linear;
     opacity: .9;
     z-index: 1;
     position: absolute;
 }
-
-    .sec_onglet_contact:hover {
-        opacity: 1;
-    }
-
-.showcase_gallery {
+.sec_onglet_contact:hover
+{
+    opacity: 1;
+}
+.showcase_gallery
+{
     height: 50vh;
-    background-image: url(../pic/showcase_gallery.jpg);
+    background-image:url(../pic/showcase_gallery.jpg) ;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
-
-.about-div {
+.about-div
+{
     height: max-content;
     background-image: url(../pic/showcase_about.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-color: #DF6C4F;
+       background-color :#DF6C4F;
 }
-
-    .about-div .col-lg-8 {
-        background-color: #25728b;
-        border-radius: 15px;
-    }
-
-        .about-div .col-lg-8 h1 {
-            font-family: 'Long Cang', cursive;
-        }
+.about-div .col-lg-8
+{
+    background-color: #25728b;
+    border-radius: 15px;
+}
+.about-div .col-lg-8 h1
+{
+    font-family:  'Long Cang', cursive ;
+}
 /* buutoon scroll top */
 #button {
     display: inline-block;
@@ -255,32 +268,29 @@ nav {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    transition: background-color .3s, opacity .5s, visibility .5s;
+    transition: background-color .3s, 
+      opacity .5s, visibility .5s;
     opacity: 0;
     visibility: hidden;
     z-index: 1000;
-}
-
-    #button::after {
-        content: "\f077";
-        font-family: FontAwesome;
-        font-weight: normal;
-        font-style: normal;
-        font-size: 2em;
-        line-height: 50px;
-        color: #fff;
-    }
-
-    #button:hover {
-        cursor: pointer;
-        background-color: #49c5b6;
-    }
-
-    #button:active {
-        background-color: #555;
-    }
-
-    #button.show {
-        opacity: 1;
-        visibility: visible;
-    }
+  }
+  #button::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+  }
+  #button:hover {
+    cursor: pointer;
+    background-color: #49c5b6;
+  }
+  #button:active {
+    background-color: #555;
+  }
+  #button.show {
+    opacity: 1;
+    visibility: visible;
+  }

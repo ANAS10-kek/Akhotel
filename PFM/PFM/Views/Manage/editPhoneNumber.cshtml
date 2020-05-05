@@ -2,96 +2,111 @@
 @{
     ViewBag.Title = "Edit Username";
 }
-@if (ViewData["JavaScriptFunction"] == null)
-{
+<style>
+    .div-form input {
+        color: #403866;
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        background: transparent;
+        height: 40px;
+        padding: 0 10px 0 38px;
+        outline: none;
+        border: none;
+    }
 
-}
-else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
-{
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'PhoneNumber is Already exists'
-        });</script>
-}
-else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
-{
-    <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        })</script>
-}
-<div class="col-lg-9 px-0 mx-0 py-3">
-    <div class="d-flex align-items-center m-0 pl-3">
-        <span class="row align-items-center">
-            <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
-        </span>
-        <h3 class="m-0 pl-1">General Account Settings</h3>
-    </div>
-    <hr />
-    <div class="form-horizontal">
-        @if (Model.PhoneNumber == null)
+    .btnback {
+        background-color: #9cd9ee !important;
+        color: white;
+        font-size: 1.5rem;
+        justify-self: center;
+        letter-spacing: 1px !important;
+    }
+</style>
+<link href="~/Content/StylePageInscription.css" rel="stylesheet" />
+<div class="mx-lg-5 mx-md-3 mx-sm-2 mt-5">
+    <div class="col-lg-12 d-flex">
+        @if (ViewData["JavaScriptFunction"] == null)
         {
-            <h4 class="pb-4 pt-3">
-                Add your Number Phone <span style="color:#9cd9ee;">
-                </span>
-            </h4>
-        }
-        else
-        {
-            <h4 class="pb-4">
-                Your Current PhoneNumber is : <span style="color:#9cd9ee;">
-                    @Html.DisplayFor(m => m.PhoneNumber)
-                </span>
-            </h4>
-        }
-
-
-        @if (Model.PhoneNumber == null)
-        {
-            using (Html.BeginForm("editPhoneNumber", "Manage", FormMethod.Post, new { @class = "", role = "form", @id = "editPhoneNumber" }))
-            {
-                <div class="div-form col-lg-6 p-0 m-0">
-                    <label class="required labelinput py-2">Number phone</label>
-                    <div class="wrap-input100 validate-input">
-                        @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100" })
-                    </div>
-                </div>
-
-                <div class="row col-lg-6 d-flex justify-content-end p-0 m-0 pt-4">
-                    <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Add</button>
-                    @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
-                </div>
-            }
 
         }
-        else
+        else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
         {
-            using (Html.BeginForm("editPhoneNumber", "Manage", FormMethod.Post, new { @class = "", role = "form", @id = "editPhoneNumber" }))
-            {
-                <div class="div-form col-lg-6 p-0 m-0">
-                    <label class="required labelinput py-2">Number phone</label>
-                    <div class="wrap-input100 validate-input">
-                        @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100" })
-                    </div>
-                </div>
-            }
-            <div class="row col-lg-6 d-flex justify-content-end p-0 m-0 pt-4">
-                <button class="btn text-light mr-3" id="btnSub" style="background-color:#DF6C4F;" type="submit">Edit</button>
-                <span class="mr-2 ">
-                    @using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        <input type="submit" value="Delete" class="btn btn-danger" />
-                    }
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'PhoneNumber is Already exists'
+                });</script>
+        }
+        else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
+        {
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })</script>
+        }
+        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
+            <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
+                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
+                @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
+
+            </ul>
+        </div>
+        <div class="col-lg-9 container pt-1">
+            <div class="d-flex align-content-center pt-3 m-0">
+                <span>
+                    <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
                 </span>
-                @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+                <h2>General Account Settings</h2>
             </div>
-        }
+            <hr />
+            @using (Html.BeginForm("editPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal ml-lg-5 ml-md-3 ml-sm-1", role = "form", @id = "editPhoneNumber" }))
+            {
+
+                if (Model.PhoneNumber == null)
+                {
+                    <h4 class="pb-4 pt-3">
+                        Add your Number Phone <span style="color:#9cd9ee;">
+                        </span>
+                    </h4>
+                }
+                else
+                {
+                    <h4 class="pb-4">
+                        Your Current PhoneNumber is : <span style="color:#9cd9ee;">
+                            @Html.DisplayFor(m => m.PhoneNumber)
+                        </span>
+                    </h4>
+                }
+                @Html.AntiForgeryToken()
+                <div class="div-form col-lg-6 p-0 m-0">
+                    <label class="required labelinput py-2">Number phone</label>
+                    <div class="wrap-input100 validate-input">
+                        @Html.EditorFor(m => m.PhoneNumber, new { @class = "input100" })
+                    </div>
+                </div>
+                if (Model.PhoneNumber == null)
+                {
+                    <div class="row col-lg-6 d-flex justify-content-end p-0 m-0 pt-4">
+                        <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Add</button>
+                        @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+                    </div>
+                }
+                else
+                {
+                    <div class="row col-lg-6 d-flex justify-content-end p-0 m-0 pt-4">
+                        <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+                        <span class="mr-2 ">@Html.Partial("RemovePhoneNumber")</span>
+                        @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+                    </div>
+                }
+            }
+        </div>
     </div>
 </div>
 <script src="~/Scripts/jquery-3.4.1.js">
@@ -99,9 +114,6 @@ else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
 <script src="~/Scripts/jquery.validate.js"></script>
 <script>
     $(document).ready(function () {
-        $("#btnSub").click(function () {
-            $("#editPhoneNumber").submit();
-        });
         $('#editPhoneNumber').validate(
             {
                 errorClass: 'help-block animation-slideDown text-danger',

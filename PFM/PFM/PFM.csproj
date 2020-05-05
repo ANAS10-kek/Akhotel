@@ -558,6 +558,7 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
@@ -565,6 +566,7 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
@@ -584,6 +586,7 @@
     <Content Include="Views\Manage\_MenuRightSide.cshtml" />
     <Content Include="Views\Manage\editUsername.cshtml" />
     <Content Include="Views\Manage\editPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\RemovePhoneNumber.cshtml" />
     <Content Include="Views\Manage\editEmail.cshtml" />
     <Content Include="Views\Manage\SetotherInfo.cshtml" />
     <Content Include="Scripts\umd\popper.js.flow" />
