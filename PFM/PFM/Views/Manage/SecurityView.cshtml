@@ -1,0 +1,31 @@
+﻿@model PFM.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Mange Account";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+<div class="col-lg-9 px-0 mx-0 py-3">
+    <h2>Security Settings</h2>
+    <hr />
+    <ul class="list-group col-lg-12 p-0 m-0">
+        @if (Model.PasswordHash == null)
+        {
+            <li class="list-group-item py-3 col-lg-12  px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                <span class="pl-1 font-weight-bold col">Password</span>
+                <span class="col text-center text-danger">
+                    <i class="fas fa-exclamation-circle "></i>
+                </span>
+                <span class="col text-right">@Html.ActionLink("Add", "editPassword", "Manage")</span>
+            </li>
+        }
+        else
+        {
+            <li class="list-group-item py-3 col-lg-12  px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
+                <span class="pl-1 font-weight-bold col">Password</span>
+                <span class="col text-center">****************</span>
+                <span class="col text-right">@Html.ActionLink("Edit", "editPassword", "Manage")</span>
+            </li>
+        }
+    </ul>
+</div>
+

@@ -3,28 +3,6 @@
 @{
     ViewBag.Title = "Edit Username";
 }
-<style>
-    .div-form input {
-        color: #403866;
-        font-size: 18px;
-        display: block;
-        width: 100%;
-        background: transparent;
-        height: 40px;
-        padding: 0 10px 0 38px;
-        outline: none;
-        border: none;
-    }
-
-    .btnback {
-        background-color: #9cd9ee !important;
-        color: white;
-        font-size: 1.5rem;
-        justify-self: center;
-        letter-spacing: 1px !important;
-    }
-</style>
-<link href="~/Content/StylePageInscription.css" rel="stylesheet" />
 @if (ViewData["JavaScriptFunction"] == null)
 {
 
@@ -35,7 +13,7 @@ else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'UserName is Already exists'
+            text: 'Email is Already exists'
         });</script>
 }
 else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
@@ -49,46 +27,35 @@ else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
             timer: 1500
         })</script>
 }
-<div class="mx-lg-5 mx-md-3 mx-sm-2 mt-5">
-    <div class="col-lg-12 d-flex">
-        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
-            <ul class="list-group col-lg-12 p-0" style="height:500px !important;">
-                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
-                @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
-
-            </ul>
-        </div>
-        <div class="col-lg-9 container pt-1">
-            <div class="d-flex align-content-center pt-3 m-0">
-                <span>
-                    <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
-                </span>
-                <h2>General Account Settings</h2>
-            </div>
-            <hr />
-            @using (Html.BeginForm("editUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal col-lg-12 ml-lg-5 ml-md-3 ml-sm-1", role = "form", @id = "editUsername" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4 class="pt-2 pb-5">
-                    Your Current username is : <span style="color:#9cd9ee;">
-                        @Html.DisplayFor(m => m.UserName)
-                    </span>
-                </h4>
-                <div class="div-form col-lg-8 px-0 mx-0">
-                    @Html.LabelFor(m => m.UserName, new { @class = "required labelinput py-2" })
-                    <div class="wrap-input100 validate-input">
-                        @Html.EditorFor(m => m.UserName, new { @class = "input100 " })
-                    </div>
-                </div>
-                <div class="row col-lg-8 d-flex justify-content-end pt-3 px-0 mx-0">
-                    <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
-                    @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
-                </div>
-
-            }
-        </div>
+<div class="col-lg-9 px-0 mx-0 py-3">
+    <div class="d-flex align-items-center m-0 pl-3">
+        <span  class="row align-items-center">
+            <a href='@Url.Action("Index")' class="btn btnback mr-3 px-3 py-0 font-weight-bold"><i class="fas fa-arrow-left"></i></a>
+        </span>
+        <h3 class="m-0 pl-1">General Account Settings</h3>
     </div>
+    <hr />
+    @using (Html.BeginForm("editUsername", "Manage", FormMethod.Post, new { @class = "form-horizontal col-lg-12", role = "form", @id = "editUsername" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4 class="pt-2 tit pb-5">
+            Your Current username is : <span style="color:#9cd9ee;">
+                @Html.DisplayFor(m => m.UserName)
+            </span>
+        </h4>
+        <div class="div-form col-lg-8 px-0 mx-0">
+            @Html.LabelFor(m => m.UserName, new { @class = "required labelinput py-2" })
+            <div class="wrap-input100 validate-input">
+                @Html.EditorFor(m => m.UserName, new { @class = "input100 " })
+            </div>
+        </div>
+        <div class="row col-lg-8 d-flex justify-content-end pt-3 px-0 mx-0">
+            <button class="btn text-light mr-3" style="background-color:#DF6C4F;" type="submit">Preview of change</button>
+            @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-secondary" })
+        </div>
+    }
 </div>
+
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script>
