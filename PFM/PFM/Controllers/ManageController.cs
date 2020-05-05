@@ -66,6 +66,26 @@ namespace PFM.Controllers
                 }
                 return View(model);
             }
+        }  
+        public ActionResult SecurityView()
+        {
+            if(!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }else
+            {
+                if (User.Identity.GetUserId() == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                string id = User.Identity.GetUserId();
+                var model = db.Users.Where(m => m.Id == id).Single();
+                if (model == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(model);
+            }
         }
         //
         // POST: /Manage/RemoveLogin
@@ -90,14 +110,13 @@ namespace PFM.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
-
-        //a
+       //a
         // GET: /Manage/editEmail
         public ActionResult editEmail()
         {
             string id = User.Identity.GetUserId();
             var model = db.Users.Where(m => m.Id == id).Single();
-            return View(model);
+            return View("editEmail", "_LayoutManage", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -126,7 +145,7 @@ namespace PFM.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
                     ViewData["JavaScriptFunction"] = "successALert();";
-                    return View(user);
+                    return View("editEmail", "_LayoutManage", model);
 
                 }
                 else if (find)
@@ -139,10 +158,10 @@ namespace PFM.Controllers
                     {
                         ViewData["JavaScriptFunction"] = "errorAlert();";
                     }
-                    return View(user);
+                    return View("editEmail", "_LayoutManage", model);
                 }
             }
-            return View();
+            return View("editEmail", "_LayoutManage");
         }
         // POST: /Manage/AddPhoneNumber
         public ActionResult editPhoneNumber()
@@ -152,7 +171,6 @@ namespace PFM.Controllers
             return View(model);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult editPhoneNumber(ApplicationUser model)
         {
             bool find = false;
@@ -173,7 +191,7 @@ namespace PFM.Controllers
                     user.PhoneNumber = model.PhoneNumber;
                     db.SaveChanges();
                     ViewData["JavaScriptFunction"] = "successALert();";
-                    return View(user);
+                    return View("editPhoneNumber", "_LayoutManage", user);
                 }
                 else if (find)
                 {
@@ -185,7 +203,8 @@ namespace PFM.Controllers
                     {
                         ViewData["JavaScriptFunction"] = "errorAlert();";
                     }
-                    return View(user);
+                    db.SaveChanges();
+                    return View("editPhoneNumber", "_LayoutManage", user);
                 }
             }
             return View();
@@ -204,7 +223,7 @@ namespace PFM.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("editPhoneNumber", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return RedirectToAction("editPhoneNumber",new { Message = ManageMessageId.RemovePhoneSuccess });
         }
         //// GET: /Manage/SetotherInfo
         public ActionResult SetotherInfo()
@@ -245,7 +264,7 @@ namespace PFM.Controllers
             }
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
-            return View(model);
+            return View("SetotherInfo", "_LayoutManage",model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -328,22 +347,6 @@ namespace PFM.Controllers
         }
         //
         // GET: /Manage/ChangePassword
-        //Setting Password
-
-        public ActionResult passwordSettings()
-        {
-            if (User.Identity.GetUserId() == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            string id = User.Identity.GetUserId();
-            var model = db.Users.Where(m => m.Id == id).Single();
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
-            return View(model);
-        }//
         //PAsswordEdit.Add
         public ActionResult editPassword()
         {
@@ -365,6 +368,7 @@ namespace PFM.Controllers
             {
                 return RedirectToAction("ChangePassword");
             }
+           
             return View();
         }
         //
@@ -542,6 +546,15 @@ namespace PFM.Controllers
             var model = db.Users.Find(User.Identity.GetUserId());
             return View(model);
         }
+        public ActionResult info()
+        {
+            return View();
+        } 
+        public ActionResult GeneralSettingsSection()
+        {
+            return RedirectToAction("Index","Manage");
+        }
+
         //delete Account
         public ActionResult RemoveAccount()
         {

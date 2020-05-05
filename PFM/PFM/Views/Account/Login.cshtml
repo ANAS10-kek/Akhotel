@@ -5,7 +5,7 @@
 }
 <link href="~/Content/StylePageLogin.css" rel="stylesheet" />
 <div class="col-md-4 py-5 m-auto">
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizonta", role = "form" }))
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizonta", role = "form",@id="LoginForm" }))
     {
         @Html.AntiForgeryToken()
         <div class="col-lg-12 row justify-content-center">
@@ -14,7 +14,7 @@
             </span>
         </div>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="div-form col-lg-12 p-0 ">
             <label class="required labelinput">Email</label>
             <div class="wrap-input100 validate-input">
@@ -39,11 +39,6 @@
                     Remember me
                 </label>
             </div>
-            <div>
-                <a href="#" class="txt1 elementsOrange">
-                    Forgot?
-                </a>
-            </div>
         </div>
         <div class="container-login100-form-btn m-t-17 pb-3">
             <button class="col-lg-12 py-1 btn" style="background-color:#9cd9ee">
@@ -51,15 +46,56 @@
             </button>
         </div>
         <p class="elementsOrange">
-            @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register", new { @class = "elementsOrange" })
+            @Html.ActionLink("Register as a new user", "Register", new { @class = "elementsOrange" })
         </p>
         <p class="elementsOrange">
-            @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword", new { @class = "elementsOrange" })
+            @Html.ActionLink("Forgot your password ?", "ForgotPassword", "Account", new { @class = "elementsOrange" })
         </p>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     }
 </div>
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
 <script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/MyScripts/DisplayPassword.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#LoginForm').validate(
+            {
+                errorClass: 'help-block animation-slideDown text-danger',
+                errorElement: 'span',
+                errorPlacement: function (error, e) {
+                    e.parents('.div-form ').append(error);
+                },
+                highlight: function (e) {
+
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'Password':
+                    {
+                        required: true,
+                    }
+                },
+                messages: {
+                    'Email': {
+                        required: "Email is Empty",
+                        email: "Enter a Valid email(example@xyz.az)"
+                    },
+                    'Password':
+                    {
+                        required: "Password  is Empty",
+                    }
+                }
+            });
+    });
+</script>

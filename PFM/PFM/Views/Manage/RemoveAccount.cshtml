@@ -1,1 +1,24 @@
-﻿
+﻿@if (ViewData["JavaScriptFunction"] == null)
+{
+
+}
+else if (ViewData["JavaScriptFunction"].ToString() == "errorAlert();")
+{
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Email is Already exists'
+        });</script>
+}
+else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
+{
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })</script>
+}

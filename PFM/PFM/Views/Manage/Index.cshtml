@@ -2,114 +2,79 @@
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Mange Account";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
 }
-<div class="mx-lg-5 mx-md-3 mx-sm-2 mt-5">
-    <div class="col-lg-12 d-flex">
-        @if (ViewData["JavaScriptFunction"] == null)
-        {
+<div class="col-lg-12 px-0 mx-0 py-3">
+    <h3>General Account Settings</h3>
+    <hr />
+    <ul class="list-group col-lg-12 p-0 m-0">
+        <li class="list-group-item py-3 px-lg-2 px-x d-flex justify-content-between align-items-center" style="background-color: #e8e7e3;">
+            <span class="pl-1 font-weight-bold col">Username</span>
+            <span class="col text-center d-lg-block d-md-block d-sm-none d-none">@Html.DisplayFor(m => m.UserName)</span>
+            <span class="col text-right p-0">@Html.ActionLink("Edit", "editUsername", "Manage")</span>
+        </li>
+        <li class="list-group-item py-3 px-lg-2 px-x d-flex justify-content-between align-items-center" style="background-color: #e8e7e3;">
+            <span class="pl-1 font-weight-bold col">Phone Number</span>
+            @if (Model.PhoneNumber == null)
+            {
+                <span class="col text-center text-danger"><i class="fas fa-exclamation-circle pl-3"></i>
+                </span>
+            }
+            else
+            {
+                <span class="col text-center d-lg-block d-md-block d-sm-none d-none text-dark">
+                    @Html.DisplayFor(m => m.PhoneNumber)
+                </span>
+            }
+            <span class="col text-right p-0">@Html.ActionLink("Edit", "editPhoneNumber", "Manage")</span>
+        </li>
+        <li class="list-group-item py-3 px-lg-2 px-x d-flex justify-content-between" style="background-color: #e8e7e3;">
+            <span class="pl-1 font-weight-bold col">Email</span>
+            @if (Model.Email == null)
+            {
+                <span class="col text-center text-danger">
+                    <i class="fas fa-exclamation-circle "></i>
+                </span>
+            }
+            else
+            {
+                <span class="col d-lg-block d-md-block d-sm-none d-none text-center text-dark">
+                    @Html.DisplayFor(m => m.Email)
+                </span>
+            }
+            <span class="col text-right p-0">@Html.ActionLink("Edit", "editEmail", "Manage")</span>
+        </li>
+        <li class="list-group-item py-3 px-lg-2 px-x d-flex  align-items-center" style="background-color: #e8e7e3;">
+            <span class="pl-1 font-weight-bold   col-lg-5 col-md-5 col-sm-5 col">Email Confirmation </span>
+            @if (!Model.EmailConfirmed)
+            {
+                <span class="text-danger text-center m-0 p-0 col-lg-7 d-flex justify-content-center">
+                    You need To confirm your email for our newsletter<i class="fas fa-exclamation-circle pl-5"></i>
+                </span>
+            }
+            else
+            {
+                <span class="text-center d-flex justify-content-center">
+                    Your email is confirmed
+                </span>
+            }
+        </li>
+        <li class="list-group-item py-3 px-lg-2 px-x d-flex justify-content-between align-items-center" style="background-color: #e8e7e3;">
+            <span class="pl-1 font-weight-bold col">Other informations</span>
+            @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
+            {
+                <span class="col text-center text-danger"><i class="fas fa-exclamation-circle "></i></span>
+            }
+            else
+            {
+                <span class="col text-center d-lg-block d-md-block d-sm-none d-none">Your Address,country,City..</span>
+            }
+            <span class="col text-right p-0">@Html.ActionLink("Edit", "SetotherInfo", "Manage")</span>
+        </li>
+        <a href='@Url.Action("RemoveAccount","Manage")' class="list-group-item py-3 px-2  d-flex justify-content-center align-items-center bg-danger btn font-weight-bold" style="color: #e8e7e3;">
+            Remove Account<i class="fas fa-user-times pl-4"></i>
+        </a>
 
-        }
-        else if (ViewData["JavaScriptFunction"].ToString() == "successALert();")
-        {
-            <script>
-
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Your work has been saved',
-                    showConfirmButton: false,
-                    timer: 2200
-                })
-                window.location.href = "https://localhost:44333/Manage/Index"
-            </script>
-        }
-        <div class="col-lg-3 border m-0 p-0 " style="padding: 0px !important; background-color: #e8e7e3;">
-            <ul class="list-group col-lg-12 p-0" style="height:400px !important;">
-                <li class="list-group-item" style="background-color: #e8e7e3;"><span class="my-5" style="font-size:1.7rem">Mange Account</span></li>
-                @if (Model.PhoneNumber == null || Model.Email == null || Model.PasswordHash == null || !Model.EmailConfirmed || Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
-                {
-                    @Html.Partial("_MenuRightSide", new PFM.Models.ApplicationUser())
-                }
-                else
-                {
-                    @Html.Partial("_MenuRightSide_v2", new PFM.Models.ApplicationUser())
-                }
-            </ul>
-        </div>
-        <div class="col-lg-9 container py-3">
-            <h2>General Account Settings</h2>
-            <hr />
-            <ul class="list-group col-lg-12 p-0 m-0">
-                <li class="list-group-item py-3 col-lg-12  px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
-                    <span class="pl-1 font-weight-bold col">Username</span>
-                    <span class="col text-center">@Html.DisplayFor(m => m.UserName)</span>
-                    <span class="col text-right">@Html.ActionLink("Edit", "editUsername", "Manage")</span>
-                </li>
-                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
-                    <span class="pl-1 font-weight-bold col">Phone Number</span>
-                    @if (Model.PhoneNumber == null)
-                    {
-                        <span class="col text-center text-danger">
-                            Empty<i class="fas fa-exclamation-circle "></i>
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="col text-center text-dark">
-                            @Html.DisplayFor(m => m.PhoneNumber)
-                        </span>
-                    }
-                    <span class="col text-right">@Html.ActionLink("Edit", "editPhoneNumber", "Manage")</span>
-                </li>
-                <li class="list-group-item py-3 px-2 d-flex justify-content-between" style="background-color: #e8e7e3;">
-                    <span class="pl-1 font-weight-bold col">Email</span>
-                    @if (Model.Email == null)
-                    {
-                        <span class="col text-center text-danger">
-                            <i class="fas fa-exclamation-circle "></i>
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="col text-center text-dark">
-                            @Html.DisplayFor(m => m.Email)
-                        </span>
-                    }
-                    <span class="col text-right">@Html.ActionLink("Edit", "editEmail", "Manage")</span>
-                </li>
-                <li class="list-group-item py-3 px-2 d-flex justify-content-start" style="background-color: #e8e7e3;">
-                    <span class="pl-1 font-weight-bold col-lg-3">Email Confirmation </span>
-                    @if (!Model.EmailConfirmed)
-                    {
-                        <span class="text-danger text-center m-0 p-0 col-lg-7">
-                            You need To confirm your email for our newsletter<i class="fas fa-exclamation-circle pl-5"></i>
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="col-lg-6 text-center">
-                            Your email is confirmed
-                        </span>
-                    }
-                    @*<span class="col"></span>*@
-                </li>
-                <li class="list-group-item py-3 px-2  d-flex justify-content-between" style="background-color: #e8e7e3;">
-                    <span class="pl-1 font-weight-bold col">Other informations</span>
-                    @if (Model.City == null || Model.Country == null || Model.State == null || Model.Address == null)
-                    {
-                        <span class="col text-center text-danger">Your Address,country,City...   <i class="fas fa-exclamation-circle "></i></span>
-                    }
-                    else
-                    {
-                        <span class="col text-center">Your Address,country,City..</span>
-                    }
-                    <span class="col text-right">@Html.ActionLink("Edit", "SetotherInfo", "Manage")</span>
-                </li>
-                <a href='@Url.Action("RemoveAccount","Manage")' class="list-group-item py-3 px-2  d-flex justify-content-center align-items-center bg-danger btn font-weight-bold" style="color: #e8e7e3;">
-                    Remove Account<i class="fas fa-user-times pl-4"></i>
-                </a>
-            </ul>
-        </div>
-    </div>
-
+    </ul>
 </div>
+
