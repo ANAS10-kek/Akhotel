@@ -558,6 +558,7 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
@@ -565,6 +566,7 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
@@ -584,6 +586,7 @@
     <Content Include="Views\Manage\_MenuRightSide.cshtml" />
     <Content Include="Views\Manage\editUsername.cshtml" />
     <Content Include="Views\Manage\editPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\RemovePhoneNumber.cshtml" />
     <Content Include="Views\Manage\editEmail.cshtml" />
     <Content Include="Views\Manage\SetotherInfo.cshtml" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -591,6 +594,26 @@
     <Content Include="Views\Manage\passwordSettings.cshtml" />
     <Content Include="Views\Manage\editPassword.cshtml" />
     <Content Include="Views\Manage\RemoveAccount.cshtml" />
+    <Content Include="Views\Rooms\Create.cshtml" />
+    <Content Include="Views\Rooms\Delete.cshtml" />
+    <Content Include="Views\Rooms\Details.cshtml" />
+    <Content Include="Views\Rooms\Edit.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\RoomImages\Create.cshtml" />
+    <Content Include="Views\RoomImages\Delete.cshtml" />
+    <Content Include="Views\RoomImages\Details.cshtml" />
+    <Content Include="Views\RoomImages\Edit.cshtml" />
+    <Content Include="Views\RoomImages\Index.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Caracteristiques\Create.cshtml" />
+    <Content Include="Views\Caracteristiques\Delete.cshtml" />
+    <Content Include="Views\Caracteristiques\Details.cshtml" />
+    <Content Include="Views\Caracteristiques\Edit.cshtml" />
+    <Content Include="Views\Caracteristiques\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
