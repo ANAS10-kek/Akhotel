@@ -288,9 +288,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005040957411_init.cs" />
-    <Compile Include="Migrations\202005040957411_init.Designer.cs">
-      <DependentUpon>202005040957411_init.cs</DependentUpon>
+    <Compile Include="Migrations\202005050859144_init.cs" />
+    <Compile Include="Migrations\202005050859144_init.Designer.cs">
+      <DependentUpon>202005050859144_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -322,6 +322,7 @@
     <Content Include="Content\BtnSignUp.css" />
     <Content Include="Content\gallery.css" />
     <Content Include="Content\mobile.css" />
+    <Content Include="Content\simple-lightbox.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\StylePageInscription.css" />
     <Content Include="Content\StylePageLogin.css" />
@@ -474,6 +475,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\MyScripts\simple-lightbox.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -629,7 +631,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202005050859144_init.resx">
+      <DependentUpon>202005050859144_init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

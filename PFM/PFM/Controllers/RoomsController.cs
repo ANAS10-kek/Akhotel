@@ -18,9 +18,9 @@ namespace PFM.Controllers
         // GET: Rooms
         public ActionResult Index()
         {
-            return View(db.Rooms.ToList());
+            var rooms = db.Rooms.ToList();
+            return View(rooms);
         }
-
         // GET: Rooms/Details/5
         public ActionResult Details(int? id)
         {

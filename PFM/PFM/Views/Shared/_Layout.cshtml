@@ -23,16 +23,16 @@
         <div class="collapse navbar-collapse links" style="background-color:#000000 !important" id="navbarNav">
             <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
                 <li class="nav-item active pr-3">
-                    <a>@Html.ActionLink("Home", "Index", "Home", htmlAttributes: new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                    <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a class="nav-link" href="eat&drink.html">Rooms & Suites</a>
+                    <a href='@Url.Action("Index","Rooms")' class="nav-link">Rooms & Suites</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a>@Html.ActionLink("Eat & drinks", "Index", "EatDrink", htmlAttributes: new { @class = "nav-link" })</a>
+                    <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a>@Html.ActionLink("Offers", "Index", "Offers", htmlAttributes: new { @class = "nav-link" })</a>
+                    <a href='@Url.Action("Index","Offers")' class="nav-link">Offers</a>
                 </li>
                 <li class="nav-item pr-3">
                     <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
