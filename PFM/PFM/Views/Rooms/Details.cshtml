@@ -1,0 +1,82 @@
+﻿@model PFM.Models.ModelsReservation.Room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeDeLit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeDeLit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponibilité)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponibilité)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbChambres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbChambres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LongDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ChambreId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
