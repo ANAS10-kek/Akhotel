@@ -580,15 +580,12 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\EatDrink\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Manage\_MenuRightSide.cshtml" />
     <Content Include="Views\Manage\editUsername.cshtml" />
     <Content Include="Views\Manage\editPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\RemovePhoneNumber.cshtml" />
     <Content Include="Views\Manage\editEmail.cshtml" />
     <Content Include="Views\Manage\SetotherInfo.cshtml" />
     <Content Include="Scripts\umd\popper.js.flow" />
     <Content Include="Views\Home\Gallery.cshtml" />
-    <Content Include="Views\Manage\passwordSettings.cshtml" />
     <Content Include="Views\Manage\editPassword.cshtml" />
     <Content Include="Views\Manage\RemoveAccount.cshtml" />
     <Content Include="Views\Rooms\Create.cshtml" />
@@ -617,6 +614,9 @@
     <Content Include="Views\Shared\_LayoutManage.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_OngletContact.cshtml" />
+    <Content Include="Views\Manage\Info.cshtml" />
+    <Content Include="Views\Manage\SecurityView.cshtml" />
+    <Content Include="Views\Manage\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
