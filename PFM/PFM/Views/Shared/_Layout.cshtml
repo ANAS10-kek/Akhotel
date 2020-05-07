@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Long+Cang&display=swap" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style_eat_offers.css" rel="stylesheet" />
+    <link href="~/Content/ReservationStyle.css" rel="stylesheet" />
     <link rel="stylesheet" media="(max-width:600px)" href="~/Content/mobile.css">
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -26,7 +27,7 @@
                     <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","Rooms")' class="nav-link">Rooms & Suites</a>
+                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
                 </li>
                 <li class="nav-item pr-3">
                     <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
@@ -162,7 +163,7 @@
             </div>
         </footer>
     </section>
-    @Html.Partial("_OngletContact",new PFM.Models.MailViewModel())
+    @Html.Partial("_OngletContact", new PFM.Models.MailViewModel())
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>

@@ -21,6 +21,12 @@ namespace PFM.Controllers
             var rooms = db.Rooms.ToList();
             return View(rooms);
         }
+
+        public ActionResult RoomListUser()
+        {
+            var rooms = db.Rooms.ToList();
+            return View(rooms);
+        }
         // GET: Rooms/Details/5
         public ActionResult Details(int? id)
         {

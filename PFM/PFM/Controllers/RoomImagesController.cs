@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,7 +50,7 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ImageId,Name,Size,ImageData,RoomId")] RoomImage roomImage)
+        public ActionResult Create([Bind(Include = "ImageId,Name,FullPath,RoomId")] RoomImage roomImage)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +61,34 @@ namespace PFM.Controllers
 
             ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", roomImage.RoomId);
             return View(roomImage);
+        }
+
+        public ActionResult AddImage()
+        {
+            return View();
+        }
+
+       [HttpPost]
+        public ActionResult AddImage(HttpPostedFileBase file)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            string path = Server.MapPath("~/App_Data/File");
+            string fileName = Path.GetFileName(file.FileName);
+            string fullPath = Path.Combine(path, fileName);
+
+            file.SaveAs(fullPath);
+            RoomImage ri = new RoomImage()
+            {
+                FullPath = fullPath,
+                Name = fileName
+
+            };
+
+            db.RoomImages.Add(ri);
+            db.SaveChanges();
+
+            return View();
         }
 
         // GET: RoomImages/Edit/5
@@ -83,7 +112,7 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ImageId,Name,Size,ImageData,RoomId")] RoomImage roomImage)
+        public ActionResult Edit([Bind(Include = "ImageId,Name,FullPath,RoomId")] RoomImage roomImage)
         {
             if (ModelState.IsValid)
             {

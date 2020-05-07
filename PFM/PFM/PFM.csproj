@@ -288,9 +288,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005050859144_init.cs" />
-    <Compile Include="Migrations\202005050859144_init.Designer.cs">
-      <DependentUpon>202005050859144_init.cs</DependentUpon>
+    <Compile Include="Migrations\202005050927417_init.cs" />
+    <Compile Include="Migrations\202005050927417_init.Designer.cs">
+      <DependentUpon>202005050927417_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051436334_init1.cs" />
+    <Compile Include="Migrations\202005051436334_init1.Designer.cs">
+      <DependentUpon>202005051436334_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -593,11 +597,6 @@
     <Content Include="Views\Rooms\Details.cshtml" />
     <Content Include="Views\Rooms\Edit.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
-    <Content Include="Views\RoomImages\Create.cshtml" />
-    <Content Include="Views\RoomImages\Delete.cshtml" />
-    <Content Include="Views\RoomImages\Details.cshtml" />
-    <Content Include="Views\RoomImages\Edit.cshtml" />
-    <Content Include="Views\RoomImages\Index.cshtml" />
     <Content Include="Views\Reservations\Create.cshtml" />
     <Content Include="Views\Reservations\Delete.cshtml" />
     <Content Include="Views\Reservations\Details.cshtml" />
@@ -617,6 +616,13 @@
     <Content Include="Views\Manage\Info.cshtml" />
     <Content Include="Views\Manage\SecurityView.cshtml" />
     <Content Include="Views\Manage\_ViewStart.cshtml" />
+    <Content Include="Views\Rooms\RoomListUser.cshtml" />
+    <Content Include="Views\RoomImages\Create.cshtml" />
+    <Content Include="Views\RoomImages\Delete.cshtml" />
+    <Content Include="Views\RoomImages\Details.cshtml" />
+    <Content Include="Views\RoomImages\Edit.cshtml" />
+    <Content Include="Views\RoomImages\Index.cshtml" />
+    <Content Include="Views\RoomImages\AddImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -632,9 +638,15 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005050859144_init.resx">
-      <DependentUpon>202005050859144_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005050927417_init.resx">
+      <DependentUpon>202005050927417_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051436334_init1.resx">
+      <DependentUpon>202005051436334_init1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\File\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
