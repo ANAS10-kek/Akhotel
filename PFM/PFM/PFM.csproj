@@ -288,15 +288,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005050927417_init.cs" />
-    <Compile Include="Migrations\202005050927417_init.Designer.cs">
-      <DependentUpon>202005050927417_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005051436334_init1.cs" />
-    <Compile Include="Migrations\202005051436334_init1.Designer.cs">
-      <DependentUpon>202005051436334_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Cities.cs" />
@@ -636,14 +627,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005050927417_init.resx">
-      <DependentUpon>202005050927417_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005051436334_init1.resx">
-      <DependentUpon>202005051436334_init1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\File\" />
