@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -329,6 +330,7 @@
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\gallery.css" />
     <Content Include="Content\mobile.css" />
+    <Content Include="Content\sal.css" />
     <Content Include="Content\simple-lightbox.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\StylePageInscription.css" />
@@ -483,6 +485,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\MyScripts\simple-lightbox.js" />
+    <Content Include="Scripts\sal.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />

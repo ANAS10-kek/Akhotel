@@ -3,6 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
     user-select: none;
+
 }
 
 h1, h2, h3, h4 {
@@ -14,6 +15,8 @@ body {
     padding: 0px;
     box-sizing: border-box !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x:hidden;
+    overflow-y:scroll;
 }
 
 nav {
@@ -245,6 +248,10 @@ nav {
             font-family: 'Long Cang', cursive;
         }
 /* buutoon scroll top */
+.navbar
+{
+    flex-wrap:nowrap !important;
+}
 #button {
     display: inline-block;
     background-color: #DF6C4F;

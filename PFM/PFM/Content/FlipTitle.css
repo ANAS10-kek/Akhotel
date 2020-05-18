@@ -1,12 +1,12 @@
 ﻿.a {
     text-decoration: none;
     color: #DF6C4F !important;
-    font-size: 1.4rem;
-    white-space: nowrap;
+    font-size: 1.5rem;
+    font-family: 'Alegreya Sans', sans-serif !important;
 }
 
 .roll {
-    padding-right:2px;
+    text-decoration: none;
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
@@ -17,7 +17,8 @@
 }
 
     .roll span {
-        padding-right: 2px;
+        text-decoration: none;
+        font-weight:bold;
         display: block;
         position: relative;
         -webkit-transition: all 400ms ease;
@@ -29,23 +30,25 @@
     }
 
     .roll:hover span {
-        background: #49c5b6;
+        text-decoration: none;
        
-        -webkit-transform: translate3d( 0px, 0px, -30px) rotateX( 90deg);
-        -moz-transform: translate3d( 0px, 0px, -30px) rotateX( 90deg);
+        -webkit-transform: translate3d( 0px, 0px, 20px) rotateX( 90deg);
+        -moz-transform: translate3d( 0px, 0px, 20px) rotateX( 90deg);
     }
 
     .roll span:after {
         content: attr(data-title);
         display: block;
         position: absolute;
+        font-family: 'Long Cang', cursive;
         left: 0;
         top: 0;
-        padding: 1px 2px;
-        color: #fff;
-        background: #49c5b6;
-        color: black; -webkit-transform-origin: 50% 0%;
+        font-weight: bold !important;
+        padding-left: 5px;
+        color: #49c5b6 !important;
+        font-size: 1.5rem;
+        -webkit-transform-origin: 50% 0%;
         -moz-transform-origin: 50% 0%;
-        -webkit-transform: translate3d( 0px, 105%, 0px) rotateX( -90deg);
+        -webkit-transform: translate3d( 0px, 106%, 0px) rotateX( -90deg);
         -moz-transform: translate3d( 0px, 105%, 0px) rotateX( -90deg);
     }
