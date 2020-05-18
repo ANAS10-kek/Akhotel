@@ -9,7 +9,6 @@ namespace PFM.Models
     // Vous pouvez ajouter des données de profil pour l'utilisateur en ajoutant d'autres propriétés à votre classe ApplicationUser. Pour en savoir plus, consultez https://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
     {
-
         [Display(Name = "Address")]
         public string Address { get; set; }
 

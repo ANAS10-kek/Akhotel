@@ -14,14 +14,23 @@
     <link rel="stylesheet" media="(max-width:600px)" href="~/Content/mobile.css">
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="~/Content/FlipTitle.css" rel="stylesheet" />
+    <style>
+        .progress-bar {
+            height: 8px;
+            background: #4caf50;
+            width: 0%;
+            z-index: 3;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark py-2" style="background-color:#000000 !important" id="my_nav">
-        <a class="navbar-brand font-weight-bold display-1" href="@Url.Action( "Index", "Home")"> <span id="s_nav">AK</span> Hotel </a>
+        <a class=" font-weight-bold display-1 a" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse links" style="background-color:#000000 !important" id="navbarNav">
+        <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
             <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
                 <li class="nav-item active pr-3">
                     <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
@@ -45,6 +54,7 @@
             @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
         </div>
     </nav>
+    <div class="progress-bar" id="myBar"></div>
     <div class="body-content m-0 p-0">
         @RenderBody()
     </div>
@@ -167,5 +177,37 @@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+    </script>
+    <script>
+            var supports3DTransforms = document.body.style['webkitPerspective'] !== undefined ||
+                document.body.style['MozPerspective'] !== undefined;
+
+            function linkify(selector) {
+                if (supports3DTransforms) {
+
+                    var nodes = document.getElementsByClassName(selector);
+
+                    for (var i = 0, len = nodes.length; i < len; i++) {
+                        var node = nodes[i];
+
+                        if (!node.className || !node.className.match(/roll/g)) {
+                            node.className += ' roll';
+                            node.innerHTML = '<span data-title="' + node.text + '">' + node.innerHTML + '</span>';
+                        }
+                    };
+                }
+            }
+
+            linkify('a');
+    </script>
+
 </body>
 </html>
