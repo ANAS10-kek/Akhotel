@@ -9,13 +9,11 @@ namespace PFM.Controllers
     public class MailViewModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: MailViewModels
         public ActionResult Index()
         {
             return View(db.Mails.ToList());
         }
-
         // GET: MailViewModels/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,10 +48,8 @@ namespace PFM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(mailViewModel);
         }
-
         // GET: MailViewModels/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -68,6 +64,7 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email_M,Name_M,Subject_M,Message_M")] MailViewModel mailViewModel)
@@ -80,6 +77,7 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
+
         // GET: MailViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -94,6 +92,7 @@ namespace PFM.Controllers
             }
             return View(mailViewModel);
         }
+
         // POST: MailViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

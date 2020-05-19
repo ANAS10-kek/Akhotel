@@ -143,10 +143,8 @@ namespace PFM.Controllers
                     return View(model);
             }
         }
-
         //
         // GET: /Account/Register
-       
         [HttpPost]
         public JsonResult GetStatesList(string Countries_id)
         {
@@ -161,14 +159,12 @@ namespace PFM.Controllers
             var cities = db.Cities.Where(m => m.States.id == id).ToList();
             return Json(new SelectList(cities, "id", "name"));
         }
-
         // POST: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
-
             return View();
         }
         [HttpPost]
