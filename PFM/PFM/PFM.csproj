@@ -289,15 +289,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005120503388_init.cs" />
-    <Compile Include="Migrations\202005120503388_init.Designer.cs">
-      <DependentUpon>202005120503388_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005120531379_init121.cs" />
-    <Compile Include="Migrations\202005120531379_init121.Designer.cs">
-      <DependentUpon>202005120531379_init121.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -644,14 +635,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005120503388_init.resx">
-      <DependentUpon>202005120503388_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005120531379_init121.resx">
-      <DependentUpon>202005120531379_init121.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
