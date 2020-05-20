@@ -13,7 +13,7 @@ namespace PFM.Controllers
         {
             return View();
         }
-        [HttpPost]
+      /*  [HttpPost]
         public ActionResult _OngletContact(string Email_M, string Subject_M, string Message_M, string Name_M, MailViewModel mailViewModel)
         {
 
@@ -48,7 +48,7 @@ namespace PFM.Controllers
             }
 
 
-        }
+        }*/
         //public ActionResult _LoginPartial()
         // {
         //     var model = db.Users.Find(User.Identity.GetUserId());

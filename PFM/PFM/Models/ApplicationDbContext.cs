@@ -15,7 +15,6 @@ namespace PFM.Models
             : base("DBCn", throwIfV1Schema: false)
         {
         }
-        public virtual DbSet<MailViewModel> Mails { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
