@@ -1,9 +1,24 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-}
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    string cLayout = "";
+    if (controller == "Administration")
+    {
 
+        cLayout = "~/Views/Shared/_administrationLayout.cshtml";
+    }
+    else
+    {
+        cLayout = "~/Views/Shared/_Layout.cshtml";
+    }
+    Layout = cLayout;
+}
+@if(Request.Browser.IsMobileDevice)
+{
+
+}
 <section>
-    <div id="showcase" class="showcase container-fluid text-center m-0 px-0 py-5 col-lg-12 col-lg-12 col-lg-12 ">
+    <div id="showcase" class="showcase container-fluid text-center m-0 px-0 col-lg-12 col-lg-12 col-lg-12 ">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex justify-content-center align-items-center flex-column title-showcase">
                 <h1 class="font-weight-bold p-5 animate__animated animate__fadeInDown animate__slow">Welcome To <span id="s_nav">AK</span> Hotel </h1>
@@ -86,13 +101,6 @@
                 <p>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                 </p>
-                <div>
-                    <ul class="list-group list-unstyled">
-                        <li>FROM....TO</li>
-                        <li>FROM....TO</li>
-
-                    </ul>
-                </div>
                 <a href="eat&drink.html" class="btn btn-info">Explore</a>
             </div>
         </div>

@@ -3,14 +3,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
+
     <title>@ViewBag.Title - AK Hotel</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Long+Cang&display=swap" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style_eat_offers.css" rel="stylesheet" />
-    <link href="~/Content/ReservationStyle.css" rel="stylesheet" />
+    @*<link href="~/Content/ReservationStyle.css" rel="stylesheet" />*@
+
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" media="(max-width:600px)" href="~/Content/mobile.css">
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
@@ -195,6 +197,7 @@
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
             document.getElementById("myBar").style.width = scrolled + "%";
+        }
     </script>
     <script>
         var supports3DTransforms = document.body.style['webkitPerspective'] !== undefined ||

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PFM.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "GetListUser";
+    Layout = "~/Views/Shared/_administrationLayout.cshtml";
+
+}
+    <style>
+        th {
+            text-align: center !important;
+            vertical-align:middle !important;
+        }
+        td {
+            font-size: small;
+            vertical-align: middle !important;
+        }
+    </style>
+<div class="card mb-4">
+    <div style="font-size:1.3rem" class="card-header font-weight-bold d-flex justify-content-between align-items-center"><i class="fas fa-table mr-1"></i>List clients <a class=" btn btn-primary ml-auto" href='@Url.Action("GetListUser")'><i class="fas fa-sync-alt"></i></a></div>
+    <div class="card-body">
+        <div class="pl-1 py-1 pr-2 overflow-auto" >
+            <table class="table table-bordered " id="tableUser">
+                <thead>
+                    <tr>
+                        <th class="d-none">
+                            id
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Country)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.State)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td class="d-none tdId" >
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+
+                        <td style="font-size:1.3rem">
+                            <div class="d-flex justify-content-center">
+                                <a role="button" class="pr-2" href='@Url.Action("Details", new { id = item.Id })'><i class="fas fa-edit"></i></a> |
+                                <a role="button" class="pl-2 text-danger btn btn-block  btndelete custom-control"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

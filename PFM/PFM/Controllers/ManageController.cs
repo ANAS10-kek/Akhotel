@@ -369,7 +369,6 @@ namespace PFM.Controllers
                 return RedirectToAction("ChangePassword");
             }
            
-            return View();
         }
         //
         // POST: /Manage/ChangePassword
@@ -385,7 +384,6 @@ namespace PFM.Controllers
             {
                 return View();
             }
-            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -411,7 +409,6 @@ namespace PFM.Controllers
                 AddErrors(result);
                 return View(model);
             }
-            return View(model);
         }
         //
         // POST: /Manage/SetPassword
@@ -427,7 +424,6 @@ namespace PFM.Controllers
             {
                 return View();
             }
-            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

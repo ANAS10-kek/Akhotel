@@ -277,6 +277,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\CaracteristiquesController.cs" />
     <Compile Include="Controllers\EatDrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -288,9 +289,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005201531569_DropMails.cs" />
-    <Compile Include="Migrations\202005201531569_DropMails.Designer.cs">
-      <DependentUpon>202005201531569_DropMails.cs</DependentUpon>
+    <Compile Include="Migrations\202005211034332_init.cs" />
+    <Compile Include="Migrations\202005211034332_init.Designer.cs">
+      <DependentUpon>202005211034332_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,15 +329,22 @@
     <Content Include="Content\BtnSignUp.css" />
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\gallery.css" />
+    <Content Include="Content\jquery.toast.min.css" />
     <Content Include="Content\mobile.css" />
     <Content Include="Content\sal.css" />
     <Content Include="Content\simple-lightbox.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\StyleAdminstration.css" />
     <Content Include="Content\StylePageInscription.css" />
     <Content Include="Content\StylePageLogin.css" />
     <Content Include="Content\style_eat_offers.css" />
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
+    <Content Include="Scripts\jquery.toast.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\MyScripts\DeleteClient.js" />
+    <Content Include="Scripts\MyScripts\NewPasswordValidation_DSh.js" />
     <Content Include="Content\util.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -423,6 +431,7 @@
     <Content Include="pic\hotelthumb\hotel\uogashi2.jpg" />
     <Content Include="pic\menupic\diner.jpg" />
     <Content Include="pic\menupic\lunch.jpg" />
+    <Content Include="pic\notFound.svg" />
     <Content Include="pic\offer-pic\showcase-offer.jpg" />
     <Content Include="pic\offer.jpg" />
     <Content Include="pic\rooms.jpg" />
@@ -462,6 +471,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\index.js.flow" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -631,6 +641,12 @@
     <Content Include="Views\RoomImages\Edit.cshtml" />
     <Content Include="Views\RoomImages\Index.cshtml" />
     <Content Include="Views\RoomImages\AddImage.cshtml" />
+    <Content Include="Views\Shared\_administrationLayout.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Administration\GetListUser.cshtml" />
+    <Content Include="Views\Administration\Details.cshtml" />
+    <Content Include="Views\Administration\NewPassword.cshtml" />
+    <Content Include="Views\Administration\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -646,10 +662,11 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005201531569_DropMails.resx">
-      <DependentUpon>202005201531569_DropMails.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005211034332_init.resx">
+      <DependentUpon>202005211034332_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
