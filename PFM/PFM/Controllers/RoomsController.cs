@@ -15,13 +15,7 @@ namespace PFM.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Rooms
-        public ActionResult Index()
-        {
-            var rooms = db.Rooms.ToList();
-            return View(rooms);
-        }
-
+        // GET: Rooms    
         public ActionResult RoomListUser()
         {
             var rooms = db.Rooms.ToList();
@@ -45,6 +39,7 @@ namespace PFM.Controllers
         // GET: Rooms/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -57,6 +52,7 @@ namespace PFM.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Rooms.Add(room);
                 db.SaveChanges();
                 return RedirectToAction("Index");

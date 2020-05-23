@@ -280,7 +280,6 @@
     <Compile Include="Controllers\CaracteristiquesController.cs" />
     <Compile Include="Controllers\EatDrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MailViewModelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RoomImagesController.cs" />
@@ -295,7 +294,6 @@
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Models\Countries.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\MailViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelsReservation\Caracteristique.cs" />
     <Compile Include="Models\ModelsReservation\Reservation.cs" />
