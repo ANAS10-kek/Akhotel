@@ -285,6 +285,7 @@
     <Compile Include="Controllers\RoomImagesController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +318,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
     <Content Include="Content\FlipTitle.css" />
+    <Content Include="Content\jquery.toast.min.css" />
+    <Content Include="Content\StyleAdminstration.css" />
     <Content Include="Content\gallery.css" />
     <Content Include="Content\mobile.css" />
     <Content Include="Content\sal.css" />
@@ -452,6 +455,11 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\jquery.toast.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\MyScripts\DeleteClient.js" />
+    <Content Include="Scripts\MyScripts\NewPasswordValidation_DSh.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -618,7 +626,12 @@
     <Content Include="Views\RoomImages\Edit.cshtml" />
     <Content Include="Views\RoomImages\Index.cshtml" />
     <Content Include="Views\RoomImages\AddImage.cshtml" />
-    <Content Include="Views\Shared\LayoutAdminstration.cshtml" />
+    <Content Include="Views\Shared\_administrationLayout.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Administration\GetListUser.cshtml" />
+    <Content Include="Views\Administration\Details.cshtml" />
+    <Content Include="Views\Administration\NewPassword.cshtml" />
+    <Content Include="Views\Administration\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
