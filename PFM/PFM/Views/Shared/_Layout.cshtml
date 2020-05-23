@@ -3,14 +3,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
+
     <title>@ViewBag.Title - AK Hotel</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Long+Cang&display=swap" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style_eat_offers.css" rel="stylesheet" />
-    <link href="~/Content/ReservationStyle.css" rel="stylesheet" />
+    @*<link href="~/Content/ReservationStyle.css" rel="stylesheet" />*@
+
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" media="(max-width:600px)" href="~/Content/mobile.css">
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
@@ -178,10 +180,15 @@
             </div>
         </footer>
     </section>
-    @Html.Partial("_OngletContact", new PFM.Models.MailViewModel())
+
+    @*@Html.Partial("_OngletContact", new PFM.Models.MailViewModel())*@
+    <div class="box-footer-1">
+        <a id="button"></a>
+    </div>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/MyScripts/main.js"></script>
     <script>
         window.onscroll = function () { myFunction() };
 
@@ -190,6 +197,7 @@
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
             document.getElementById("myBar").style.width = scrolled + "%";
+        }
     </script>
     <script>
         var supports3DTransforms = document.body.style['webkitPerspective'] !== undefined ||
@@ -221,6 +229,18 @@
         $('.navbar-nav .nav-item a').click(e => {
             $(this).tab('show');
         });
+    </script>
+    <script>
+        (function (d, w, c) {
+            w.ChatraID = 'JYwvs2rotZqucxXz2';
+            var s = d.createElement('script');
+            w[c] = w[c] || function () {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
     </script>
 </body>
 </html>

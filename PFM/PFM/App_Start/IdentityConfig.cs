@@ -18,19 +18,20 @@ namespace PFM
         {
             // Indiquez votre service de messagerie ici pour envoyer un e-mail.
 
-            MailAddress mail = new MailAddress("test123.Anas@gmail.com");
-            MailMessage mm = new MailMessage(mail.ToString(), message.Destination);
-            mm.IsBodyHtml = true;
-            mm.Subject = message.Subject;
-            mm.Body = message.Body;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
-            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
-            smtp.UseDefaultCredentials = true;
-            smtp.Credentials = NetworkCred;
-            smtp.Port = 587;
-            return smtp.SendMailAsync(mm);
+            //MailAddress mail = new MailAddress("test123.Anas@gmail.com");
+            //MailMessage mm = new MailMessage(mail.ToString(), message.Destination);
+            //mm.IsBodyHtml = true;
+            //mm.Subject = message.Subject;
+            //mm.Body = message.Body;
+            //SmtpClient smtp = new SmtpClient();
+            //smtp.Host = "smtp.gmail.com";
+            //smtp.EnableSsl = true;
+            //NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
+            //smtp.UseDefaultCredentials = true;
+            //smtp.Credentials = NetworkCred;
+            //smtp.Port = 587;
+            //return smtp.SendMailAsync(mm);
+            return Task.FromResult(0);
         }
     }
 

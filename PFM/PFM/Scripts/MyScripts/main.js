@@ -1,4 +1,6 @@
+
 $(document).ready(function () {
+
     if ($(window).scrollTop() < 12) {
         $("nav").css(" opacity", "1");
     }
@@ -6,7 +8,13 @@ $(document).ready(function () {
         $("nav").css(" opacity", "0.8");
 
     }
-    if ($(window).width() >= 500) {
+    var wdt = $(window).width();;
+    $(window).resize(function () {
+        wdt = $(window).width();
+        console.log(wdt);
+    });
+
+    if (wdt >= 600) {
         $(".eat-div").hover(function () {
 
             $(".caption2").fadeIn(1000);
@@ -31,25 +39,26 @@ $(document).ready(function () {
         $(".caption").css('margin-top', '10%');
         $(".caption4").css('margin-top', '10%');
         $(".caption2").show("slow");
-        $(".caption3").css({ 'display': 'block' });
+        $(".caption3").show("slow")
     }
-    var a = false;
-    function showcont() {
-        if (a == false) {
-            $("#fleche i").removeClass("fa-arrow-up text-primary");
-            $("#fleche i").addClass("fa-arrow-down text-danger");
-            $(".btn_display").css('background-color', '#25728b');
-            a = true;
-        }
-        else
-            if (a == true) {
-                $("#fleche i").removeClass("fa-arrow-down text-danger");
-                $("#fleche i").addClass("fa-arrow-up text-primary");
-                $(".btn_display").css('background-color', '#000000');
-                a = false;
-            }
-        $("#div_cacher").slideToggle("slow");;
-    }
+
+    //var a = false;
+    //function showcont() {
+    //    if (a == false) {
+    //        $("#fleche i").removeClass("fa-arrow-up text-primary");
+    //        $("#fleche i").addClass("fa-arrow-down text-danger");
+    //        $(".btn_display").css('background-color', '#25728b');
+    //        a = true;
+    //    }
+    //    else
+    //        if (a == true) {
+    //            $("#fleche i").removeClass("fa-arrow-down text-danger");
+    //            $("#fleche i").addClass("fa-arrow-up text-primary");
+    //            $(".btn_display").css('background-color', '#000000');
+    //            a = false;
+    //        }
+    //    $("#div_cacher").slideToggle("slow");;
+    //}
     $(".btn_display").click(function () {
         showcont();
     });

@@ -9,14 +9,19 @@
 h1, h2, h3, h4 {
     text-transform: capitalize;
 }
+html {
+    overflow-x: hidden !important;
+    overflow-y: scroll;
+}
 
 body {
+    position:relative;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x:hidden;
-    overflow-y:scroll;
+
+    
 }
 
 nav {
@@ -42,7 +47,10 @@ nav {
 }
 
 .showcase {
-    height: 80vh;
+    padding-top:130px !important;
+    padding-bottom:130px !important;
+    height: max-content;
+    width:100% !important;
     background-image: url(../pic/showcase.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -98,8 +106,9 @@ nav {
 }
 
 .room-suite {
-    padding-top: 200px;
-    height: 80vh;
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+    height: max-content;
     background-image: url(../pic/rooms.jpg);
     background-position: center;
     background-repeat: no-repeat;
