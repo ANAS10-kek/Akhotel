@@ -7,32 +7,34 @@
 <div class="mt-4" style="height:50px" ></div>
     <div class="container mb-2">
 
-        <h1>Rooms</h1>
+        <h1 class="display-3">Rooms</h1>
 
 
         <div class="row">
 
+                <div class="card-columns">
+                    @foreach (var item in Model)
+                    {
 
-            @foreach (var item in Model)
-            {
-
-
-                <div class="card col-md m-1">
-                    <img class="card-img-top img-fluid" src="https://source.unsplash.com/random/300x200" alt="">
-                    <div class="card-body ">
-                        <h4>@Html.DisplayFor(modelItem => item.NbChambres) Restant</h4>
-                        <h2>@Html.DisplayFor(modelItem => item.Titre)</h2>
-                        <p>@Html.DisplayFor(modelItem => item.ShortDescription)</p>
-                        <div class="bg-light mt-2"> @Html.ActionLink("Details", "Details", new { id = item.ChambreId })</div>
-                        <div class="d-flex justify-content-end">
-                            <a class="btn btn-info text-light btn-lg">Reserver</a>
+                        <div class="card">
+                            <img class="card-img-top" src="https://source.unsplash.com/random/300x200" alt="Card image cap">
+                            <div class="card-body">
+                                <h4>@Html.DisplayFor(modelItem => item.NbChambres) Restant</h4>
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titre)</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.ShortDescription)</p>
+                                <div class="d-flex justify-content-end align-content-end">
+                                    <a class="btn btn-info text-light btn-lg">Reserver</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"> @Html.ActionLink("Details", "Details", new { id = item.ChambreId })</small>
+                            </div>
                         </div>
+
+                    }
                     </div>
 
-                </div>
 
-
-            }
         </div>
 
     </div>

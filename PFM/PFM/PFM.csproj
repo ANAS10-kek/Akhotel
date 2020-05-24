@@ -632,6 +632,7 @@
     <Content Include="Views\Administration\Details.cshtml" />
     <Content Include="Views\Administration\NewPassword.cshtml" />
     <Content Include="Views\Administration\Error.cshtml" />
+    <Content Include="Views\Rooms\roomList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

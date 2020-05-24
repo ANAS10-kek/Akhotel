@@ -69,9 +69,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-hotel"></i></div>
                             Manage reservations
 
-                        </a><a class="nav-link" href='@Url.Action("GetListUser")'>
+                        </a><a class="nav-link" href='@Url.Action("GetListUser","Administration")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Manage clients
+                        </a>
+                        <a class="nav-link" href='@Url.Action("roomList","Rooms")'>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Manage Rooms
                         </a>
                         @*Addons*@
                         <div class="sb-sidenav-menu-heading">Addons</div>
@@ -120,9 +124,12 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
         $(document).ready(function () {
-            $('#tableUser').DataTable({
+            $('#tableUser, #tableRooms').DataTable({
                 rowReorder: true
             });
+
+
+
         });
     </script>
     <script>
@@ -166,9 +173,8 @@
                         $(".swal2-actions button").click(function () {
 
                             location.reload();
-                            console.log("in");
                         });
-                       
+
                     },
                     error: function (ex) {
                         Swal.fire({
@@ -187,8 +193,64 @@
         id=$(this).find(".tdId").text().trim();
 
     });
-           
+
 });
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+    $(".btndelete").click(function () {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteRoom")',
+                    dataType: 'json',
+                    data: jQuery.param({ id: id }),
+                    success: function (data) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+
+                        )
+                        $(".swal2-actions button").click(function () {
+
+                            location.reload();
+                          
+                        });
+
+                    },
+                    error: function (ex) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
+                    }
+                });
+
+            }
+        })
+    });
+    var id;
+    $("tr").click(function () {
+        id=$(this).find("#tdId").text().trim();
+
+    });
+
+});
+    </script>
+
+
 </body>
 </html>

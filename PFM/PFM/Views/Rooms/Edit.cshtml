@@ -1,7 +1,10 @@
 ﻿@model PFM.Models.ModelsReservation.Room
 
+
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_administrationLayout.cshtml";
+
 }
 
 <h2>Edit</h2>
@@ -11,7 +14,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal container">
         <h4>Room</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -90,7 +93,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "roomList")
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>

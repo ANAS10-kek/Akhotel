@@ -21,6 +21,13 @@ namespace PFM.Controllers
             var rooms = db.Rooms.ToList();
             return View(rooms);
         }
+
+        public ActionResult roomList()
+        {
+            var rooms = db.Rooms.ToList();
+            return View(rooms);
+        }
+        
         // GET: Rooms/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,12 +57,15 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ChambreId,Titre,ImageId,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
         {
+           
             if (ModelState.IsValid)
             {
 
                 db.Rooms.Add(room);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                int id = db.Rooms.ToList().Last().ChambreId;
+
+                return RedirectToAction("Create/"+id,"roomImages");
             }
 
             return View(room);
@@ -87,35 +97,24 @@ namespace PFM.Controllers
             {
                 db.Entry(room).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("roomList");
             }
             return View(room);
         }
 
         // GET: Rooms/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Room room = db.Rooms.Find(id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
-            return View(room);
-        }
 
-        // POST: Rooms/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public JsonResult DeleteRoom(int id)
         {
-            Room room = db.Rooms.Find(id);
-            db.Rooms.Remove(room);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            var room = db.Rooms.Find(id);
+            if (room != null)
+            {
+                db.Rooms.Remove(room);
+                db.SaveChanges();
+            }
+            return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

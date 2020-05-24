@@ -39,7 +39,7 @@ namespace PFM.Controllers
         }
 
         // GET: RoomImages/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
 
             return View();
@@ -50,17 +50,15 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RoomImage roomImage,HttpPostedFileBase[] imgs)
+        public ActionResult Create( IEnumerable<HttpPostedFileBase> files,int id)
         {
-            if (ModelState.IsValid)
-            {
-                if (imgs != null)
-                {
-                    foreach(var img in imgs)
+           
+            
+                    foreach(var img in files)
                     {
-                        if (img.ContentLength > 0)
-                        {
-                           
+                       
+                            RoomImage roomImage = new RoomImage();
+                            roomImage.RoomId = id;
                             roomImage.Name = Path.GetFileName(img.FileName);
                             roomImage.FullPath = Server.MapPath("/pic/rooms_pic/"+img.FileName);
 
@@ -68,14 +66,9 @@ namespace PFM.Controllers
                             
                             db.RoomImages.Add(roomImage);
                             db.SaveChanges();
-                        }
+                        
                     }
-                }
-
-
                
-               
-            }
 
             return RedirectToAction("Index");
         }

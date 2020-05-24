@@ -6,77 +6,35 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Room</h4>
+<div class="container p-0">
+    <h4 class="display-4">Room</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titre)
-        </dt>
+    <div class="container">
+        <div class="row justify-content-between">
+            <h4 class="text-capitalize "> @Html.DisplayFor(model => model.Titre)</h4>
+            @Html.ActionLink("reserver", "reserver", "Reservation", new { @class = "btn btn-primary " })
+        </div>
+        <div id="imgs">
+            <picture>
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/random/300x200" alt="Card image cap">
+            </picture>
+            <picture>
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/random/300x200" alt="Card image cap">
+            </picture>
+            <picture>
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/random/300x200" alt="Card image cap">
+            </picture>
+            <picture>
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/random/300x200" alt="Card image cap">
+            </picture>
+        </div>
+        <p class="text-justify mt-5">@Html.DisplayFor(model => model.LongDescription)</p>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Titre)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ImageId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prix)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prix)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeDeLit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TypeDeLit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Disponibilité)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Disponibilité)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NbChambres)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NbChambres)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShortDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LongDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LongDescription)
-        </dd>
-
-    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ChambreId }, new { @class = "btn btn-warning text-light" }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ChambreId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
