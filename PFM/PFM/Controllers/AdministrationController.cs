@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using PFM.Models;
+using PFM.Models.ModelsReservation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -107,7 +109,7 @@ namespace PFM.Controllers
         // GET: Administration/Edit/5
         public ActionResult Details(string id)
         {
-            
+
             ApplicationUser usrTmp = new ApplicationUser();
             var usr = db.Users.Find(id);
             usrTmp = usr;
@@ -158,12 +160,12 @@ namespace PFM.Controllers
             usr.PasswordHash = null;
             db.SaveChanges();
             var result = await UserManager.AddPasswordAsync(Session["id"].ToString(), model.NewPassword);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 ViewData["JavaScriptFunction"] = "successALert();";
-               
+
             }
-            return RedirectToAction("Details/"+usr.Id,"Administration");
+            return RedirectToAction("Details/" + usr.Id, "Administration");
 
         }
 
@@ -173,12 +175,83 @@ namespace PFM.Controllers
         {
 
             var usr = db.Users.Find(id);
-            if (usr!=null)
+            if (usr != null)
             {
                 db.Users.Remove(usr);
                 db.SaveChanges();
             }
-            return Json(db.Users.ToList(),JsonRequestBehavior.AllowGet);
+            return Json(db.Users.ToList(), JsonRequestBehavior.AllowGet);
         }
+        //*******************************ROOMS****************************************
+
+        //list Room
+        public ActionResult roomList()
+        {
+            var rooms = db.Rooms.ToList();
+            return View(rooms);
+        }
+        //create Rooms
+        int idR;
+        public ActionResult CreateRoom()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateRoom(IEnumerable<HttpPostedFileBase> files,[Bind(Include = "ChambreId,Titre,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
+        {
+
+           
+            if(files==null)
+            {
+                return View();
+
+            }
+            else
+            {
+                RoomImage roomImage;
+                db.Rooms.Add(room);
+                db.SaveChanges();
+                idR = db.Rooms.ToList().Last().ChambreId;
+                foreach (var img in files)
+                {
+                    roomImage = new RoomImage();
+                    roomImage.RoomId = idR;
+                    roomImage.Name = Path.GetFileName(img.FileName);
+                    roomImage.FullPath = Server.MapPath("/pic/rooms_pic/" + img.FileName);
+                    img.SaveAs(roomImage.FullPath);
+                    db.RoomImages.Add(roomImage);
+                    db.SaveChanges();
+
+                }
+            }
+            return RedirectToAction("roomList");
+        }
+
+    //roomImage
+    public ActionResult CreateImagesRoom(int id)
+    {
+
+        return View();
     }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult CreateImagesRoom()
+    {
+
+
+        return RedirectToAction("roomList");
+    }
+    [HttpPost]
+    public JsonResult DeleteRoom(int id)
+    {
+
+        var room = db.Rooms.Find(id);
+        if (room != null)
+        {
+            db.Rooms.Remove(room);
+            db.SaveChanges();
+        }
+        return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
+    }
+}
 }

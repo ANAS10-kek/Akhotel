@@ -318,6 +318,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
     <Content Include="Content\FlipTitle.css" />
+    <Content Include="Content\jquery.fancybox.css" />
+    <Content Include="Scripts\jquery.fancybox.js" />
+    <Content Include="Content\jquery.fancybox.min.css" />
+    <Content Include="Scripts\jquery.fancybox.min.js" />
     <Content Include="Content\jquery.toast.min.css" />
     <Content Include="Content\StyleAdminstration.css" />
     <Content Include="Content\gallery.css" />
@@ -620,19 +624,19 @@
     <Content Include="Views\Manage\SecurityView.cshtml" />
     <Content Include="Views\Manage\_ViewStart.cshtml" />
     <Content Include="Views\Rooms\RoomListUser.cshtml" />
-    <Content Include="Views\RoomImages\Create.cshtml" />
     <Content Include="Views\RoomImages\Delete.cshtml" />
     <Content Include="Views\RoomImages\Details.cshtml" />
     <Content Include="Views\RoomImages\Edit.cshtml" />
     <Content Include="Views\RoomImages\Index.cshtml" />
-    <Content Include="Views\RoomImages\AddImage.cshtml" />
     <Content Include="Views\Shared\_administrationLayout.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\GetListUser.cshtml" />
     <Content Include="Views\Administration\Details.cshtml" />
     <Content Include="Views\Administration\NewPassword.cshtml" />
     <Content Include="Views\Administration\Error.cshtml" />
-    <Content Include="Views\Rooms\roomList.cshtml" />
+    <Content Include="Views\Administration\roomList.cshtml" />
+    <Content Include="Views\Administration\CreateRoom.cshtml" />
+    <Content Include="Views\Administration\CreateImagesRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

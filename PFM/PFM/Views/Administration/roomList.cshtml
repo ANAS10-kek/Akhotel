@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PFM.Models.ModelsReservation.Room>
+
+@{
+    ViewBag.Title = "List des rooms";
+    Layout = "~/Views/Shared/_administrationLayout.cshtml";
+
+}
+
+
+<div class="card mb-4">
+    <div style="font-size:1.3rem;vertical-align:middle" class="card-header font-weight-bold d-flex justify-content-between align-items-center"><i class="fas fa-person-booth px-2"></i>List rooms<a class=" btn btn-primary ml-auto" href='@Url.Action("RoomList")'><i class="fas fa-sync-alt"></i></a></div>
+    <div class="card-body">
+        <a class="btn btn-primary m-2" href='@Url.Action("CreateRoom")'>Add new room</a> 
+        <div class="pl-1 py-1 pr-2 overflow-auto">
+            <table class="table table-bordered" id="tableRooms">
+                <thead>
+                    <tr>
+                        <th class="d-none">
+                            id
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Titre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Prix)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TypeDeLit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Disponibilité)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NbChambres)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="d-none" id="tdId">
+                                @Html.DisplayFor(modelItem => item.ChambreId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Titre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prix)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TypeDeLit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Disponibilité)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NbChambres)
+                            </td>
+                            <td style="font-size:1.3rem">
+                                <div class="d-flex justify-content-center">
+                                    <a role="button" class="px-2 btn" href='@Url.Action("Details", new { id = item.ChambreId })'><i class="fas fa-edit"></i></a> |
+                                    <a role="button" class="px-2 text-danger btn  btndelete custom-control"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+
+
+
+
+

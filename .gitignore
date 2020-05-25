@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /PFM/PFM/Migrations
+/PFM/PFM/pic/rooms_pic

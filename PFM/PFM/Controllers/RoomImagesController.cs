@@ -50,30 +50,27 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( IEnumerable<HttpPostedFileBase> files,int id)
+        public ActionResult Create(IEnumerable<HttpPostedFileBase> files, int id)
         {
-           
-            
-                    foreach(var img in files)
-                    {
-                       
-                            RoomImage roomImage = new RoomImage();
-                            roomImage.RoomId = id;
-                            roomImage.Name = Path.GetFileName(img.FileName);
-                            roomImage.FullPath = Server.MapPath("/pic/rooms_pic/"+img.FileName);
+            foreach (var img in files)
+            {
 
-                            img.SaveAs(roomImage.FullPath);
-                            
-                            db.RoomImages.Add(roomImage);
-                            db.SaveChanges();
-                        
-                    }
-               
+                RoomImage roomImage = new RoomImage();
+                roomImage.RoomId = id;
+                roomImage.Name = Path.GetFileName(img.FileName);
+                roomImage.FullPath = Server.MapPath("/pic/rooms_pic/" + img.FileName);
+
+                img.SaveAs(roomImage.FullPath);
+
+                db.RoomImages.Add(roomImage);
+                db.SaveChanges();
+
+            }
 
             return RedirectToAction("Index");
         }
 
-      
+
 
         // GET: RoomImages/Edit/5
         public ActionResult Edit(int? id)

@@ -21,12 +21,6 @@ namespace PFM.Controllers
             var rooms = db.Rooms.ToList();
             return View(rooms);
         }
-
-        public ActionResult roomList()
-        {
-            var rooms = db.Rooms.ToList();
-            return View(rooms);
-        }
         
         // GET: Rooms/Details/5
         public ActionResult Details(int? id)
@@ -71,6 +65,7 @@ namespace PFM.Controllers
             return View(room);
         }
 
+
         // GET: Rooms/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -104,18 +99,7 @@ namespace PFM.Controllers
 
         // GET: Rooms/Delete/5
 
-        [HttpPost]
-        public JsonResult DeleteRoom(int id)
-        {
-
-            var room = db.Rooms.Find(id);
-            if (room != null)
-            {
-                db.Rooms.Remove(room);
-                db.SaveChanges();
-            }
-            return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
-        }
+        
 
         protected override void Dispose(bool disposing)
         {
