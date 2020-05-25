@@ -332,6 +332,8 @@
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
     <Content Include="Content\util.css" />
+    <Content Include="Content\datepicker.min.css" />
+    <Content Include="Scripts\datepicker.fr.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="pic\AKHotel\1.jpg" />
@@ -439,6 +441,9 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datepicker.en.js" />
+    <Content Include="Scripts\datepicker.js" />
+    <Content Include="Scripts\datepicker.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -727,9 +732,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />

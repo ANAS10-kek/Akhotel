@@ -53,6 +53,12 @@ namespace PFM.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //reservation.DateDebut = DateDebut;
+                //reservation.DateFin = DateFin;
+                //reservation.Confirmation = Confirmation;
+                //reservation.NbChambres = NbChambres;
+               
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -22,10 +22,8 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <link href="~/Content/simple-lightbox.css" rel="stylesheet" />
-
-    <link href="https://code.jquery.com/ui/1.11.4/themes/mint-choc/jquery-ui.css"/>
-
-
+    <link href="~/Content/datepicker.min.css" rel="stylesheet" />
+    
     <style>
         .progress-bar {
             height: 8px;
@@ -192,7 +190,7 @@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-   
+
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/MyScripts/main.js"></script>
 
@@ -249,14 +247,14 @@
             if (d.head) d.head.appendChild(s);
         })(document, window, 'Chatra');
     </script>
-
+    <script src="~/Scripts/datepicker.js"></script>
+    <script src="~/Scripts/datepicker.fr.js"></script>
+    <script src="~/Scripts/datepicker.en.js"></script>
     <script>
-        $(document).ready(function () {
-            $(".datepicker").datepicker();
-        });
+        $('#myPicker,#myPicker2').datepicker();
+        // Access instance of plugin
+        $('#myPicker,#myPicker2').data('datepicker');
     </script>
-
-
 </body>
 </html>
 
