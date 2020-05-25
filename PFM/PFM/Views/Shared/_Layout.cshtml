@@ -11,16 +11,20 @@
     <link href="https://fonts.googleapis.com/css?family=Long+Cang&display=swap" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/style_eat_offers.css" rel="stylesheet" />
-    @*<link href="~/Content/ReservationStyle.css" rel="stylesheet" />*@
+
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" media="(max-width:600px)" href="~/Content/mobile.css">
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link href="~/Content/FlipTitle.css" rel="stylesheet" />
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <link href="~/Content/simple-lightbox.css" rel="stylesheet" />
+
+    <link href="https://code.jquery.com/ui/1.11.4/themes/mint-choc/jquery-ui.css"/>
+
 
     <style>
         .progress-bar {
@@ -186,9 +190,12 @@
         <a id="button"></a>
     </div>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+   
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/MyScripts/main.js"></script>
+
     <script>
         window.onscroll = function () { myFunction() };
 
@@ -242,6 +249,14 @@
             if (d.head) d.head.appendChild(s);
         })(document, window, 'Chatra');
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker();
+        });
+    </script>
+
+
 </body>
 </html>
 
