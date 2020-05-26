@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PFM.Models;
 using PFM.Models.ModelsReservation;
 
@@ -40,8 +41,8 @@ namespace PFM.Controllers
         // GET: Reservations/Create
         public ActionResult Create()
         {
-            ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre");
-            return View();
+          
+            return View(TempData["ChamberId"]);
         }
 
         // POST: Reservations/Create
@@ -49,22 +50,30 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReservationId,RoomId,UserId,DateDebut,DateFin,Confirmation,NbChambres")] Reservation reservation)
+        public ActionResult Create([Bind(Include = "DateDebut,DateFin,NbChambres")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
 
-                //reservation.DateDebut = DateDebut;
-                //reservation.DateFin = DateFin;
-                //reservation.Confirmation = Confirmation;
-                //reservation.NbChambres = NbChambres;
+                
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    reservation.RoomId = int.Parse(TempData["ChamberId"].ToString());
+                    reservation.Confirmation = "Non";
+                    reservation.UserId = int.Parse(User.Identity.GetUserId().ToString());
+                    db.Reservations.Add(reservation);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+
+                return RedirectToAction("Login","Account");
                
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+               
             }
 
-            ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
+          
             return View(reservation);
         }
 

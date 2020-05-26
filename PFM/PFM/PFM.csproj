@@ -722,6 +722,7 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\CreateImagesRoom.cshtml" />
+    <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
