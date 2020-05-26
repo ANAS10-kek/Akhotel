@@ -53,11 +53,6 @@ namespace PFM.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                //reservation.DateDebut = DateDebut;
-                //reservation.DateFin = DateFin;
-                //reservation.Confirmation = Confirmation;
-                //reservation.NbChambres = NbChambres;
                
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
@@ -83,10 +78,6 @@ namespace PFM.Controllers
             ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
             return View(reservation);
         }
-
-        // POST: Reservations/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReservationId,RoomId,UserId,DateDebut,DateFin,Confirmation,NbChambres")] Reservation reservation)

@@ -103,7 +103,7 @@
                         <div class="col-lg-12 pb-2 div-form ">
                             <label class="labelinput">Long Description</label>
                             <div class="col-lg-12 m-0 p-0">
-                                @Html.EditorFor(m => m.LongDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(m => m.LongDescription, 5, 10, new { @class = "form-control col-lg-12 multi-line" })    
                                 @Html.ValidationMessageFor(model => model.LongDescription, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -132,6 +132,7 @@
                         <fieldset class="border rounded p-2 bg-light ">
                             <legend class="w-auto px-2 bg-light border rounded">Images Selected :</legend>
                             <div id="placeImages" class="placeImages d-flex col-lg-12 flex-wrap ">
+                               
                             </div>
                         </fieldset>
 
