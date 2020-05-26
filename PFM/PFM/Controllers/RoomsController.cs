@@ -34,6 +34,8 @@ namespace PFM.Controllers
             {
                 return HttpNotFound();
             }
+            TempData["ChamberId"] = id;
+
             return View(room);
         }
 

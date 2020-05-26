@@ -330,8 +330,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
-    <Content Include="Content\flickity-docs.css" />
-    <Content Include="Content\flickity.css" />
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\jquery.toast.min.css" />
     <Content Include="Content\StyleAdminstration.css" />
@@ -346,7 +344,6 @@
     <Content Include="Content\style_eat_offers.css" />
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
-    <Content Include="Content\tooltipster.bundle.min.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\datepicker.min.css" />
     <Content Include="Scripts\datepicker.fr.js" />
@@ -478,8 +475,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\flickity-docs.min.js" />
-    <Content Include="Scripts\flickity.pkgd.min.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\jquery.toast.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -654,7 +649,6 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
-    <Content Include="Scripts\tooltipster.bundle.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -742,7 +736,6 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\DetailsRoom.cshtml" />
-    <Content Include="Views\Administration\roleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
