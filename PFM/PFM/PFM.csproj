@@ -300,6 +300,10 @@
     <Compile Include="Migrations\202005262043042_init2.Designer.cs">
       <DependentUpon>202005262043042_init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005262335500_init3.cs" />
+    <Compile Include="Migrations\202005262335500_init3.Designer.cs">
+      <DependentUpon>202005262335500_init3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -330,6 +334,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
+    <Content Include="Content\flickity-docs.css" />
+    <Content Include="Content\flickity.css" />
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\jquery.toast.min.css" />
     <Content Include="Content\StyleAdminstration.css" />
@@ -345,6 +351,11 @@
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
     <Content Include="Content\util.css" />
+    <Content Include="Content\tooltipster.bundle.min.css" />
+    <Content Include="Scripts\flickity-docs.min.js" />
+    <Content Include="Scripts\flickity.pkgd.min.js" />
+    <Content Include="Scripts\tooltipster.bundle.min.js" />
+    <Content Include="Views\Administration\roleList.cshtml" />
     <Content Include="Content\datepicker.min.css" />
     <Content Include="Scripts\datepicker.fr.js" />
     <Content Include="favicon.ico" />
@@ -736,6 +747,7 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\DetailsRoom.cshtml" />
+   <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -756,6 +768,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005262043042_init2.resx">
       <DependentUpon>202005262043042_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005262335500_init3.resx">
+      <DependentUpon>202005262335500_init3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
