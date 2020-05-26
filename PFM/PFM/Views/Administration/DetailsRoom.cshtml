@@ -1,53 +1,83 @@
 ﻿@model PFM.Models.ModelsReservation.Room
 
 @{
-    ViewBag.Title = "CreateRoom";
+    ViewBag.Title = "DetailsRoom";
     Layout = "~/Views/Shared/_administrationLayout.cshtml";
 }
-<style>
-    .labelinput {
-        display: block;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-bottom: 7px;
-    }
 
-    .avatar-pic {
-        width: 150px;
-    }
+    <style>
+        .labelinput {
+            display: block;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
 
-    img {
-        position: relative;
-        width: 150px;
-    }
+        .avatar-pic {
+            width: 150px;
+        }
 
-    .divInput {
-        position: relative;
-    }
+        img {
+            position: relative;
+            width: 150px;
+        }
 
-    #fileInput {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-        filter: alpha(opacity=0);
-        opacity: 0;
-        background-color: #59698d !important;
-    }
-    .labelinput::after {
-        content: '*';
-        margin-left: 2px;
-        color: #b90000;
-    }
-</style>
+        .divInput {
+            position: relative;
+        }
+
+        .sctFiled {
+            height: 300px;
+        }
+
+        #fileInput {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            background-color: #59698d !important;
+        }
+
+        .main-carousel {
+        }
+
+            .main-carousel a {
+                height: 230px;
+                border-radius: 10px;
+                background-color: rgba(0, 0, 0, 0.125);
+                border: .5px solid rgba(0, 0, 0, 0.205);
+            }
+
+        .labelinput::after {
+            content: '*';
+            margin-left: 2px;
+            color: #b90000;
+        }
+
+        .btnDeleteImg {
+            top: 29px;
+            right: -107px;
+            z-index: 1;
+            opacity: .8;
+            color: red;
+            width: 24px !important;
+            height: 24px !important;
+        }
+
+            .btnDeleteImg:hover {
+                opacity: 1;
+            }
+    </style>
 <div class="card mb-4">
-    <div style="font-size: 1.3rem; vertical-align: middle" class="card-header font-weight-bold d-flex justify-content-between align-items-center"><i class="fas fa-plus-square px-2 py-0"></i><span> Create new  room</span>    <a class="btn btn-outline-danger  ml-auto" href='@Url.Action("roomList")'><i class="fas fa-arrow-circle-left"></i></a></div>
-    @using (Html.BeginForm("CreateRoom", "Administration", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formCreate" }))
+    <div style="font-size: 1.3rem; vertical-align: middle" class="card-header font-weight-bold d-flex justify-content-between align-items-center"><i class="fas fa-edit"></i><span> Edit and Details room</span>    <a class="btn btn-outline-danger  ml-auto" href='@Url.Action("roomList")'><i class="fas fa-arrow-circle-left"></i></a></div>
+    @using (Html.BeginForm("DetailsRoom", "Administration", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formCreate" }))
     {
         @Html.AntiForgeryToken()
 
@@ -103,20 +133,37 @@
                         <div class="col-lg-12 pb-2 div-form ">
                             <label class="labelinput">Long Description</label>
                             <div class="col-lg-12 m-0 p-0">
-                                @Html.TextAreaFor(m => m.LongDescription, 5, 10, new { @class = "form-control col-lg-12 multi-line" })    
+                                @Html.TextAreaFor(m => m.LongDescription, 5, 10, new { @class = "form-control col-lg-12 multi-line" })
+
                                 @Html.ValidationMessageFor(model => model.LongDescription, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </fieldset>
                 </div>
+
                 <div class="col-lg-6 d-flex flex-column">
-                    <div class="divInput mb-2 div-form ">
+                    <div class="pb-2">
+                        <fieldset class="border rounded p-2 bg-light  sctFiled">
+                            <legend class="w-auto px-2 bg-light border rounded">Images room :</legend>
+                            <div class="col-lg-12 divOutImg  main-carousel">
+
+                                @foreach (var item in ViewBag.imagesCurrentRoom)
+                                {
+                                    <a class="col-lg-4 mb-2  carousel-cell  px-2 mx-2" id="btnDeleteImg" href="~/pic/rooms_pic/@item.Name" data-fancybox='gallery' data-type='image' data-caption="Caption #">
+                                        <span title="Delete this image from this room" class=" tooltip bg-secondary text-center position-relative btnDeleteImg d-flex justify-content-center py-1"><i class="fas fa-trash"></i><span class="roomID d-none">@item.ImageId</span></span>
+                                        <img class="img-thumbnail align-self-center" src="~/pic/rooms_pic/@item.Name">
+                                    </a>
+                                }
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="divInput mt-3 div-form ">
                         <fieldset class="border rounded p-2 bg-light ">
                             <legend class="w-auto px-2 bg-light border rounded">Images room :</legend>
                             <div>
-                                <div class="file-field">
+                                <div class="file-field ">
                                     <div class="mb-4 d-flex justify-content-center">
-                                        <i class="fa fa-8x fa-download" aria-hidden="true"></i>
+                                        <i class="fa fa-4x fa-download" aria-hidden="true"></i>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="btn btn-mdb-color btn-rounded float-left">
@@ -128,21 +175,22 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div>
-                        <fieldset class="border rounded p-2 bg-light ">
-                            <legend class="w-auto px-2 bg-light border rounded">Images Selected :</legend>
-                            <div id="placeImages" class="placeImages d-flex col-lg-12 flex-wrap ">
-                               
+                    <div class="pt-2">
+                        <fieldset class="border rounded p-2 bg-light  sctFiled">
+                            <legend class="w-auto px-2 bg-light border rounded">New images selected :</legend>
+                            <div id="placeImages" class="placeImages col-lg-12  d-flex flex-wrap">
+
+
                             </div>
                         </fieldset>
-
                     </div>
+
                 </div>
             </div>
 
         </div>
         <div class="col-lg-12 text-lg-right py-2 d-flex justify-content-end">
-            <button type="submit" class="btn btn-success px-5"><i class="far fa-save"></i> Save</button>
+            <button type="submit" class="btn btn-success px-5 btnSave"><i class="far fa-save"></i> Save</button>
         </div>
     }
 </div>
@@ -184,9 +232,6 @@
                     }, 'LongDescription':
                     {
                         required: true
-                    }, 'files':
-                    {
-                        required: true
                     }, 'Disponibilité':
                     {
                         required: true
@@ -210,9 +255,6 @@
                     }, 'LongDescription':
                     {
                         required: 'Long Description is required'
-                    }, 'files':
-                    {
-                        required: 'Images is required'
                     }, 'Disponibilité':
                     {
                         required: 'Availability is required'

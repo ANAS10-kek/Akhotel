@@ -182,18 +182,17 @@
             </div>
         </footer>
     </section>
-
-    @*@Html.Partial("_OngletContact", new PFM.Models.MailViewModel())*@
     <div class="box-footer-1">
         <a id="button"></a>
     </div>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/MyScripts/main.js"></script>
-
+    <script src="~/Scripts/datepicker.js"></script>
+    <script src="~/Scripts/datepicker.fr.js"></script>
+    <script src="~/Scripts/datepicker.en.js"></script>
     <script>
         window.onscroll = function () { myFunction() };
 
@@ -247,9 +246,6 @@
             if (d.head) d.head.appendChild(s);
         })(document, window, 'Chatra');
     </script>
-    <script src="~/Scripts/datepicker.js"></script>
-    <script src="~/Scripts/datepicker.fr.js"></script>
-    <script src="~/Scripts/datepicker.en.js"></script>
     <script>
         $('#myPicker,#myPicker2').datepicker();
         // Access instance of plugin

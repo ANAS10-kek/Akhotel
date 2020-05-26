@@ -4,6 +4,7 @@ using PFM.Models;
 using PFM.Models.ModelsReservation;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -197,11 +198,9 @@ namespace PFM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateRoom(IEnumerable<HttpPostedFileBase> files,[Bind(Include = "ChambreId,Titre,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
+        public ActionResult CreateRoom(IEnumerable<HttpPostedFileBase> files, [Bind(Include = "ChambreId,Titre,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
         {
-
-           
-            if(files==null)
+            if (files == null)
             {
                 return View();
 
@@ -226,32 +225,76 @@ namespace PFM.Controllers
             }
             return RedirectToAction("roomList");
         }
+        //Edit Room
 
-    //roomImage
-    public ActionResult CreateImagesRoom(int id)
-    {
-
-        return View();
-    }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult CreateImagesRoom()
-    {
-
-
-        return RedirectToAction("roomList");
-    }
-    [HttpPost]
-    public JsonResult DeleteRoom(int id)
-    {
-
-        var room = db.Rooms.Find(id);
-        if (room != null)
+        public ActionResult DetailsRoom(int id)
         {
-            db.Rooms.Remove(room);
-            db.SaveChanges();
+            var currentRoom = db.Rooms.Find(id);
+            ViewBag.imagesCurrentRoom = db.RoomImages.ToList().Where(c => c.RoomId == id);
+            idR = id;
+            return View(currentRoom);
         }
-        return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
+        [HttpPost]
+        public ActionResult DetailsRoom(Room UpdatedRoom, IEnumerable<HttpPostedFileBase> files, int id)
+        {
+
+
+
+            var currentRoom = db.Rooms.Find(id);
+            currentRoom.Disponibilité = UpdatedRoom.Disponibilité;
+            currentRoom.Prix = UpdatedRoom.Prix;
+            currentRoom.NbChambres = UpdatedRoom.NbChambres;
+            currentRoom.ShortDescription = UpdatedRoom.ShortDescription;
+            currentRoom.LongDescription = UpdatedRoom.LongDescription;
+            currentRoom.TypeDeLit = UpdatedRoom.TypeDeLit;
+            currentRoom.Titre = UpdatedRoom.Titre;
+            db.SaveChanges();
+            foreach (var img in files)
+            {
+                if (img != null)
+                {
+                    RoomImage roomImage = new RoomImage();
+                    roomImage.RoomId = id;
+                    roomImage.Name = Path.GetFileName(img.FileName);
+                    roomImage.FullPath = Server.MapPath("/pic/rooms_pic/" + img.FileName);
+                    img.SaveAs(roomImage.FullPath);
+                    db.RoomImages.Add(roomImage);
+                    db.SaveChanges();
+                }
+
+            }
+            ViewBag.imagesCurrentRoom = db.RoomImages.ToList().Where(c => c.RoomId == id);
+            return View(currentRoom);
+        }
+
+
+
+
+        //Delete Room
+        [HttpPost]
+        public JsonResult DeleteRoom(int id)
+        {
+
+            var room = db.Rooms.Find(id);
+            if (room != null)
+            {
+                db.Rooms.Remove(room);
+                db.SaveChanges();
+            }
+            return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        //delete Image Room
+        [HttpPost]
+        public JsonResult DeleteImageRoom(int id)
+        {
+
+            var roomImage = db.RoomImages.Find(id);
+            if (roomImage != null)
+            {
+                db.RoomImages.Remove(roomImage);
+                db.SaveChanges();
+            }
+            return Json(JsonRequestBehavior.AllowGet);
+        }
     }
-}
 }
