@@ -288,6 +288,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005262010402_init.cs" />
+    <Compile Include="Migrations\202005262010402_init.Designer.cs">
+      <DependentUpon>202005262010402_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005262037561_init1.cs" />
+    <Compile Include="Migrations\202005262037561_init1.Designer.cs">
+      <DependentUpon>202005262037561_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005262043042_init2.cs" />
+    <Compile Include="Migrations\202005262043042_init2.Designer.cs">
+      <DependentUpon>202005262043042_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -299,7 +312,6 @@
     <Compile Include="Models\ModelsReservation\Reservation.cs" />
     <Compile Include="Models\ModelsReservation\RoomImage.cs" />
     <Compile Include="Models\ModelsReservation\Room.cs" />
-    <Compile Include="Models\RolesModelView.cs" />
     <Compile Include="Models\States.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -328,6 +340,7 @@
     <Content Include="Content\sal.css" />
     <Content Include="Content\simple-lightbox.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\StyleCreateView.css" />
     <Content Include="Content\StylePageInscription.css" />
     <Content Include="Content\StylePageLogin.css" />
     <Content Include="Content\style_eat_offers.css" />
@@ -475,6 +488,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\MyScripts\CreateViewScript.js" />
     <Content Include="Scripts\MyScripts\DeleteClient.js" />
     <Content Include="Scripts\MyScripts\NewPasswordValidation_DSh.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -728,6 +742,7 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\DetailsRoom.cshtml" />
+    <Content Include="Views\Administration\roleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -740,7 +755,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\202005262010402_init.resx">
+      <DependentUpon>202005262010402_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005262037561_init1.resx">
+      <DependentUpon>202005262037561_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005262043042_init2.resx">
+      <DependentUpon>202005262043042_init2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,7 +16,7 @@
     <link href="~/Content/jquery.fancybox.min.css" rel="stylesheet" />
     <link href="~/Content/flickity.css" rel="stylesheet" />
     <link href="~/Content/tooltipster.bundle.min.css" rel="stylesheet" />
-
+    <link href="~/Content/StyleCreateView.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
@@ -70,19 +70,33 @@
 
                             <a href='@Url.Action("About","Home")' class="nav-link">About</a>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Management</div>
-                        <a class="nav-link" href="">
-                            <div class="sb-nav-link-icon"><i class="fas fa-hotel"></i></div>
-                            Manage reservations
+                        <div class="sb-sidenav-menu-heading">
+                            administration
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMangement" aria-expanded="false" aria-controls="collapseMangement">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                            Management
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseMangement" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                            <a class="nav-link" href="">
+                                <div class="sb-nav-link-icon"><i class="fas fa-hotel"></i></div>
+                                Manage reservations
 
-                        </a><a class="nav-link" href='@Url.Action("GetListUser","Administration")'>
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            Manage clients
-                        </a>
-                        <a class="nav-link" href='@Url.Action("roomList","Administration")'>
-                            <div class="sb-nav-link-icon"><i class="fas fa-person-booth"></i></div>
-                            Manage Rooms
-                        </a>
+                            </a>
+                            <a class="nav-link" href='@Url.Action("GetListUser","Administration")'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Manage clients
+                            </a>
+                            <a class="nav-link" href='@Url.Action("roomList","Administration")'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-person-booth"></i></div>
+                                Manage Rooms
+                            </a>
+                            <a class="nav-link" href='@Url.Action("roleList","Administration")'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-tag"></i></div>
+                                Manage Role
+                            </a>
+                        </div>
                         @*Addons*@
                         <div class="sb-sidenav-menu-heading">Addons</div>
                         <a class="nav-link" href="charts.html">
@@ -138,11 +152,12 @@
     <script src="~/Scripts/flickity.pkgd.min.js"></script>
     <script src="~/Scripts/MyScripts/DeleteClient.js"></script>
     <script src="~/Scripts/tooltipster.bundle.min.js"></script>
+    <script src="~/Scripts/MyScripts/CreateViewScript.js"></script>
 
     @*scripts DataTable*@
     <script>
         $(document).ready(function () {
-            $('#tableUser, #tableRooms').DataTable({
+            $('#tableUser, #tableRooms,#tableRoles').DataTable({
                 rowReorder: true
             });
         });
@@ -343,6 +358,104 @@
                         title: 'Your work has been saved'
                     });
         });
+    </script>
+    @*scripts Add new  role *@
+    <script>
+    $(document).ready(function () {
+        $(".CreateView").hide();
+        $(".btnDisplayView").click(function () {
+            const { value: name } = Swal.fire({
+                title: 'Enter role name',
+                input: 'text',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to write something!'
+                    } else {
+                $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CreateRolee")',
+                dataType: 'json',
+                    data: jQuery.param({ Name: value }),
+                    success: function (data) {
+                        console.log(data);
+                 Swal.fire(
+                    'Added!',
+                    'Role has been Added.',
+                    'success'
+                        )
+                        $(".swal2-actions button").click(function () {
+
+                            location.reload();
+                        });
+                },
+                error: function (ex) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+                 }
+                });
+                    }
+                }
+            });
+        });
+    });
+
+
+    </script>
+    @*Delete Role*@
+    <script>
+        var id;
+        $(document).ready(function () {
+            $("tr").click(function () {
+                id = $(this).find(".idrole").text().trim();
+            
+
+        });
+            $(".btndelete").click(function () {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                console.log(id);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("DeleteRole", "Administration")',
+                    dataType: 'json',
+                    data: jQuery.param({ id: id}),
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        $(".swal2-actions button").click(function () {
+                            location.reload();
+                        });
+                    },
+                    error: function (ex) {
+                        console.log(ex);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
+                    }
+                });
+            }
+        })
+    });
+   
+});
     </script>
 </body>
 </html>

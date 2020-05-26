@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using PFM.Models;
 using PFM.Models.ModelsReservation;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -266,10 +268,6 @@ namespace PFM.Controllers
             ViewBag.imagesCurrentRoom = db.RoomImages.ToList().Where(c => c.RoomId == id);
             return View(currentRoom);
         }
-
-
-
-
         //Delete Room
         [HttpPost]
         public JsonResult DeleteRoom(int id)
@@ -296,5 +294,61 @@ namespace PFM.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+        //role List
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        [HttpPost]
+        public JsonResult CreateRolee(string Name)
+        {
+            try
+            {
+                ApplicationRole role = new ApplicationRole();
+            var roles = db.IdentityRoles.ToList();
+
+            if (roles.Count <= 0)
+            {
+                role.Id = RandomString(1);
+            }
+            else
+            {
+
+                role.Id = roles.Last().Id+ RandomString(1);
+            }
+            role.Name = Name;
+            db.Roles.Add(role);
+            db.SaveChanges();
+            return Json(JsonRequestBehavior.AllowGet);
+            }
+            catch (DbEntityValidationException e)
+            {
+               
+                throw e;
+            }
+
+        }
+        [HttpPost]
+        public JsonResult DeleteRole(string id)
+        {
+
+            var role = db.Roles.Find(id);
+            if (role != null)
+            {
+                db.Roles.Remove(role);
+                db.SaveChanges();
+            }
+            return Json(db.Roles.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult roleList()
+        {
+            var roles = db.IdentityRoles.ToList();
+            return View(roles);
+        }
+       
     }
 }

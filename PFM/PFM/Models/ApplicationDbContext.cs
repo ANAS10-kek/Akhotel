@@ -74,10 +74,13 @@ namespace PFM.Models
             .WithMany(r => r.Caracteristiques)
             .HasForeignKey(ri => ri.RoomId);
 
+
         }
 
         public System.Data.Entity.DbSet<PFM.Models.ModelsReservation.Reservation> Reservations { get; set; }
 
         public System.Data.Entity.DbSet<PFM.Models.ModelsReservation.Caracteristique> Caracteristiques { get; set; }
+
+        public System.Data.Entity.DbSet<PFM.Models.ApplicationRole> IdentityRoles { get; set; }
     }
 }
