@@ -18,8 +18,8 @@
                         @Session["CountUsers"].ToString()<i class="fas fa-users pl-2" style="font-size:2rem !important"></i>
                     </span>
                 </div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-dark stretched-link" href="#">View Details</a>
+                <div class="card-footer d-flex align-items-center justify-content-between py-2">
+                    <a class="small text-dark stretched-link" href='@Url.Action("Index","Tables")'>View Details</a>
                     <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -29,12 +29,10 @@
                 <div class="card-header py-0 text-light lead px-1 bg-dark">Tolal Reservation</div>
                 <div class="card-body">
                     <span class="display-4 text-dark font-weight-bold px-3 d-flex justify-content-center align-items-center">
-                        @Session["CountResr"]<i class="fas fa-users pl-2" style="font-size:2rem !important"></i>
+                        @Session["CountResr"]<i class="fas fa-hotel pl-2" style="font-size:2rem !important"></i>
                     </span>
                 </div>
-                <div class="card-footer d-flex bg-dark align-items-center justify-content-between">
-                    <a class="small text-light stretched-link" href="#">View Details</a>
-                    <div class="small text-light"><i class="fas fa-angle-right"></i></div>
+                <div class="card-footer d-flex bg-dark align-items-center justify-content-between py-3">
                 </div>
             </div>
         </div>
@@ -46,8 +44,8 @@
                         @Session["CountRooms"].ToString() <i class="fas fa-person-booth pl-2" style="font-size:2rem !important"></i>
                     </span>
                 </div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-dark stretched-link" href="#">View Details</a>
+                <div class="card-footer d-flex align-items-center justify-content-between py-2">
+                    <a class="small text-dark stretched-link" href='@Url.Action("Index","Tables")'>View Details</a>
                     <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -57,12 +55,10 @@
                 <div class="card-header bg-dark py-0 text-light bg-da lead px-1">Tolal Rooms Available</div>
                 <div class="card-body">
                     <span class="display-4 text-dark font-weight-bold px-3 d-flex justify-content-center align-items-center">
-                        @Session["CountRoomReserved"].ToString()<i class="fas fa-users pl-2" style="font-size:2rem !important"></i>
+                        @Session["CountRoomReserved"].ToString()<i class="fa fa-sort-amount-desc pl-2"  style="font-size:2rem !important"></i>
                     </span>
                 </div>
-                <div class="card-footer d-flex bg-dark align-items-center justify-content-between">
-                    <a class="small text-light stretched-link" href="#">View Details</a>
-                    <div class="small text-light"><i class="fas fa-angle-right"></i></div>
+                <div class="card-footer d-flex bg-dark align-items-center justify-content-between py-3">
                 </div>
             </div>
         </div>
@@ -71,14 +67,15 @@
 <div class="row m-0 p-0">
     <div class="col-xl-6">
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
-            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+            <div class="card-header">
+                <i class="fas fa-chart-area mr-1"></i>Count of user registred by mounth</div>
+            <div class="card-body"><canvas id="myAreaChart" width="100" height="40"></canvas></div>
         </div>
     </div>
     <div class="col-xl-6">
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
-            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>User Confirmed email</div>
+            <div class="card-body"><canvas id="myPieChart" width="100" height="40"></canvas></div>
         </div>
     </div>
 </div>

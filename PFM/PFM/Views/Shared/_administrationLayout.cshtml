@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -6,9 +7,9 @@
     <title>@ViewBag.Title</title>
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap.min.css">
 
+    <link href="~/Content/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/datatables/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/StyleAdminstration.css" rel="stylesheet" />
 
     <link href="~/Content/jquery.toast.min.css" rel="stylesheet" />
@@ -19,24 +20,21 @@
     <link href="~/Content/StyleCreateView.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="~/Content/Chart.js/Chart.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <a class="navbar-brand" href="#">Ak hotel Administration</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
         <div class="nav-item dropdown ml-auto">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-shield"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-100px !important">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right ml-auto" }))
+            {
+                @Html.AntiForgeryToken()
+                <a class="btn btn-outline-danger" title="Logout" href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt"></i></a>
+            }
         </div>
-
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -44,7 +42,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href='@Url.Action("index")'>
+                        <a class="nav-link" href='@Url.Action("index","Administration")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -99,18 +97,18 @@
                         </div>
                         @*Addons*@
                         <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href='@Url.Action("ChartView","Admninistration")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
-                        </a><a class="nav-link" href="tables.html">
+                        </a>
+                        <a class="nav-link" href='@Url.Action("Index", "Tables")'>
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
                         </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Admin
+                    <div class="small">Name : <span class="px-1">@User.Identity.GetUserName()</span>as <span>Administrator</span></div>
                 </div>
             </nav>
         </div>
@@ -138,10 +136,6 @@
     @*scripts*@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.4/js/responsive.bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery.toast.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
@@ -153,12 +147,26 @@
     <script src="~/Scripts/MyScripts/DeleteClient.js"></script>
     <script src="~/Scripts/tooltipster.bundle.min.js"></script>
     <script src="~/Scripts/MyScripts/CreateViewScript.js"></script>
+    <script src="~/Content/Chart.js/Chart.js"></script>
 
     @*scripts DataTable*@
+
+
+    <script src="~/Content/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/Content/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.flash.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.print.js"></script>
+    <script src="~/Content/pdfmake/pdfmake.js"></script>
     <script>
         $(document).ready(function () {
             $('#tableUser, #tableRooms,#tableRoles,#tableUSerRole').DataTable({
-                rowReorder: true
+                rowReorder: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>
@@ -567,6 +575,62 @@
 });
         </script>
     }
+
+    @*chart js*@
+    <script>
+        var arrayIn = @Html.Raw(Json.Encode(@ViewBag.data));
+        console.log(arrayIn);
+        var arrayOfcount = [];
+        var arrayOfdate = [];
+        for (var i = 0; i < arrayIn.length; i++) {
+            arrayOfcount.push(arrayIn[i].count);
+            arrayOfdate.push(arrayIn[i].date);
+        }
+        console.log(arrayOfcount);
+        var tabMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var monthdisplay = [];
+       
+        for (var i = arrayOfdate[0] - 1; i < 12; i++) {
+            monthdisplay.push(tabMonth[i]);
+
+
+        }
+        var ctx = document.getElementById('myAreaChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: monthdisplay,
+                datasets: [{
+                    label: 'Count of Users ',
+                    backgroundColor: 'rgba(223, 108, 79)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: arrayOfcount
+                }]
+            },
+            options: {}
+        });
+        var emailConfirmed =@Html.Raw(Json.Encode(ViewBag.EmailConfirmed));
+        var EmailNotConfirmed =@Html.Raw(Json.Encode(ViewBag.EmailNotConfirmed));
+        console.log(emailConfirmed);
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Confirmed users', 'Unconfiremd users'],
+               
+                datasets: [{
+                    label: 'Count of Users',
+                    backgroundColor: [
+                        'rgba(223, 108, 79)',
+                        'rgba(73, 197, 182)',
+                    ],
+
+                    data: [emailConfirmed, EmailNotConfirmed],
+                }]
+            },
+            options: {}
+        });
+    </script>
 
 </body>
 </html>

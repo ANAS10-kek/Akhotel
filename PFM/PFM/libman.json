@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "datatables@1.10.20",
+      "destination": "Content/datatables/"
+    },
+    {
+      "library": "datatables-buttons@2.2.0",
+      "destination": "Content/datatables-buttons/"
+    },
+    {
+      "library": "pdfmake@0.1.65",
+      "destination": "Content/pdfmake/"
+    },
+    {
+      "library": "Chart.js@2.9.3",
+      "destination": "Content/Chart.js/"
+    }
+  ]
+}

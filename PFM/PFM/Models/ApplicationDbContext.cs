@@ -82,5 +82,6 @@ namespace PFM.Models
         public System.Data.Entity.DbSet<PFM.Models.ModelsReservation.Caracteristique> Caracteristiques { get; set; }
 
         public System.Data.Entity.DbSet<PFM.Models.ApplicationRole> IdentityRoles { get; set; }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using PFM.Models;
 using PFM.Models.ModelsReservation;
 using System;
@@ -9,6 +10,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -16,7 +18,7 @@ using System.Web.UI;
 
 namespace PFM.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -58,6 +60,13 @@ namespace PFM.Controllers
             Session["CountResr"] = db.Reservations.ToList().Count;
             Session["CountRooms"] = db.Rooms.ToList().Count;
             Session["CountRoomReserved"] = 0;
+            ViewBag.data = this.db.Users
+                                   .Where(x => x.Id != null)
+                                   .GroupBy(s => new { date = s.Datesinup.Month })
+                                   .Select(x => new { count = x.Count(), date = x.Key.date })
+                                    .ToList();
+            ViewBag.EmailNotConfirmed = this.db.Users.Where(x => x.EmailConfirmed == false).ToList().Count;
+            ViewBag.EmailConfirmed = this.db.Users.Where(x => x.EmailConfirmed == true).ToList().Count;
             return View();
         }
         //Get List User
@@ -303,22 +312,22 @@ namespace PFM.Controllers
         [HttpPost]
         public JsonResult CreateRolee(string Name)
         {
-                ApplicationRole role = new ApplicationRole();
-                var roles = db.IdentityRoles.ToList();
+            ApplicationRole role = new ApplicationRole();
+            var roles = db.IdentityRoles.ToList();
 
-                if (roles.Count <= 0)
-                {
-                    role.Id = RandomString(1);
-                }
-                else
-                {
+            if (roles.Count <= 0)
+            {
+                role.Id = RandomString(1);
+            }
+            else
+            {
 
-                    role.Id = roles.Last().Id + RandomString(1);
-                }
-                role.Name = Name;
-                db.Roles.Add(role);
-                db.SaveChanges();
-                return Json(JsonRequestBehavior.AllowGet);
+                role.Id = roles.Last().Id + RandomString(1);
+            }
+            role.Name = Name;
+            db.Roles.Add(role);
+            db.SaveChanges();
+            return Json(JsonRequestBehavior.AllowGet);
 
         }
         [HttpPost]
@@ -345,26 +354,51 @@ namespace PFM.Controllers
             Session["nameRole"] = currentRole.Name.ToString();
 
             var CurrentRoles = db.Roles.Find(id).Users;
-            var allUser =db.Users.ToList();
+            var allUser = db.Users.ToList();
             ViewBag.listUser = from user in db.Users
-                                     where user.Roles.Any(r => r.RoleId == id)
-                                     select user;
+                               where user.Roles.Any(r => r.RoleId == id)
+                               select user;
             List<ApplicationUser> UsersOutRole = new List<ApplicationUser>();
             ViewBag.listAllUser = db.Users.Where(m => m.Roles.All(r => r.RoleId != id)).ToList();
-           
+
             return View();
         }
-        public JsonResult addUserTorole(string id,string role)
+        public JsonResult addUserTorole(string id, string role)
         {
             UserManager.AddToRole(id, role);
             return Json(JsonRequestBehavior.AllowGet);
         }
-        public JsonResult deleteUserfromRole(string id,string role)
+        public JsonResult deleteUserfromRole(string id, string role)
         {
             UserManager.RemoveFromRole(id, role);
             return Json(JsonRequestBehavior.AllowGet);
         }
         //index COunt
-        
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ChartView()
+        {
+            ViewBag.data = this.db.Users
+                                 .Where(x => x.Id != null)
+                                 .GroupBy(s => new { date = s.Datesinup.Month })
+                                 .Select(x => new { count = x.Count(), date = x.Key.date })
+                                  .ToList();
+            ViewBag.EmailNotConfirmed = this.db.Users.Where(x => x.EmailConfirmed == false).ToList().Count;
+            ViewBag.EmailConfirmed = this.db.Users.Where(x => x.EmailConfirmed == true).ToList().Count;
+            return View();
+         }
     }
 }

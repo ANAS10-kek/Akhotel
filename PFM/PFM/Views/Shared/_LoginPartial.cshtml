@@ -13,11 +13,22 @@
                     <i class="far fa-2x fa-id-badge"></i>
                     @Html.ActionLink("Mange profil", "Index", "Manage", routeValues: User.Identity.GetUserId().ToString(), htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
                 </span>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <div class="dropdown-divider"></div>
+                    <span class="d-flex pl-1 align-items-center">
+                        <i class="fas fa-2x fa-tachometer-alt"></i>
+                        <a class="dropdown-item" title="Logout" href='@Url.Action("Index","Administration")'>
+                            Dashboard
+                        </a>
+                    </span>
+                }
                 <div class="dropdown-divider"></div>
                 <span class="d-flex pl-1 align-items-center">
                     <i class="fas fa-2x fa-sign-out-alt"></i>
                     <a class="dropdown-item" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                 </span>
+
             </div>
         </div>
     }
