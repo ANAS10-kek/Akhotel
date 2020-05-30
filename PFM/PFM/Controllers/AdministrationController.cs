@@ -16,7 +16,7 @@ using System.Web.UI;
 
 namespace PFM.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -54,6 +54,10 @@ namespace PFM.Controllers
         // GET: Administration
         public ActionResult Index()
         {
+            Session["CountUsers"] = db.Users.ToList().Count;
+            Session["CountResr"] = db.Reservations.ToList().Count;
+            Session["CountRooms"] = db.Rooms.ToList().Count;
+            Session["CountRoomReserved"] = 0;
             return View();
         }
         //Get List User
@@ -360,5 +364,7 @@ namespace PFM.Controllers
             UserManager.RemoveFromRole(id, role);
             return Json(JsonRequestBehavior.AllowGet);
         }
+        //index COunt
+        
     }
 }
