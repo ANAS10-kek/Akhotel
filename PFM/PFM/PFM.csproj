@@ -288,21 +288,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005262010402_init.cs" />
-    <Compile Include="Migrations\202005262010402_init.Designer.cs">
-      <DependentUpon>202005262010402_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005262037561_init1.cs" />
-    <Compile Include="Migrations\202005262037561_init1.Designer.cs">
-      <DependentUpon>202005262037561_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005262043042_init2.cs" />
-    <Compile Include="Migrations\202005262043042_init2.Designer.cs">
-      <DependentUpon>202005262043042_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005262335500_init3.cs" />
-    <Compile Include="Migrations\202005262335500_init3.Designer.cs">
-      <DependentUpon>202005262335500_init3.cs</DependentUpon>
+    <Compile Include="Migrations\202005271247126_init.cs" />
+    <Compile Include="Migrations\202005271247126_init.Designer.cs">
+      <DependentUpon>202005271247126_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -747,7 +735,8 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\DetailsRoom.cshtml" />
-   <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
+    <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
+    <Content Include="Views\Administration\ListUserInRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -760,17 +749,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005262010402_init.resx">
-      <DependentUpon>202005262010402_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005262037561_init1.resx">
-      <DependentUpon>202005262037561_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005262043042_init2.resx">
-      <DependentUpon>202005262043042_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005262335500_init3.resx">
-      <DependentUpon>202005262335500_init3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005271247126_init.resx">
+      <DependentUpon>202005271247126_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

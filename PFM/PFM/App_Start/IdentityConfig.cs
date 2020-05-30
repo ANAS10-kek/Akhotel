@@ -14,6 +14,8 @@ namespace PFM
 {
     public class EmailService : IIdentityMessageService
     {
+        
+
         public Task SendAsync(IdentityMessage message)
         {
             // Indiquez votre service de messagerie ici pour envoyer un e-mail.
@@ -34,19 +36,19 @@ namespace PFM
             return Task.FromResult(0);
         }
     }
-
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+            : base(roleStore) { }
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+        }
+    }
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
         {
-            //var soapSms = new PFM.APSMX2.ASPSMSX2SoapClient("ASPSMSX2Soap");
-            //soapSms.SendSimpleTextSMS(
-            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSUSERKEY"],
-            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSPASSWORD"],
-            //    message.Destination,
-            //    System.Configuration.ConfigurationManager.AppSettings["ASPSMSORIGINATOR"],
-            //    message.Body);
-            //soapSms.Close();
             return Task.FromResult(0);
         }
     }

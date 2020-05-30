@@ -16,39 +16,39 @@ using System.Web.UI;
 
 namespace PFM.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
         public AdministrationController()
         {
         }
-        public AdministrationController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AdministrationController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+            ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
+
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
+            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
+            private set { _signInManager = value; }
         }
+
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get { return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>(); }
+            private set { _roleManager = value; }
         }
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Administration
@@ -205,7 +205,6 @@ namespace PFM.Controllers
             if (files == null)
             {
                 return View();
-
             }
             else
             {
@@ -222,7 +221,6 @@ namespace PFM.Controllers
                     img.SaveAs(roomImage.FullPath);
                     db.RoomImages.Add(roomImage);
                     db.SaveChanges();
-
                 }
             }
             return RedirectToAction("roomList");
@@ -239,9 +237,6 @@ namespace PFM.Controllers
         [HttpPost]
         public ActionResult DetailsRoom(Room UpdatedRoom, IEnumerable<HttpPostedFileBase> files, int id)
         {
-
-
-
             var currentRoom = db.Rooms.Find(id);
             currentRoom.Disponibilité = UpdatedRoom.Disponibilité;
             currentRoom.Prix = UpdatedRoom.Prix;
@@ -272,7 +267,6 @@ namespace PFM.Controllers
         [HttpPost]
         public JsonResult DeleteRoom(int id)
         {
-
             var room = db.Rooms.Find(id);
             if (room != null)
             {
@@ -305,30 +299,22 @@ namespace PFM.Controllers
         [HttpPost]
         public JsonResult CreateRolee(string Name)
         {
-            try
-            {
                 ApplicationRole role = new ApplicationRole();
-            var roles = db.IdentityRoles.ToList();
+                var roles = db.IdentityRoles.ToList();
 
-            if (roles.Count <= 0)
-            {
-                role.Id = RandomString(1);
-            }
-            else
-            {
+                if (roles.Count <= 0)
+                {
+                    role.Id = RandomString(1);
+                }
+                else
+                {
 
-                role.Id = roles.Last().Id+ RandomString(1);
-            }
-            role.Name = Name;
-            db.Roles.Add(role);
-            db.SaveChanges();
-            return Json(JsonRequestBehavior.AllowGet);
-            }
-            catch (DbEntityValidationException e)
-            {
-               
-                throw e;
-            }
+                    role.Id = roles.Last().Id + RandomString(1);
+                }
+                role.Name = Name;
+                db.Roles.Add(role);
+                db.SaveChanges();
+                return Json(JsonRequestBehavior.AllowGet);
 
         }
         [HttpPost]
@@ -349,6 +335,30 @@ namespace PFM.Controllers
             var roles = db.IdentityRoles.ToList();
             return View(roles);
         }
-       
+        public ActionResult ListUserInRole(string id)
+        {
+            var currentRole = db.Roles.Find(id);
+            Session["nameRole"] = currentRole.Name.ToString();
+
+            var CurrentRoles = db.Roles.Find(id).Users;
+            var allUser =db.Users.ToList();
+            ViewBag.listUser = from user in db.Users
+                                     where user.Roles.Any(r => r.RoleId == id)
+                                     select user;
+            List<ApplicationUser> UsersOutRole = new List<ApplicationUser>();
+            ViewBag.listAllUser = db.Users.Where(m => m.Roles.All(r => r.RoleId != id)).ToList();
+           
+            return View();
+        }
+        public JsonResult addUserTorole(string id,string role)
+        {
+            UserManager.AddToRole(id, role);
+            return Json(JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult deleteUserfromRole(string id,string role)
+        {
+            UserManager.RemoveFromRole(id, role);
+            return Json(JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -157,7 +157,7 @@
     @*scripts DataTable*@
     <script>
         $(document).ready(function () {
-            $('#tableUser, #tableRooms,#tableRoles').DataTable({
+            $('#tableUser, #tableRooms,#tableRoles,#tableUSerRole').DataTable({
                 rowReorder: true
             });
         });
@@ -411,7 +411,7 @@
         $(document).ready(function () {
             $("tr").click(function () {
                 id = $(this).find(".idrole").text().trim();
-            
+
 
         });
             $(".btndelete").click(function () {
@@ -454,8 +454,121 @@
             }
         })
     });
-   
+
 });
     </script>
+    @*Role user management*@
+    @if (Session["nameRole"] != null)
+    {
+        <script>
+
+
+
+            $(document).ready(function () {
+                var ArrayId = [];
+                var ArrayIdDeleting = [];
+            $("#CountItemInrole").text($(".ClassCounting").length);
+            @*Added Items*@
+            var CountElementInWaiting = 0;
+            $(".IsNotInRole").change(function () {
+
+                if ($(this).prop("checked") == true) {
+                    $(this).parent().parent().css("background-color", "#ffeb7a");
+                    var id = $(this).parent().parent().find(".tdId").text().trim();
+                    ArrayId.push(id);
+                    console.log(ArrayId);
+                    CountElementInWaiting++;
+                } else {
+                    $(this).parent().parent().css("background-color", "#ff5c5c");
+                    var id = $(this).parent().parent().find(".tdId").text().trim();
+                    console.log(id);
+                    var index = ArrayId.indexOf(id);
+                    ArrayId.splice(index, 1);
+                    console.log(ArrayId);
+                    CountElementInWaiting--;
+                }
+                $("#CountItem").text(CountElementInWaiting);
+
+            });
+            @* Deleted Items *@
+            var CountItemDeleting = 0;
+            $(".IsInRole").change(function () {
+                if ($(this).prop("checked") == false) {
+                    $(this).parent().parent().css("background-color", "#ff5c5c");
+                    var id = $(this).parent().parent().find(".tdId").text().trim();
+                    ArrayIdDeleting.push(id);
+                    CountItemDeleting++;
+                } else {
+                    $(this).parent().parent().css("background-color", "#73f587");
+                    var id = $(this).parent().parent().find(".tdId").text().trim();
+                    var index = ArrayIdDeleting.indexOf(id);
+                    ArrayIdDeleting.splice(index, 1);
+                    CountItemDeleting--;
+                }
+                $("#CountItemDeleting").text(CountItemDeleting);
+                $("#CountItemInrole").text($(".ClassCounting").length - CountItemDeleting);
+            });
+
+
+     $(".btnSave").click(function () {
+            var role = $(".role").text();
+            var length = $("#CountItem").text().trim();
+            console.log(length);
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Save it!'
+            }).then((result) => {
+            if (result.value) {
+                for (var i = 0; i < ArrayId.length; i++) {
+                    console.log(ArrayId[i])
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("addUserTorole")',
+                        dataType: 'json',
+                        data: jQuery.param({ id: ArrayId[i], role: role}),
+                        success: function (data) {
+                        },
+                        error: function (ex) {
+                        }
+                    });
+                }
+                for (var i = 0; i < ArrayIdDeleting.length; i++) {
+                    console.log(ArrayIdDeleting.length)
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("deleteUserfromRole")',
+                        dataType: 'json',
+                        data: jQuery.param({ id: ArrayIdDeleting[i], role: role}),
+                        success: function (data) {
+                            Swal.fire(
+                                'Added!',
+                                'Your users has been added.',
+                                'success'
+                            )
+                            $(".swal2-actions button").click(function () {
+                                location.reload();
+                            });
+                        },
+                        error: function (ex) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    });
+                }
+             }
+        });
+        });
+});
+        </script>
+    }
+
 </body>
 </html>
