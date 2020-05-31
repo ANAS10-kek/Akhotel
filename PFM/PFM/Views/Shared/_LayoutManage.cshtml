@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link href="~/Content/StylePageInscription.css" rel="stylesheet" />
     <link href="~/Content/StylePageLogin.css" rel="stylesheet" />
+    <link href="~/Content/FlipTitle.css" rel="stylesheet" />
     <style>
         .div-form input {
             color: #403866;
@@ -54,7 +55,6 @@
                 height: max-content;
             }
 
-
             .tit {
                 padding: 0 !important;
             }
@@ -71,24 +71,21 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark py-2" style="background-color:#000000 !important" id="my_nav">
-        <a class="navbar-brand font-weight-bold display-1" href="@Url.Action( "Index", "Home")"> <span id="s_nav">AK</span> Hotel </a>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-0 px-2  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+        <a class="a navbar-brand py-0" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse links p-0" style="background-color:#000000 !important" id="navbarNav">
-            <ul class="navbar-nav bg-dark text-center p-0 m-0" style="background-color:#000000 !important">
+        <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
+            <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
                 <li class="nav-item active pr-3">
                     <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","Rooms")' class="nav-link">Rooms & Suites</a>
+                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
                 </li>
                 <li class="nav-item pr-3">
                     <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","Offers")' class="nav-link">Offers</a>
                 </li>
                 <li class="nav-item pr-3">
                     <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
@@ -96,7 +93,6 @@
                 <li class="nav-item  pr-3">
                     <a href='@Url.Action("About","Home")' class="nav-link">About</a>
                 </li>
-            </ul>
             </ul>
             @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
         </div>

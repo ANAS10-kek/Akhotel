@@ -309,13 +309,7 @@
     <Content Include="App_Data\Data_log.ldf">
       <DependentUpon>Data.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
     <Content Include="Content\Chart.js\Chart.bundle.js" />
@@ -552,11 +546,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\jquery.toast.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -643,8 +633,6 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Content\_bootstrap-datetimepicker.less" />
-    <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="libman.json" />
     <Content Include="Content\pdfmake\pdfmake.js.map" />
     <Content Include="Content\pdfmake\pdfmake.min.js.map" />
