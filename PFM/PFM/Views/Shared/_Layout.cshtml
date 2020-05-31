@@ -31,39 +31,39 @@
             background-color: #DF6C4F;
             width: 0%;
             z-index: 3;
-            border-top-right-radius:5px;
-            border-bottom-right-radius:5px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
     </style>
 </head>
 <body>
-        @*<div class="progress-bar " id="myBar"></div>*@
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
-            <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
-                <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
-                    <li class="nav-item active pr-3">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
-                    </li>
-                    <li class="nav-item  pr-3">
-                        <a href='@Url.Action("About","Home")' class="nav-link">About</a>
-                    </li>
-                </ul>
-                @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
-            </div>
-        </nav>
+    @*<div class="progress-bar " id="myBar"></div>*@
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+        <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
+            <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
+                <li class="nav-item active pr-3">
+                    <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item  pr-3">
+                    <a href='@Url.Action("About","Home")' class="nav-link">About</a>
+                </li>
+            </ul>
+            @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
+        </div>
+    </nav>
     <div class="body-content m-0 p-0">
         @RenderBody()
     </div>
@@ -77,8 +77,9 @@
                         <div class="ftco-footer-widget mb-4">
                             <h2 class="ftco-heading-2"><span id="s_nav">HK</span> Hotel</h2>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur molestiae minima
-                                earum praesentium et eos eveniet natus illo illum. Molestiae rec
+                                Save time, save money!
+
+
                             </p>
                             <ul class="ftco-footer-social list-unstyled d-flex see  float-lg-left float-lft mt-5">
                                 <li class="ftco-animate pr-5">
@@ -145,8 +146,7 @@
                                             <span class="icon-map-marker">
                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                             </span><span class="text">
-                                                203 Lorem ipsum
-                                                dolor sit ame quos dolore amet saepe? USA
+                                                203 Montreal ,Canada
                                             </span>
                                         </a>
                                     </li>
@@ -155,8 +155,7 @@
                                             <span class="icon-phone">
                                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                             </span><span class="text">
-                                                +2 392 3929
-                                                210
+                                                +15149003341
                                             </span>
                                         </a>
                                     </li>
@@ -164,7 +163,7 @@
                                         <a href="#">
                                             <span class="icon-envelope">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            </span><span class="text">info@yourdomain.com</span>
+                                            </span><span class="text">Akhotel3@business.com</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -194,15 +193,15 @@
     <script src="~/Scripts/datepicker.fr.js"></script>
     <script src="~/Scripts/datepicker.en.js"></script>
     @*<script>
-        window.onscroll = function () { myFunction() };
+            window.onscroll = function () { myFunction() };
 
-        function myFunction() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("myBar").style.width = scrolled + "%";
-        }
-    </script>*@
+            function myFunction() {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            }
+        </script>*@
     <script>
         var supports3DTransforms = document.body.style['webkitPerspective'] !== undefined ||
             document.body.style['MozPerspective'] !== undefined;
