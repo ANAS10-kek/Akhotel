@@ -17,6 +17,10 @@
     {
       "library": "Chart.js@2.9.3",
       "destination": "Content/Chart.js/"
+    },
+    {
+      "library": "lightbox2@2.11.1",
+      "destination": "Content/lightbox2/"
     }
   ]
 }

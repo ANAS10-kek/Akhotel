@@ -384,6 +384,16 @@
     <Content Include="Content\flickity.css" />
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\jquery.toast.min.css" />
+    <Content Include="Content\lightbox2\css\lightbox.css" />
+    <Content Include="Content\lightbox2\css\lightbox.min.css" />
+    <Content Include="Content\lightbox2\images\close.png" />
+    <Content Include="Content\lightbox2\images\loading.gif" />
+    <Content Include="Content\lightbox2\images\next.png" />
+    <Content Include="Content\lightbox2\images\prev.png" />
+    <Content Include="Content\lightbox2\js\lightbox-plus-jquery.js" />
+    <Content Include="Content\lightbox2\js\lightbox-plus-jquery.min.js" />
+    <Content Include="Content\lightbox2\js\lightbox.js" />
+    <Content Include="Content\lightbox2\js\lightbox.min.js" />
     <Content Include="Content\pdfmake\pdfmake.js" />
     <Content Include="Content\pdfmake\pdfmake.min.js" />
     <Content Include="Content\pdfmake\vfs_fonts.js" />
@@ -631,6 +641,8 @@
     <Content Include="libman.json" />
     <Content Include="Content\pdfmake\pdfmake.js.map" />
     <Content Include="Content\pdfmake\pdfmake.min.js.map" />
+    <Content Include="Content\lightbox2\js\lightbox-plus-jquery.min.map" />
+    <Content Include="Content\lightbox2\js\lightbox.min.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
