@@ -41,8 +41,8 @@ namespace PFM.Controllers
         // GET: Reservations/Create
         public ActionResult Create()
         {
-          
-            return View(TempData["ChamberId"]);
+
+            return View();
         }
 
         // POST: Reservations/Create
@@ -50,99 +50,95 @@ namespace PFM.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DateDebut,DateFin,NbChambres")] Reservation reservation)
+        public ActionResult Create([Bind(Include = "DateDebut,DateFin,NbChambres")] Reservation reservation, int id)
         {
             if (ModelState.IsValid)
             {
 
-                
-
-                if (User.Identity.IsAuthenticated)
-                {
-                    reservation.RoomId = int.Parse(TempData["ChamberId"].ToString());
-                    reservation.Confirmation = "Non";
-                    reservation.UserId = int.Parse(User.Identity.GetUserId().ToString());
-                    db.Reservations.Add(reservation);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-
-                }
-
-                return RedirectToAction("Login","Account");
-               
-               
-            }
-
-          
-            return View(reservation);
-        }
-
-        // GET: Reservations/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
-            return View(reservation);
-        }
-
-        // POST: Reservations/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ReservationId,RoomId,UserId,DateDebut,DateFin,Confirmation,NbChambres")] Reservation reservation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(reservation).State = EntityState.Modified;
+                    reservation.RoomId = id;
+                //reservation.RoomId = int.Parse(TempData["ChamberId"].ToString());
+                reservation.Confirmation = "Non";
+                reservation.UserId = int.Parse(User.Identity.GetUserId().ToString());
+                db.Reservations.Add(reservation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
-            return View(reservation);
-        }
 
-        // GET: Reservations/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return HttpNotFound();
             }
             return View(reservation);
+
+
         }
 
-        // POST: Reservations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+          
+            
+    
+
+    // GET: Reservations/Edit/5
+    public ActionResult Edit(int? id)
+    {
+        if (id == null)
         {
-            Reservation reservation = db.Reservations.Find(id);
-            db.Reservations.Remove(reservation);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Reservation reservation = db.Reservations.Find(id);
+        if (reservation == null)
+        {
+            return HttpNotFound();
+        }
+        ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
+        return View(reservation);
+    }
+
+    // POST: Reservations/Edit/5
+    // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+    // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit([Bind(Include = "ReservationId,RoomId,UserId,DateDebut,DateFin,Confirmation,NbChambres")] Reservation reservation)
+    {
+        if (ModelState.IsValid)
+        {
+            db.Entry(reservation).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        ViewBag.RoomId = new SelectList(db.Rooms, "ChambreId", "Titre", reservation.RoomId);
+        return View(reservation);
     }
+
+    // GET: Reservations/Delete/5
+    public ActionResult Delete(int? id)
+    {
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Reservation reservation = db.Reservations.Find(id);
+        if (reservation == null)
+        {
+            return HttpNotFound();
+        }
+        return View(reservation);
+    }
+
+    // POST: Reservations/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(int id)
+    {
+        Reservation reservation = db.Reservations.Find(id);
+        db.Reservations.Remove(reservation);
+        db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            db.Dispose();
+        }
+        base.Dispose(disposing);
+    }
+}
 }

@@ -80,7 +80,7 @@
                                 {
                                     if (Request.IsAuthenticated)
                                     {
-                                        <a href='@Url.Action("Details","Rooms",new { id = item.ChambreId })' class="btn btn-info">Reserve now</a>
+                                        <a href='@Url.Action("Details","Reservations",new { id = item.ChambreId })' class="btn btn-info">Reserve now</a>
                                     }
                                     else
                                     {
