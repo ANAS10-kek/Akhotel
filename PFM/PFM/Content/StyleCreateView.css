@@ -1,0 +1,15 @@
+﻿.CreateView {
+    background-color: #59698d !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    opacity:0.4;
+}
+.MainCreateView {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity: 1 !important;
+}

@@ -572,16 +572,6 @@ namespace PFM.Controllers
             }
             return RedirectToAction("Index","Home");
         }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
-        }
 
         #region Programmes d'assistance
         // Utilisé pour la protection XSRF lors de l'ajout de connexions externes

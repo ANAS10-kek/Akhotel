@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PFM.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ListUserInRole";
+    Layout = "~/Views/Shared/_administrationLayout.cshtml";
+}
+<style>
+    td, tr {
+        text-align: center;
+    }
+</style>
+<div class="card mb-4">
+    <div style="font-size:1.3rem;" class="card-header d-flex flex-column justify-content-center ">
+        <div class="font-weight-bold d-flex justify-content-between align-items-center">
+            <a class="btn btn-outline-danger " href='@Url.Action("roleList")'><i class="fas fa-arrow-circle-left"></i></a>
+            <span class="px-2"><i class="fas fa-circle"></i></span>
+            <span>List user in Role : </span>
+            <span class="text-success px-2 role">@Session["nameRole"].ToString()</span>
+            <div class="d-flex  align-items-center ml-auto justify-content-around" style="font-size:1rem;">
+                <span class="d-flex align-items-center mx-1"><span style="height:15px;width:15px;background-color: #73f587 !important;content:' ';" class="mx-1"></span>In role</span>
+                <span class="d-flex align-items-center mx-1"><span style="height:15px;width:15px;background-color: #ff5c5c !important;content:' ';" class="mx-1"></span>Out role</span>
+                <span class="d-flex align-items-center mx-1"><span style="height:15px;width:15px;background-color: #ffeb7a !important;content:' ';" class="mx-1"></span>In the waiting list</span>
+            </div>
+            <a class="btn btn-primary ml-auto" href='@Url.Action("ListUserInRole")'><i class="fas fa-sync-alt"></i></a>
+        </div>
+        <div class="d-flex pt-2 justify-content-center">
+            <span class="px-3 font-weight-bold d-flex align-items-center" style="font-size:1rem;"><span style="height:15px;width:15px;background-color: #73f587 !important;content:' ';border-radius:50%" class="mx-1"></span>Count of Users in this role :<span id="CountItemInrole" class="px-1">0</span>Users</span>
+
+            <span class="px-3 font-weight-bold d-flex align-items-center" style="font-size:1rem;"><span style="height:15px;width:15px;background-color: #ff5c5c !important;content:' ';border-radius:50%" class="mx-1"></span>Count of deleted Users :<span id="CountItemDeleting" class="px-1">0</span>Users</span>
+
+            <span class="px-3 font-weight-bold d-flex align-items-center" style="font-size:1rem;"><span style="height:15px;width:15px;background-color: #ffeb7a !important;content:' ';border-radius:50%" class="mx-1"></span>Users in the waiting list  :<span id="CountItem" class="px-1">0</span>Users</span>
+        </div>
+    </div>
+    <div class="card-body">
+
+
+        <div class="pl-1 py-1 pr-2 overflow-auto">
+            <table class="table  table-bordered" id="tableUSerRole">
+                <thead>
+                    <tr>
+                        <th>
+                            In role
+                        </th>
+                        <th class="d-none">
+
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var userInrole in ViewBag.listUser)
+                    {
+                        //if (item.Id == userInrole.Id)
+                        //{
+                        <tr class="ClassCounting" style="background-color: #73f587 !important;">
+                            <td>
+                                <input type="checkbox" checked="checked" class="IsInRole" />
+                            </td>
+                            <td class="tdId d-none">@userInrole.Id</td>
+                            <td>
+                                @userInrole.UserName
+                            </td>
+                            <td>
+                                @userInrole.Email
+                            </td>
+                        </tr>
+                    }
+                    @foreach (var item in ViewBag.listAllUser)
+                    {
+                        <tr style="background-color:#ff5c5c !important;" class="rowNotInRole">
+                            <td>
+                                <input type="checkbox" class="IsNotInRole" />
+                            </td>
+                            <td class="tdId d-none">@item.Id</td>
+                            <td>
+                                @item.UserName
+                            </td>
+                            <td>
+                                @item.Email
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            <div>
+                <div class="col-lg-12 text-lg-right py-2 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success px-5 btnSave"><i class="far fa-save"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

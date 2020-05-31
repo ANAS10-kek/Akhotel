@@ -10,7 +10,7 @@
 <div class="card mb-4">
     <div style="font-size:1.3rem;vertical-align:middle" class="card-header font-weight-bold d-flex justify-content-between align-items-center"><i class="fas fa-person-booth px-2"></i>List rooms<a class=" btn btn-primary ml-auto" href='@Url.Action("RoomList")'><i class="fas fa-sync-alt"></i></a></div>
     <div class="card-body">
-        <a class="btn btn-primary m-2" href='@Url.Action("CreateRoom")'>Add new room</a> 
+        <a class="btn btn-primary m-2" href='@Url.Action("CreateRoom")'>Add new room</a>
         <div class="pl-1 py-1 pr-2 overflow-auto">
             <table class="table table-bordered" id="tableRooms">
                 <thead>
@@ -19,19 +19,19 @@
                             id
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Titre)
+                            Title
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Prix)
+                            Price
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TypeDeLit)
+                            Type de lit
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Disponibilité)
+                            Avaibility
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.NbChambres)
+                            Count of room
                         </th>
                         <th>Actions</th>
                     </tr>
@@ -71,7 +71,7 @@
             </table>
         </div>
     </div>
- </div>
+</div>
 
 
 

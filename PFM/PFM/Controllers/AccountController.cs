@@ -17,7 +17,7 @@ namespace PFM.Controllers
 {
     [RequireHttps]
     public class AccountController : Controller
-    {
+    {        ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -60,15 +60,15 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //if (Request.IsAuthenticated)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else
-            //{
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                {
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
-            //}
+            }
         }
 
         //
@@ -82,23 +82,31 @@ namespace PFM.Controllers
             {
                 return View(model);
             }
-
-            // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
-            // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid connection attempt.h");
-                    return View(model);
+                ModelState.AddModelError("", "User Not Found");
             }
+            else
+            {
+                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password.Trim(), model.RememberMe, shouldLockout: true);
+
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid connection attempt.h");
+                        return View(model);
+                }
+            }
+            return View(model);
         }
 
         //
@@ -125,11 +133,6 @@ namespace PFM.Controllers
             {
                 return View(model);
             }
-
-            // Le code suivant protège des attaques par force brute contre les codes à 2 facteurs. 
-            // Si un utilisateur entre des codes incorrects pendant un certain intervalle, le compte de cet utilisateur 
-            // est alors verrouillé pendant une durée spécifiée. 
-            // Vous pouvez configurer les paramètres de verrouillage du compte dans IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -174,7 +177,7 @@ namespace PFM.Controllers
         {
             var countries = db.Countries.ToList();
             ViewBag.Countries = new SelectList(countries, "id", "name");
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address,Country=model.Country.ToString(), State = model.State.ToString() , City = model.State.ToString() };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address,Country=model.Country.ToString(), State = model.State.ToString() , City = model.State.ToString(),Datesinup=DateTime.Now };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -223,21 +226,13 @@ namespace PFM.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null)
-                {
-                    // Ne révélez pas que l'utilisateur n'existe pas ou qu'il n'est pas confirmé
-                    return View("ForgotPasswordConfirmation");
-                }
-                // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
-                // Envoyer un message électronique avec ce lien
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 await UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                await  UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
 
@@ -277,23 +272,12 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Ne révélez pas que l'utilisateur n'existe pas
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
+          
+            var user = await UserManager.FindByEmailAsync(model.Email);
+           
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
-            return View();
+            
+            return View("Login");
         }
 
         //
@@ -405,7 +389,7 @@ namespace PFM.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Username,Email=model.Email,EmailConfirmed=true };
+                var user = new ApplicationUser { UserName = model.Username,Email=model.Email,EmailConfirmed=true ,Datesinup=DateTime.Now};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -438,26 +422,8 @@ namespace PFM.Controllers
         {
             return View();
         }
-        ApplicationDbContext db = new ApplicationDbContext();
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
 
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
+  
 
         #region Applications auxiliaires
         // Utilisé(e) pour la protection XSRF lors de l'ajout de connexions externes

@@ -285,6 +285,7 @@
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -299,7 +300,6 @@
     <Compile Include="Models\ModelsReservation\Reservation.cs" />
     <Compile Include="Models\ModelsReservation\RoomImage.cs" />
     <Compile Include="Models\ModelsReservation\Room.cs" />
-    <Compile Include="Models\RolesModelView.cs" />
     <Compile Include="Models\States.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -318,20 +318,89 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
+    <Content Include="Content\Chart.js\Chart.bundle.js" />
+    <Content Include="Content\Chart.js\Chart.bundle.min.js" />
+    <Content Include="Content\Chart.js\Chart.css" />
+    <Content Include="Content\Chart.js\Chart.js" />
+    <Content Include="Content\Chart.js\Chart.min.css" />
+    <Content Include="Content\Chart.js\Chart.min.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.flash.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.flash.min.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.html5.min.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.print.js" />
+    <Content Include="Content\datatables-buttons\js\buttons.print.min.js" />
+    <Content Include="Content\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="Content\datatables-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Content\datatables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatables\css\dataTables.foundation.css" />
+    <Content Include="Content\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\datatables\css\dataTables.material.css" />
+    <Content Include="Content\datatables\css\dataTables.material.min.css" />
+    <Content Include="Content\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Content\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\datatables\css\dataTables.uikit.css" />
+    <Content Include="Content\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\datatables\images\sort_asc.png" />
+    <Content Include="Content\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\datatables\images\sort_both.png" />
+    <Content Include="Content\datatables\images\sort_desc.png" />
+    <Content Include="Content\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Content\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\datatables\js\dataTables.dataTables.js" />
+    <Content Include="Content\datatables\js\dataTables.dataTables.min.js" />
+    <Content Include="Content\datatables\js\dataTables.foundation.js" />
+    <Content Include="Content\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\datatables\js\dataTables.material.js" />
+    <Content Include="Content\datatables\js\dataTables.material.min.js" />
+    <Content Include="Content\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Content\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\datatables\js\dataTables.uikit.js" />
+    <Content Include="Content\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Content\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\flickity-docs.css" />
+    <Content Include="Content\flickity.css" />
     <Content Include="Content\FlipTitle.css" />
     <Content Include="Content\jquery.toast.min.css" />
+    <Content Include="Content\pdfmake\pdfmake.js" />
+    <Content Include="Content\pdfmake\pdfmake.min.js" />
+    <Content Include="Content\pdfmake\vfs_fonts.js" />
+    <Content Include="Content\pdfmake\vfs_fonts.min.js" />
     <Content Include="Content\StyleAdminstration.css" />
     <Content Include="Content\gallery.css" />
     <Content Include="Content\mobile.css" />
     <Content Include="Content\sal.css" />
     <Content Include="Content\simple-lightbox.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\StyleCreateView.css" />
     <Content Include="Content\StylePageInscription.css" />
     <Content Include="Content\StylePageLogin.css" />
     <Content Include="Content\style_eat_offers.css" />
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
     <Content Include="Content\util.css" />
+    <Content Include="Content\tooltipster.bundle.min.css" />
+    <Content Include="Scripts\flickity-docs.min.js" />
+    <Content Include="Scripts\flickity.pkgd.min.js" />
+    <Content Include="Scripts\tooltipster.bundle.min.js" />
+    <Content Include="Views\Administration\roleList.cshtml" />
     <Content Include="Content\datepicker.min.css" />
     <Content Include="Scripts\datepicker.fr.js" />
     <Content Include="favicon.ico" />
@@ -470,6 +539,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\MyScripts\CreateViewScript.js" />
     <Content Include="Scripts\MyScripts\DeleteClient.js" />
     <Content Include="Scripts\MyScripts\NewPasswordValidation_DSh.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -549,6 +619,9 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="libman.json" />
+    <Content Include="Content\pdfmake\pdfmake.js.map" />
+    <Content Include="Content\pdfmake\pdfmake.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -721,8 +794,13 @@
     <Content Include="Views\Administration\Error.cshtml" />
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
-    <Content Include="Views\Administration\CreateImagesRoom.cshtml" />
+    <Content Include="Views\Administration\DetailsRoom.cshtml" />
     <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
+    <Content Include="Views\Administration\ListUserInRole.cshtml" />
+    <Content Include="Views\Tables\Index.cshtml" />
+    <Content Include="Views\Tables\TableUser.cshtml" />
+    <Content Include="Views\Administration\ChartView.cshtml" />
+    <None Include="Views\Tables\TableRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -733,9 +811,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

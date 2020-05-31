@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PFM.Models.ModelsReservation.Room>
+
+    <table class="table table-striped  table-bordered" id="tableRoles">
+        <thead>
+            <tr>
+                <th>
+                   Title
+                </th>
+                <th>
+                   Price
+                 </th>
+                <th>
+                    Type de lit
+                </th>
+                <th>
+                   Avaibility
+                </th>
+                <th>
+                   Count of room
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prix)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeDeLit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Disponibilité)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NbChambres)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
