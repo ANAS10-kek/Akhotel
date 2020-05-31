@@ -44,9 +44,6 @@ namespace PFM.Controllers
         {
             return View();
         }
-        // POST: Rooms/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ChambreId,Titre,ImageId,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
@@ -80,10 +77,6 @@ namespace PFM.Controllers
             }
             return View(room);
         }
-
-        // POST: Rooms/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ChambreId,Titre,ImageId,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
@@ -98,8 +91,6 @@ namespace PFM.Controllers
         }
 
         // GET: Rooms/Delete/5
-
-        
 
         protected override void Dispose(bool disposing)
         {

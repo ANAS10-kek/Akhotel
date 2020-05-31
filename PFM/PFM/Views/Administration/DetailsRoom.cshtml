@@ -115,6 +115,13 @@
                                 @Html.ValidationMessageFor(model => model.Disponibilité, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                         <div class="col-lg-12 pb-2 div-form">
+                            <label class="labelinput">Max count of person</label>
+                            <div class="col-lg-12 m-0 p-0">
+                                @Html.EditorFor(m => m.MaxNbPers, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaxNbPers, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
                         <div class="col-lg-12 pb-2 div-form">
                             <label class="labelinput">Count of rooms</label>
@@ -235,7 +242,7 @@
                     }, 'Disponibilité':
                     {
                         required: true
-                    }, 'ShortDescription':
+                    }, 'MaxNbPers':
                     {
                         required: true
                     }
@@ -258,9 +265,10 @@
                     }, 'Disponibilité':
                     {
                         required: 'Availability is required'
-                    }, 'ShortDescription':
+                    }
+                    , 'MaxNbPers':
                     {
-                        required: 'Short Description is required'
+                        required: 'Max of count person is required'
                     }
                 }
             });

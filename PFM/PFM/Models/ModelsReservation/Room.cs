@@ -14,9 +14,14 @@ namespace PFM.Models.ModelsReservation
         public string TypeDeLit { get; set; }
 
         public int  Disponibilité { get; set; }
+
         public int NbChambres { get; set; }
 
+        public int MaxNbPers { get; set; }
+
+
         public string ShortDescription { get; set; }
+
         public string LongDescription { get; set; }
 
         public ICollection<RoomImage> RoomImages { get; set; }
