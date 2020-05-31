@@ -19,6 +19,7 @@ namespace PFM.Controllers
         public ActionResult RoomListUser()
         {
             var rooms = db.Rooms.ToList();
+            ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View(rooms);
         }
         

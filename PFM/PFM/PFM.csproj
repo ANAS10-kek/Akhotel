@@ -289,13 +289,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005301847101_init.cs" />
-    <Compile Include="Migrations\202005301847101_init.Designer.cs">
-      <DependentUpon>202005301847101_init.cs</DependentUpon>
+    <Compile Include="Migrations\202005311049223_init.cs" />
+    <Compile Include="Migrations\202005311049223_init.Designer.cs">
+      <DependentUpon>202005311049223_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005301853312_init1.cs" />
-    <Compile Include="Migrations\202005301853312_init1.Designer.cs">
-      <DependentUpon>202005301853312_init1.cs</DependentUpon>
+    <Compile Include="Migrations\202005311355363_init1.cs" />
+    <Compile Include="Migrations\202005311355363_init1.Designer.cs">
+      <DependentUpon>202005311355363_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -406,6 +406,10 @@
     <Content Include="Content\style_room_page.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\tooltipster.bundle.min.css" />
+    <Content Include="pic\Icon-svg\coffee.svg" />
+    <Content Include="pic\Icon-svg\shower.svg" />
+    <Content Include="pic\Icon-svg\tv.svg" />
+    <Content Include="pic\Icon-svg\wifi.svg" />
     <Content Include="Scripts\flickity-docs.min.js" />
     <Content Include="Scripts\flickity.pkgd.min.js" />
     <Content Include="Scripts\tooltipster.bundle.min.js" />
@@ -770,7 +774,6 @@
     <Content Include="Views\Rooms\Delete.cshtml" />
     <Content Include="Views\Rooms\Details.cshtml" />
     <Content Include="Views\Rooms\Edit.cshtml" />
-    <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Reservations\Create.cshtml" />
     <Content Include="Views\Reservations\Delete.cshtml" />
     <Content Include="Views\Reservations\Details.cshtml" />
@@ -809,6 +812,7 @@
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Tables\TableUser.cshtml" />
     <Content Include="Views\Administration\ChartView.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
     <None Include="Views\Tables\TableRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -822,11 +826,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005301847101_init.resx">
-      <DependentUpon>202005301847101_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005311049223_init.resx">
+      <DependentUpon>202005311049223_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005301853312_init1.resx">
-      <DependentUpon>202005301853312_init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005311355363_init1.resx">
+      <DependentUpon>202005311355363_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

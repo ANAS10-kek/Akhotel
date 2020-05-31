@@ -3,6 +3,7 @@
     ViewBag.Title = "ChartView";
     Layout = "~/Views/Shared/_administrationLayout.cshtml";
 }
+
 <div class="container-fluid">
     <h1 class="mt-4">Charts</h1>
     <ol class="breadcrumb mb-4">
@@ -33,5 +34,61 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Content/Chart.js/Chart.js"></script>
+<script>
+    $(document).ready(function () {
+            var arrayIn = @Html.Raw(Json.Encode(@ViewBag.data));
+            console.log(arrayIn);
+            var arrayOfcount = [];
+            var arrayOfdate = [];
+            for (var i = 0; i < arrayIn.length; i++) {
+                arrayOfcount.push(arrayIn[i].count);
+                arrayOfdate.push(arrayIn[i].date);
+            }
+            console.log(arrayOfcount);
+            var tabMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var monthdisplay = [];
+
+            for (var i = arrayOfdate[0] - 1; i < 12; i++) {
+                monthdisplay.push(tabMonth[i]);
 
 
+            }
+            var ctx = document.getElementById('myAreaChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: monthdisplay,
+                    datasets: [{
+                        label: 'Count of Users ',
+                        backgroundColor: 'rgba(223, 108, 79)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: arrayOfcount
+                    }]
+                },
+                options: {}
+            });
+            var emailConfirmed =@Html.Raw(Json.Encode(ViewBag.EmailConfirmed));
+            var EmailNotConfirmed =@Html.Raw(Json.Encode(ViewBag.EmailNotConfirmed));
+            console.log(emailConfirmed);
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Confirmed users', 'Unconfiremd users'],
+
+                    datasets: [{
+                        label: 'Count of Users',
+                        backgroundColor: [
+                            'rgba(223, 108, 79)',
+                            'rgba(73, 197, 182)',
+                        ],
+
+                        data: [emailConfirmed, EmailNotConfirmed],
+                    }]
+                },
+                options: {}
+            });
+    });
+</script>

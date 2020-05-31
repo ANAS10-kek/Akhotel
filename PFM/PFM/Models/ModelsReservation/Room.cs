@@ -13,7 +13,7 @@ namespace PFM.Models.ModelsReservation
 
         public string TypeDeLit { get; set; }
 
-        public string Disponibilité { get; set; }
+        public int  Disponibilité { get; set; }
         public int NbChambres { get; set; }
 
         public string ShortDescription { get; set; }
