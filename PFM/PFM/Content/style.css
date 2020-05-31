@@ -257,10 +257,7 @@ nav {
             font-family: 'Long Cang', cursive;
         }
 /* buutoon scroll top */
-.navbar
-{
-    flex-wrap:nowrap !important;
-}
+
 #button {
     display: inline-block;
     background-color: #DF6C4F;

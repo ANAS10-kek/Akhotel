@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<PFM.Models.ModelsReservation.Room>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rooms";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="mt-4 pt-4 px-5 col-lg-12 bg-light">
-    <div class="px-5">
+<div class="mt-5 pt-4 px-1 px-sm-1 px-md-3 px-lg-5 col-lg-12">
+    <div class="px-1 px-sm-1 px-md-3 px-lg-5">
         <h5 class="lead px-5 py-3 font-weight-bold d-inline-block"  data-aos="zoom-in"  style="border-right:2px solid #DF6C4F">Our <span class="px-1 font-weight-bold" style="color:#49c5b6">AK Hotel</span>   offers designer rooms and superior comfort</h5>
         <p class="text-break px-3"  data-aos="zoom-in"  style="border-left:2px solid #DF6C4F">
             Set in the dynamic Montreal quarter of Canada, the Radisson Blu offers superior comfort and service in chic rooms. The 193 rooms and suites pair neutral tones and natural materials with vibrant splashes of color to create a relaxing, contemporary environment. Each accommodation provides thoughtful amenities like free high-speed wireless internet, a large-screen plasma television, and separate bathrooms. Other modern conveniences include air conditioning and a safe. The rooms also treat guests to attractive views of the hotel patio or the bustling streets .
         </p>
-
-        <div class="pt-4 mt-5">
-
-        </div>
+        <div class="pt-4 mt-5"></div>
         <hr style="background-color:#DF6C4F" />
         <div class="col-lg-12 d-flex py-5" style="height:500px">
             <div class="col-lg-6 d-flex flex-column w-100">
@@ -31,22 +28,20 @@
         </div>
         <hr style="background-color:#49c5b6" />
         <h3 class="">Room types</h3>
-        <div class="d-flex flex-column" style="height:max-content !important">
+        <div class="d-flex flex-column  justify-content-around" style="height:max-content !important">
             @foreach (var item in Model)
             {
-
-                <div class="d-flex p-4 my-2 bg-light border border- rounded " data-aos="fade-down" style="height:280px !important">
-                    <div class="col-lg-6 gallery  d-flex justify-content-start align-items-center" data-aos="fade-in">
+                <div class="d-flex  shadow  p-4 my-2 bg-light flex-column flex-sm-column  flex-md-column  flex-lg-row  border rounded" data-aos="fade-down" style="height:max-content !important">
+                    <div class="col-lg-6 gallery d-flex   justify-content-start align-items-center" data-aos="fade-in">
                         @foreach (var img in ViewBag.ImagesRooms)
                         {
                             if (item.ChambreId == img.RoomId)
                             {
-                                <a href="~/pic/rooms_pic/@img.Name" class="h-100 w-100" style="background:url(../../pic/rooms_pic/@img.Name) no-repeat center center/cover">
+                              <a href="~/pic/rooms_pic/@img.Name" class="h-100 w-100 "  style="background:url(../../pic/rooms_pic/@img.Name) no-repeat center center/cover">
 
                                 </a>
                             }
                         }
-
                     </div>
                     <div class="col-lg-6 d-flex px-1 flex-column justify-content-around ">
                         <h5>@item.Titre</h5>
@@ -58,8 +53,8 @@
                         <p class="pl-3 mt-1 py-2" style="border-left:2px solid #DF6C4F">
                             @item.LongDescription
                         </p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex h-50">
+                        <div class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row   justify-content-between">
+                            <div class="d-flex h-50 mb-4">
                                 <span style="width:25px">
                                     <img src="~/pic/Icon-svg/coffee.svg" />
                                 </span>
@@ -83,9 +78,17 @@
                                 }
                                 else
                                 {
-                                    @Html.ActionLink("Reserve now","Details","Rooms", new { id = item.ChambreId },new {@class= "btn btn-info"} )
-                               }
+                                    if (Request.IsAuthenticated)
+                                    {
+                                        <a href='@Url.Action("Details","Rooms",new { id = item.ChambreId })' class="btn btn-info">Reserve now</a>
+                                    }
+                                    else
+                                    {
+                                        <a href='@Url.Action("login","account",new { returnUrl="~/Rooms/Details/"+item.ChambreId})' class="btn btn-info">Reserve now</a>
+                                    }
+                                }
 
+                                }
                             </div>
                         </div>
                     </div>

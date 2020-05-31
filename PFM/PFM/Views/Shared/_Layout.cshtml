@@ -19,15 +19,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link href="~/Content/FlipTitle.css" rel="stylesheet" />
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <link href="~/Content/simple-lightbox.css" rel="stylesheet" />
     <link href="~/Content/datepicker.min.css" rel="stylesheet" />
     <link href="~/Content/lightbox2/css/lightbox.min.css" rel="stylesheet" />
     <style>
         .progress-bar {
             content: ' ';
-            height: 8px;
+            height: 5px;
             background-color: #DF6C4F;
             width: 0%;
             z-index: 3;
@@ -37,33 +36,33 @@
     </style>
 </head>
 <body>
-    @*<div class="progress-bar " id="myBar"></div>*@
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
-        <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
-            <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
-                <li class="nav-item active pr-3">
-                    <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
-                </li>
-                <li class="nav-item  pr-3">
-                    <a href='@Url.Action("About","Home")' class="nav-link">About</a>
-                </li>
-            </ul>
-            @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
-        </div>
-    </nav>
+         @*<div class="progress-bar " id="myBar"></div>*@
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+            <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
+                <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
+                    <li class="nav-item active pr-3">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item  pr-3">
+                        <a href='@Url.Action("About","Home")' class="nav-link">About</a>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
+            </div>
+        </nav>
     <div class="body-content m-0 p-0">
         @RenderBody()
     </div>
@@ -192,18 +191,20 @@
     <script src="~/Scripts/datepicker.js"></script>
     <script src="~/Scripts/datepicker.fr.js"></script>
     <script src="~/Scripts/datepicker.en.js"></script>
+    <script>
+        window.onscroll = function () { myFunction() };
     <script src="~/Content/lightbox2/js/lightbox.min.js"></script>
 
     @*<script>
             window.onscroll = function () { myFunction() };
 
-            function myFunction() {
-                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                var scrolled = (winScroll / height) * 100;
-                document.getElementById("myBar").style.width = scrolled + "%";
-            }
-        </script>*@
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        }
+    </script>
     <script>
         var supports3DTransforms = document.body.style['webkitPerspective'] !== undefined ||
             document.body.style['MozPerspective'] !== undefined;

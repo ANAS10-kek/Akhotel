@@ -416,6 +416,18 @@
     <Content Include="pic\Icon-svg\shower.svg" />
     <Content Include="pic\Icon-svg\tv.svg" />
     <Content Include="pic\Icon-svg\wifi.svg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845814_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845822_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845824_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845828_3xl %281%29.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845828_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845838_3xl %281%29.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f63845838_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089047_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089913_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089935_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089963_3xl.jpg" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089999_3xl.jpg" />
     <Content Include="Scripts\flickity-docs.min.js" />
     <Content Include="Scripts\flickity.pkgd.min.js" />
     <Content Include="Scripts\tooltipster.bundle.min.js" />
@@ -643,6 +655,7 @@
     <Content Include="Content\pdfmake\pdfmake.min.js.map" />
     <Content Include="Content\lightbox2\js\lightbox-plus-jquery.min.map" />
     <Content Include="Content\lightbox2\js\lightbox.min.map" />
+    <Content Include="pic\rooms_pic\16256-116577-f64089915_3xl.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
