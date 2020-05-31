@@ -36,8 +36,8 @@
     </style>
 </head>
 <body>
-         @*<div class="progress-bar " id="myBar"></div>*@
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+         <div class="progress-bar fixed-top " id="myBar"></div>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-0 px-2  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
             <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -191,11 +191,9 @@
     <script src="~/Scripts/datepicker.js"></script>
     <script src="~/Scripts/datepicker.fr.js"></script>
     <script src="~/Scripts/datepicker.en.js"></script>
-    <script>
-        window.onscroll = function () { myFunction() };
     <script src="~/Content/lightbox2/js/lightbox.min.js"></script>
 
-    @*<script>
+    <script>
             window.onscroll = function () { myFunction() };
 
         function myFunction() {

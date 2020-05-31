@@ -39,16 +39,11 @@ namespace PFM.Controllers
 
             return View(room);
         }
-
-       
-
         // GET: Rooms/Create
         public ActionResult Create()
         {
-
             return View();
         }
-
         // POST: Rooms/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
