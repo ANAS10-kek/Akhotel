@@ -281,11 +281,10 @@ namespace PFM.Controllers
         public JsonResult DeleteRoom(int id)
         {
             var room = db.Rooms.Find(id);
-            if (room != null)
-            {
-                db.Rooms.Remove(room);
-                db.SaveChanges();
-            }
+
+            db.Rooms.Remove(room);
+            db.SaveChanges();
+
             return Json(db.Rooms.ToList(), JsonRequestBehavior.AllowGet);
         }
         //delete Image Room
@@ -399,6 +398,6 @@ namespace PFM.Controllers
             ViewBag.EmailNotConfirmed = this.db.Users.Where(x => x.EmailConfirmed == false).ToList().Count;
             ViewBag.EmailConfirmed = this.db.Users.Where(x => x.EmailConfirmed == true).ToList().Count;
             return View();
-         }
+        }
     }
 }

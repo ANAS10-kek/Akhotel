@@ -13,19 +13,15 @@
     }
     Layout = cLayout;
 }
-@if(Request.Browser.IsMobileDevice)
-{
-
-}
 <section>
     <div id="showcase" class="showcase container-fluid text-center m-0 px-0 col-lg-12 col-lg-12 col-lg-12 ">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex justify-content-center align-items-center flex-column title-showcase">
                 <h1 class="font-weight-bold p-5 animate__animated animate__fadeInDown animate__slow">Welcome To <span id="s_nav">AK</span> Hotel </h1>
-                <p class="text-light d-inline col-lg-12 animate__animated animate__fadeIn animate__slow">
-                   The reception of the AK Hotel, the restaurant and the gym open 24 hours a day. Guests can also take advantage of a convenience store, coffee served in the lobby, meeting rooms, laundry and dry cleaning services, and bicycle rental.
+                <p class="text-light d-inline col-lg-12 animate__animated animate__fadeIn animate__slow px-3">
+                    The reception of the AK Hotel, the restaurant and the gym open 24 hours a day. Guests can also take advantage of a convenience store, coffee served in the lobby, meeting rooms, laundry and dry cleaning services, and bicycle rental.
                 </p>
-                <a href="" class="btn btn-info p-3 font-weight-bold text-dark animate__animated animate__backInUp animate__slow">Learn More</a>
+                <a href='@Url.Action("About")' class="btn btn-info p-3 font-weight-bold text-dark animate__animated animate__backInUp animate__slow">Learn More</a>
             </div>
         </div>
     </div>
@@ -34,10 +30,10 @@
 
 
 <div class="container-fluid m-0 col-lg-12">
-    <div class="first-title col-lg-12"  >
+    <div class="first-title col-lg-12">
         <h1 class="text-center display-1" data-aos="zoom-in" style="font-family: 'Long Cang', cursive;"> Our service...</h1>
     </div>
-    <div class="text-center service_cont m-0 row d-flex justify-content-between flex-nowrap flex-column flex-md-column flex-sm-column flex-lg-row" >
+    <div class="text-center service_cont m-0 row d-flex justify-content-between flex-nowrap flex-column flex-md-column flex-sm-column flex-lg-row">
         <div class="jumbotron col mr-1" data-aos="fade-right">
             <i class="fa fa-3x  fa-check " aria-hidden="true"></i>
             <br>
@@ -80,14 +76,14 @@
     <div class="room-content container text-center">
         <h4 data-aos="fade-right" data-aos-duration="1800"> Rooms &amp; Suites</h4>
         <h3 data-aos="fade-left" data-aos-duration="1800" class="p-3">A foolproof brightness at all times.you are no longer at home,you are at home.</h3>
-        <a data-aos="fade-right" data-aos-duration="1800" href="room&suite.html" class=" btn btn-info pr-5 pl-5 p-3 text-dark">
+        <a data-aos="fade-right" data-aos-duration="1800" href='@Url.Action("RoomListUser","Rooms")' class=" btn btn-info pr-5 pl-5 p-3 text-dark">
             <span aria-hidden="true">View All Rooms</span>
             <span class="sr-only">Open View All Rooms Page</span>
         </a>
     </div>
 </div>
 
-<section >
+<section>
     <div class="row container-fluid m-0 p-0 container-eat-offer">
         <div class="eat-div p-0  col-lg-6" data-aos="fade-right">
             <div class="caption text-light p-3" data-aos="fade-right" data-aos-duration="2000">
@@ -103,7 +99,7 @@
                 <a href="eat&drink.html" class="btn btn-info">Explore</a>
             </div>
         </div>
-        <div class=" offer-div p-0 col-lg-6" data-aos="fade-left" >
+        <div class=" offer-div p-0 col-lg-6" data-aos="fade-left">
             <div class="caption4 p-3" data-aos="fade-left" data-aos-duration="2000">
                 <span>Email Offers</span>
                 <h2 class="">The best deals</h2>
@@ -113,7 +109,15 @@
                 <p>
                     Enjoy exclusive member benefits including discounts on food and beverage, complimentary room upgrades, and more!
                 </p>
-                <a href="offer.html" class="btn btn-info">Eamil Offers</a>
+                @if (Request.IsAuthenticated)
+                {
+                   <a class="btn btn-info disabled" >Already registred</a>
+                }
+                else
+                {
+                    <a href='@Url.Action("register","account")' class="btn btn-info">Go to register to get our offers</a>
+                }
+
             </div>
         </div>
     </div>
@@ -130,7 +134,7 @@
         </div>
         <div>
             <div class="row no-gutters">
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-1.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-1.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -150,7 +154,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-3.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-16.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -160,7 +164,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6  ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6  ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-4.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-25.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -170,7 +174,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-5.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-5.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -180,7 +184,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-5.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-6.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -192,7 +196,7 @@
                 </div>
             </div>
             <div class="row no-gutters">
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-1.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-7.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -202,7 +206,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-2.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-13.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -212,7 +216,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-3.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-9.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -222,7 +226,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-4.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-10.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -232,7 +236,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-5.jpg" class="insta-img image-popup"
                        style="background: url(../../pic/hotelthumb/hotel/photo-gallery-11.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">
@@ -242,7 +246,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000" >
+                <div class="col-sm-6 col-lg col-xs-6 ftco-animate" data-aos="zoom-in" data-aos-duration="1000">
                     <a href="images/insta-5.jpg" class="insta-img image-popup"
                        style="background: url(../../../../pic/hotelthumb/hotel/photo-gallery-12.jpg) no-repeat center center/cover;">
                         <div class="icon d-flex justify-content-center">

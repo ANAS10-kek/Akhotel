@@ -1,76 +1,8 @@
-﻿@model IEnumerable<PFM.Models.ModelsReservation.Room>
-
+﻿
 @{
     ViewBag.Title = "Index";
-    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Titre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeDeLit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Disponibilité)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NbChambres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LongDescription)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prix)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeDeLit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disponibilité)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NbChambres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LongDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ChambreId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ChambreId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ChambreId })
-        </td>
-    </tr>
-}
-
-</table>
