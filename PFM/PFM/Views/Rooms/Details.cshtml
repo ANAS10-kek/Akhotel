@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row justify-content-between">
             <h4 class="text-capitalize "> @Html.DisplayFor(model => model.Titre)</h4>
-            @Html.ActionLink("reserver", "Create", new { @class = "btn btn-primary " })
+             @Html.ActionLink("reserver", "Create","Reservations", new { @class = "btn btn-primary " })
             
         </div>
         <div id="imgs">
@@ -36,6 +36,6 @@
 
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ChambreId }, new { @class = "btn btn-warning text-light" }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "RoomListUser")
     </p>
 </div>

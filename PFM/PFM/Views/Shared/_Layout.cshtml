@@ -36,33 +36,33 @@
     </style>
 </head>
 <body>
-    <div class="progress-bar fixed-top" id="myBar"></div>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" style="background-color:#000000 !important" id="my_nav">
-        <a class="a navbar-brand py-0" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" style="background-color:#000000 !important" id="navbarNav">
-            <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","Home")' class="nav-link">Home</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
-                </li>
-                <li class="nav-item  pr-3">
-                    <a href='@Url.Action("About","Home")' class="nav-link">About</a>
-                </li>
-            </ul>
-            @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
-        </div>
-    </nav>
+         @*<div class="progress-bar " id="myBar"></div>*@
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+            <a class="a navbar-brand" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
+                <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
+                    <li class="nav-item active pr-3">
+                        <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item  pr-3">
+                        <a href='@Url.Action("About","Home")' class="nav-link">About</a>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
+            </div>
+        </nav>
     <div class="body-content m-0 p-0">
         @RenderBody()
     </div>
@@ -76,8 +76,9 @@
                         <div class="ftco-footer-widget mb-4">
                             <h2 class="ftco-heading-2"><span id="s_nav">HK</span> Hotel</h2>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur molestiae minima
-                                earum praesentium et eos eveniet natus illo illum. Molestiae rec
+                                Save time, save money!
+
+
                             </p>
                             <ul class="ftco-footer-social list-unstyled d-flex see  float-lg-left float-lft mt-5">
                                 <li class="ftco-animate pr-5">
@@ -144,8 +145,7 @@
                                             <span class="icon-map-marker">
                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                             </span><span class="text">
-                                                203 Lorem ipsum
-                                                dolor sit ame quos dolore amet saepe? USA
+                                                203 Montreal ,Canada
                                             </span>
                                         </a>
                                     </li>
@@ -154,8 +154,7 @@
                                             <span class="icon-phone">
                                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                             </span><span class="text">
-                                                +2 392 3929
-                                                210
+                                                +15149003341
                                             </span>
                                         </a>
                                     </li>
@@ -163,7 +162,7 @@
                                         <a href="#">
                                             <span class="icon-envelope">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            </span><span class="text">info@yourdomain.com</span>
+                                            </span><span class="text">Akhotel3@business.com</span>
                                         </a>
                                     </li>
                                 </ul>
