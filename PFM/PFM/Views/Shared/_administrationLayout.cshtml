@@ -17,7 +17,7 @@
     <link href="~/Content/tooltipster.bundle.min.css" rel="stylesheet" />
     <link href="~/Content/StyleCreateView.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
-    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="~/Content/Chart.js/Chart.min.js"></script>
     <link href="~/Content/pretty-checkbox.min.css" rel="stylesheet" />
 </head>
@@ -466,8 +466,6 @@
     {
         <script>
 
-
-
             $(document).ready(function () {
                 var ArrayId = [];
                 var ArrayIdDeleting = [];
@@ -512,7 +510,8 @@
                 $("#CountItemDeleting").text(CountItemDeleting);
                 $("#CountItemInrole").text($(".ClassCounting").length - CountItemDeleting);
             });
-            $(".btnSave").click(function () {
+                var Enter = false;
+                $(".btnSaveRole").click(function () {
             var role = $(".role").text();
             var length = $("#CountItem").text().trim();
             console.log(length);
@@ -534,8 +533,21 @@
                         dataType: 'json',
                         data: jQuery.param({ id: ArrayId[i], role: role}),
                         success: function (data) {
+                            Swal.fire(
+                                'Added!',
+                                'Data has been sync with success.',
+                                'success'
+                            );
+                            $(".swal2-actions button").click(function () {
+                                location.reload();
+                            });
                         },
                         error: function (ex) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            });
                         }
                     });
                 }
@@ -549,9 +561,9 @@
                         success: function (data) {
                             Swal.fire(
                                 'Added!',
-                                'Your users has been added.',
+                                'Data has been sync with success.',
                                 'success'
-                            )
+                            );
                             $(".swal2-actions button").click(function () {
                                 location.reload();
                             });
@@ -561,18 +573,19 @@
                                 icon: 'error',
                                 title: 'Oops...',
                                 text: 'Something went wrong!',
-                            })
+                            });
+
                         }
                     });
                 }
              }
         });
-        });
-});
+    });
+                
+ });
         </script>
     }
 
-    @*chart js*@
 
 
 </body>
