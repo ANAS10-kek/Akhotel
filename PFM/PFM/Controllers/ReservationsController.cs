@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -39,29 +40,34 @@ namespace PFM.Controllers
         }
 
         // GET: Reservations/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-
+            Session["chamberId"] = id;
             return View();
         }
+    
+        
+           
+           
 
         // POST: Reservations/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DateDebut,DateFin,NbChambres")] Reservation reservation, int id)
+        public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation,int id)
         {
             if (ModelState.IsValid)
             {
-
-                    reservation.RoomId = id;
-                //reservation.RoomId = int.Parse(TempData["ChamberId"].ToString());
+                
+                var UserId = User.Identity.GetUserId(); 
+                reservation.RoomId = id;
                 reservation.Confirmation = "Non";
-                reservation.UserId = int.Parse(User.Identity.GetUserId().ToString());
+                reservation.UserId = int.Parse(UserId);
+
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("RoomListUser");
 
             }
             return View(reservation);

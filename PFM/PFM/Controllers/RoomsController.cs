@@ -35,9 +35,9 @@ namespace PFM.Controllers
             {
                 return HttpNotFound();
             }
-            TempData["ChamberId"] = id;
+            
 
-            return View(room);
+            return RedirectToAction("Create","Reservations");
         }
         // GET: Rooms/Create
         public ActionResult Create()
