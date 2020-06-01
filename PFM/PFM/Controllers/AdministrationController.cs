@@ -410,35 +410,30 @@ namespace PFM.Controllers
             currentRes.DateDebut = res.DateDebut;
             currentRes.DateFin = res.DateFin;
             currentRes.NbChambres = res.NbChambres;
-            if (!stateConfirm)
-            {
-                if (res.Confirmation == true)
-                {
-                    var room = db.Rooms.Find(currentRes.RoomId);
-                    room.Disponibilité -= currentRes.NbChambres;
-                }
-            }
-            else
-            {
-                int rest;
-                if (res.Confirmation)
-                {
-                    if (currentRes.NbChambres < res.NbChambres)
-                    {
-                        rest = currentRes.NbChambres - res.NbChambres;
-                        var room = db.Rooms.Find(currentRes.RoomId);
-                        room.Disponibilité -= currentRes.NbChambres;
-                    }
-                    else if (currentRes.NbChambres < res.NbChambres)
-                    {
-                        rest = currentRes.NbChambres - res.NbChambres;
-                        var room = db.Rooms.Find(currentRes.RoomId);
-                        room.Disponibilité += currentRes.NbChambres;
-                    }
-                }            
-            }
+
             currentRes.NbPers = res.NbPers;
             db.SaveChanges();
+
+
+
+            var ChambreReserved = from ro in db.Rooms
+                                  join rea in db.Reservations on ro.ChambreId equals rea.RoomId
+                                  where rea.Confirmation == true && ro.ChambreId == currentRes.RoomId
+                                  select new { RoomId = ro.ChambreId, nbChamber = rea.NbChambres };
+
+            int CountChamberReserved =0;
+
+            if(ChambreReserved.ToList().Count()>0)
+            {
+                CountChamberReserved = (from x in ChambreReserved select x.nbChamber).Sum();  
+            }
+           
+           
+
+            db.Rooms.Find(currentRes.RoomId).Disponibilité = db.Rooms.Find(currentRes.RoomId).NbChambres - CountChamberReserved;
+            db.SaveChanges();
+
+
             return RedirectToAction("DetailsReservation/" + id, "administration");
         }
     }
