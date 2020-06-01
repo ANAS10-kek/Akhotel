@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PFM.Models;
@@ -7,14 +6,11 @@ using PFM.Models.ModelsReservation;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
 
 namespace PFM.Controllers
 {
@@ -398,6 +394,59 @@ namespace PFM.Controllers
             ViewBag.EmailNotConfirmed = this.db.Users.Where(x => x.EmailConfirmed == false).ToList().Count;
             ViewBag.EmailConfirmed = this.db.Users.Where(x => x.EmailConfirmed == true).ToList().Count;
             return View();
+        }
+        /********************************Reservation***********************/
+        public ActionResult ReservationList()
+        {
+            var reservation = db.Reservations.ToList();
+            return View(reservation);
+        }
+        bool stateConfirm;
+        public ActionResult DetailsReservation(int id)
+        {
+            var currentRes = db.Reservations.Where(c => c.ReservationId == id).Single();
+            stateConfirm = currentRes.Confirmation;
+            return View(currentRes);
+        }
+        [HttpPost]
+        public ActionResult DetailsReservation(Reservation res, int id)
+        {
+            var currentRes = db.Reservations.Where(c => c.ReservationId == id).Single();
+            currentRes.Confirmation = res.Confirmation;
+            currentRes.Name = res.Name;
+            currentRes.DateDebut = res.DateDebut;
+            currentRes.DateFin = res.DateFin;
+            currentRes.NbChambres = res.NbChambres;
+            if (!stateConfirm)
+            {
+                if (res.Confirmation == true)
+                {
+                    var room = db.Rooms.Find(currentRes.RoomId);
+                    room.Disponibilité -= currentRes.NbChambres;
+                }
+            }
+            else
+            {
+                int rest;
+                if (res.Confirmation)
+                {
+                    if (currentRes.NbChambres < res.NbChambres)
+                    {
+                        rest = currentRes.NbChambres - res.NbChambres;
+                        var room = db.Rooms.Find(currentRes.RoomId);
+                        room.Disponibilité -= currentRes.NbChambres;
+                    }
+                    else if (currentRes.NbChambres < res.NbChambres)
+                    {
+                        rest = currentRes.NbChambres - res.NbChambres;
+                        var room = db.Rooms.Find(currentRes.RoomId);
+                        room.Disponibilité += currentRes.NbChambres;
+                    }
+                }            
+            }
+            currentRes.NbPers = res.NbPers;
+            db.SaveChanges();
+            return RedirectToAction("DetailsReservation/" + id, "administration");
         }
     }
 }

@@ -1,0 +1,101 @@
+﻿@model PFM.Models.ModelsReservation.Reservation
+
+@{
+    ViewBag.Title = "DetailsReservation";
+    Layout = "~/Views/Shared/_administrationLayout.cshtml";
+}
+<style>
+    .labelinput {
+        display: block;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
+</style>
+<div class="card mb-4">
+    <div style="font-size: 1.3rem; vertical-align: middle" class="card-header font-weight-bold d-flex justify-content-between align-items-center">
+        <i class="fas fa-edit"></i>
+        <span> Edit and Details reservation</span>
+        <a class="btn btn-outline-danger  ml-auto" href='@Url.Action("ReservationList")'>
+            <i class="fas fa-arrow-circle-left"></i>
+        </a>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReservationId)
+        <div class="card-body">
+            <div class="col-lg-12 mx-0 mt-1 py-0 mb-2 px-1 d-flex">
+                <fieldset class="border col-lg-12 rounded p-2 bg-light ">
+                    <legend class="w-auto px-2 bg-light border rounded">Details reservation :</legend>
+
+                    <div class="col-lg-12 d-flex">
+                        <div class="col-lg-6 m-0 p-0">
+                            <div class="col-lg-12 pb-2 div-form">
+                                <label class="labelinput">Name user</label>
+                                <div class="col-lg-12 m-0 p-0">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-12 pb-2 div-form">
+                                <label class="labelinput">Date Debut</label>
+                                <div class="col-lg-12 m-0 p-0">
+                                    @Html.EditorFor(model => model.DateDebut, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-12 pb-2 div-form">
+                                <label class="labelinput">end Date</label>
+                                <div class="col-lg-12 m-0 p-0">
+                                    @Html.EditorFor(model => model.DateFin, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 pb-2 div-form">
+                                <label class="labelinput">Count of persons</label>
+                                <div class="col-lg-12 m-0 p-0">
+                                    @Html.EditorFor(model => model.NbPers, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NbPers, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-12 pb-2 div-form">
+                                <label class="labelinput">Count of rooms reserved</label>
+                                <div class="col-lg-12 m-0 p-0">
+                                    @Html.EditorFor(model => model.NbChambres, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NbChambres, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 m-0 p-0 d-flex flex-column justify-content-between">
+                            <div class="py-3">
+                                <fieldset class="border rounded p-2 bg-light">
+                                    <legend class="w-auto px-2 bg-light border rounded"> <label class="labelinput px-3">Confirmation rerservation</label></legend>
+                                    <div class="col-lg-12 pb-2 div-form">
+                                        <div class="col-md-10 row justify-content-center">
+                                            <div class="pretty p-switch p-fill">
+                                               @Html.EditorFor(c=>c.Confirmation)
+
+                                                <div class="state p-primary">
+                                                    <label>Confirm</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success px-5"><i class="far fa-save"></i> Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    }
+</div>
