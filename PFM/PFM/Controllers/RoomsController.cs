@@ -19,6 +19,8 @@ namespace PFM.Controllers
         public ActionResult RoomListUser()
         {
 
+           
+
             var roomsOutdated = from ro in db.Rooms
                                 join rea in db.Reservations on ro.ChambreId equals rea.RoomId
                                 where rea.DateFin < DateTime.Today
@@ -40,6 +42,9 @@ namespace PFM.Controllers
       
             ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View(rooms);
+
+
+          
         }
 
         // GET: Rooms/Details/5
