@@ -1,7 +1,10 @@
 ﻿@model PFM.Models.ModelsReservation.Reservation
 
 @{
+
     ViewBag.Title = "Create";
+    PFM.Models.ApplicationDbContext db = new PFM.Models.ApplicationDbContext();
+    var room = db.Rooms.Find(Model.RoomId);
 }
 
 <h2>Create</h2>
@@ -11,43 +14,95 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Reservation</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateDebut, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="text" name="DateDebut"  class = "form-control col-lg-6" id = "myPicker" data-language ="fr"  data-position="right top"  />
-            @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
-        </div>
-    </div> 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateFin, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="text" name="DateFin" class="form-control col-lg-6" id="myPicker2" data-language="fr" data-position="right top" />
-            @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
+ 
+<div class="d-flex">
+    <div class="p-4 col-md-6">
+
+        <div class="card text-center">
+            <div class="card-header">
+                Fill the form
+            </div>
+            <div class="card-body">
+
+
+                <h4 class="card-title mb-4">Reservation</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row  mb-4">
+                    <label class="col-md-4 text-left">Nom </label>
+                    <div class="col-md">
+                        <input type="text" name="Name" class="form-control">
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="row  mb-4">
+                    <label class="col-md-4 text-left">Number of rooms </label>
+                    <div class="col-md">
+                        <input type="number" name="NbChambres" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.NbChambres, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <label class="col-md-3 text-left">Date debut</label>
+                    <div class="col-md">
+                        <input type="text" name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="right top" />
+                        @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-md-3 text-left">Date Fin</label>
+                    <div class="col-md">
+                        <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="right top" />
+                        @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group mb-3">
+                    <label for="membership" class="mr-3">Number of People </label> <span id="nbp" class="text-warning mr-3 font-weight-bold">0</span><i class="fas fa-users "></i>
+                    <input class="custom-range" id="nbPersonne" min="1" max="@room.MaxNbPers" step="1" value="1" type="range">
+                </div>
+
+                <div class="row justify-content-end p-3">
+                    <input type="submit" value="Confirm" class="btn btn-info btn-block" />
+                </div>
+
+
+            </div>
+            <div class="card-footer text-muted">
+                AK Hotel
+            </div>
+
+
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.NbChambres, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="number" name="NbChambres" class="form-control col-lg-6" />
-            @Html.ValidationMessageFor(model => model.NbChambres, "", new { @class = "text-danger" })
-        </div>
+    <div class=" d-none d-md-block   p-4">
+        <img src="~/pic/reservation-pic/RESERVATIONPIC.jpg" class="img-fluid rounded" />
+        <span style="font-size:3.2rem !important;" class="display-4 font-weight-normal text-info text-justify">
+            Best Offers , Best Quality
+        </span>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
+   
 </div>
+   
+
 }
+
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+<script>
+    document.getElementById('nbPersonne').addEventListener("change", onChange, false);
 
+    function onChange() {
+        document.getElementById('nbp').innerText = document.getElementById('nbPersonne').value;
+
+    }
+</script>

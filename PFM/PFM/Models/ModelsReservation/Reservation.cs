@@ -12,6 +12,8 @@ namespace PFM.Models.ModelsReservation
         public int RoomId { get; set; }
 
         public int UserId { get; set; }
+
+        public string Name { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
         public string Confirmation { get; set; }
