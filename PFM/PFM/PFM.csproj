@@ -734,6 +734,7 @@
     <Content Include="Views\Administration\ReservationList.cshtml" />
     <Content Include="Views\Administration\DetailsReservation.cshtml" />
     <Content Include="Views\Rooms\RoomListUser.cshtml" />
+    <Content Include="Views\Reservations\ConfirmedReservation.cshtml" />
     <None Include="Views\Tables\TableRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>

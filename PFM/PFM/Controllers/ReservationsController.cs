@@ -56,12 +56,17 @@ namespace PFM.Controllers
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
                 
-                return RedirectToAction("RoomListUser", "Rooms");
+                return RedirectToAction("ConfirmedReservation");
             }
             else
             {
                 return View();
             }
+        }
+
+        public ActionResult ConfirmedReservation()
+        {
+            return View();
         }
     }
 }
