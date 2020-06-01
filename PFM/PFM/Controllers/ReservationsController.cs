@@ -58,7 +58,6 @@ namespace PFM.Controllers
                 reservation.UserId = User.Identity.GetUserId();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-               
                 
                 return RedirectToAction("RoomListUser", "Rooms");
             }
