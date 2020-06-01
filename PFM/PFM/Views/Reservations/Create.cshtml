@@ -20,7 +20,7 @@
         }
 
     .cc-img {
-        width:120px;
+        width: 120px;
         margin: 0 auto;
     }
 </style>
@@ -36,51 +36,62 @@
             {
                 @Html.AntiForgeryToken()
 
-                <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row">
+                <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row justify-content-between">
                     <div class="col-md-6 px-0 shadow" data-aos="fade-down">
-                        <div class="card text-center">
+                        <div class="card">
                             <div class="card-header">
-                                <h5>Fill the form</h5>
+                                <h5 class="text-center">Fill the form</h5>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Reservation</h4>
+                                <h4 class="card-title mb-4 text-center">Reservation</h4>
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="row  mb-4">
+                                <div class="row  mb-4 div-form">
                                     <label class="col-md-4 text-left labelinput">Name </label>
                                     <div class="col-md">
                                         <input type="text" name="Name" value="@User.Identity.GetUserName()" class="form-control">
                                     </div>
                                 </div>
-                                <div class="row  mb-4">
-                                    <label class="col-md-4 text-left labelinput">Number of rooms </label>
-                                    <div class="col-md">
-                                        <input type="number" name="NbChambres" class="form-control " />
+                                <div class="mb-4 div-form">
+                                    <div class="row">
+                                        <label class="col-md-4 text-left labelinput">Number of rooms </label>
+                                        <div class="col-md">
+                                            <input type="number" name="NbChambres" max="@ViewBag.chambre.NbChambres" class="form-control " />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-3 text-left labelinput">Date debut</label>
-                                    <div class="col-md">
-                                        <input type="text" name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="bottom left" />
+                                <div class="d-flex align-items-center flex-nowrap col-lg-12 mb-4 px-0 mx-0">
+                                    <div class="div-form col-lg-6 mx-0 px-0 mr-1">
+                                        <label class="col-lg-6 text-left labelinput">Date debut</label>
+                                        <div class="col-md  px-0">
+                                            <input type="text"  name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="bottom left" />
+                                        </div>
                                     </div>
-                                    <label class="col-md-3 text-left labelinput">Date Fin</label>
-                                    <div class="col-md">
-                                        <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="bottom left" />
+                                    <div class="div-form col-lg-6 mx-0 px-0">
+                                        <label class="col-lg-6 text-left labelinput">Date Fin</label>
+                                        <div class="col-md  px-0">
+                                            <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="bottom left" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="membership" class="mr-3 labelinput">Number of People </label> <span id="nbp" class="text-warning mr-3 font-weight-bold">0</span><i class="fas fa-users "></i>
+                                <div class="form-group mb-3 div-form">
+                                    <div class="d-flex justify-content-center my-2 align-items-center">
+                                        <label for="membership" class="mr-3 my-0 labelinput">Number of People </label>
+                                        <span id="nbp" class="text-warning mr-3 font-weight-bold">0</span>
+                                        <i class="fas fa-users "></i>
+                                    </div>
+                                  
                                     <input class="custom-range" id="NbPers" name="NbPers" min="1" max="@ViewBag.chambre.MaxNbPers" step="1" value="1" type="range">
                                 </div>
-                                <div class="row justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-between col-lg-12 px-0">
+                                <div class="d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-between col-lg-12 px-0">
                                     <div class="col-lg-8">
-                                        <input type="button" value="Next step" class="btn btn-info btn-block btn-Move  mb-1" />
+                                        <input type="submit" value="Confirm" class="btn btn-info btn-block btn-Move  mb-1" />
                                     </div>
                                     <div class="col-lg-4 px-1">
                                         <a href='@Url.Action("RoomListUser","Rooms")' class="btn btn-danger btn-block">Cancel</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-muted">
+                            <div class="card-footer text-center text-muted">
                                 AK Hotel
                             </div>
                         </div>
@@ -150,7 +161,7 @@
                             </div>
                             <div class="card-body px-0">
                                 <form role="form">
-                                    <div class="col-lg-12 p-0 mx-0 mb-2" >
+                                    <div class="col-lg-12 p-0 mx-0 mb-2">
                                         <div class="col-lg-12 mx-0">
                                             <label class="labelinput px-3">CARD NUMBER</label>
                                             <div class="input-group  col-lg-12 mx-0">
@@ -214,6 +225,7 @@
 
 <script>
     $(document).ready(function () {
+        var max=@ViewBag.chambre.NbChambres;
         $('#formCreateReservation').validate(
             {
                 errorClass: 'help-block animation-slideDown text-danger',
@@ -229,6 +241,10 @@
                 success: function (e) {
                     e.closest('.form-group').removeClass('has-success has-error');
                     e.closest('.help-block').remove();
+                    console.log("success " + max);
+                },
+                error: function (e) {
+                    console.log("err "+max);
                 },
                 rules: {
                     'Name': {
@@ -236,36 +252,38 @@
                     },
                     'NbChambres':
                     {
-                        required: true
-                    }, 'DateDebut':
-                    {
-                        required: true
-                    }, 'DateFin':
-                    {
-                        required: true
-                    }, 'NbPers':
-                    {
-                        required: true
-                    }
-                }, messages: {
-                    'Name': {
-                        required: 'Name is required'
-                    },
-                    'NbChambres':
-                    {
-                        required: 'Numbre of rooms is required'
-                    }, 'DateDebut':
-                    {
-                        required: 'Date Debut is required'
-                    }, 'DateFin':
-                    {
-                        required: 'Date check out is required'
-                    }, 'NbPers':
-                    {
-                        required: 'Number of persons is required'
-                    }
-                }
-            });
-    });
+                        required: true,
+                        range: [0,max]
+
+}, 'DateDebut':
+{
+    required: true
+}, 'DateFin':
+{
+    required: true
+}, 'NbPers':
+{
+    required: true
+}
+}, messages: {
+'Name': {
+    required: 'Name is required'
+},
+'NbChambres':
+{
+    required: 'Numbre of rooms is required',
+}, 'DateDebut':
+{
+    required: 'Date Debut is required'
+}, 'DateFin':
+{
+    required: 'Date check out is required'
+}, 'NbPers':
+{
+    required: 'Number of persons is required'
+}
+}
+});
+});
 </script>
 

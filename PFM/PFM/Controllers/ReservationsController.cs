@@ -50,16 +50,24 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation,int id)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 reservation.RoomId = id;
                 reservation.Confirmation = "Non";
                 reservation.UserId = User.Identity.GetUserId();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                return RedirectToAction("RoomListUser");
+                var room = db.Rooms.Find(id);
+                room.Disponibilité -= reservation.NbChambres;
+                db.SaveChanges();
+               
+                
+                return RedirectToAction("RoomListUser", "Rooms");
             }
-            return View(reservation);
+            else
+            {
+                return View();
+            } 
         }
 
           
