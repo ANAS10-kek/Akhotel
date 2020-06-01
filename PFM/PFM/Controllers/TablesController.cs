@@ -17,17 +17,5 @@ namespace PFM.Controllers
             ViewBag.listRooms = db.Rooms.ToList();
             return View();
         }
-
-        //public JsonResult Index(string nameTable)
-        //{
-        //    switch (nameTable)
-        //    {
-        //        case "users":return Json(db.Users.ToList());
-        //        case "room": return Json(db.Rooms.ToList());
-        //        case "reser": return Json(db.Reservations.ToList());
-        //        case "roomResd": return Json(JsonRequestBehavior.AllowGet);
-        //        default: return Json(db.Users.ToList());
-        //    }
-        //}
     }
 }

@@ -28,7 +28,5 @@ namespace PFM.Models.ModelsReservation
 
         public ICollection<Reservation> Reservations { get; set; }
 
-        public ICollection<Caracteristique> Caracteristiques { get; set; }
-
     }
 }
