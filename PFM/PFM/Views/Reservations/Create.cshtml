@@ -1,104 +1,208 @@
-﻿@model PFM.Models.ModelsReservation.Reservation
+﻿@using Microsoft.AspNet.Identity
+@model PFM.Models.ModelsReservation.Reservation
 
 @{
 
-    ViewBag.Title = "Create";
-    PFM.Models.ApplicationDbContext db = new PFM.Models.ApplicationDbContext();
-    int idc = int.Parse(Session["chamberId"].ToString());
-    var room = db.Rooms.Find(idc);
+    ViewBag.Title = "Add reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .labelinput {
+        display: block;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
 
-<h2>Create</h2>
+        .labelinput::after {
+            content: '*';
+            color: red;
+        }
 
+    .cc-img {
+        width:120px;
+        margin: 0 auto;
+    }
+</style>
+<div class="tabs py-5 px-0">
+    <div class="tabs__bar">
+        <div class="tabs__controls">Check Out</div>
+        <div class="tabs__controls">Confirmation</div>
+    </div>
+    <div class="tabs__content p-0">
+        <div class="tabs__section">
 
-@using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formCreateReservation" }))
-{
-    @Html.AntiForgeryToken()
+            @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formCreateReservation" }))
+            {
+                @Html.AntiForgeryToken()
 
-
-    <div class="d-flex">
-        <div class="p-4 col-md-6">
-
-            <div class="card text-center">
-                <div class="card-header">
-                    Fill the form
+                <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row">
+                    <div class="col-md-6 px-0 shadow" data-aos="fade-down">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <h5>Fill the form</h5>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Reservation</h4>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row  mb-4">
+                                    <label class="col-md-4 text-left labelinput">Name </label>
+                                    <div class="col-md">
+                                        <input type="text" name="Name" value="@User.Identity.GetUserName()" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row  mb-4">
+                                    <label class="col-md-4 text-left labelinput">Number of rooms </label>
+                                    <div class="col-md">
+                                        <input type="number" name="NbChambres" class="form-control " />
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label class="col-md-3 text-left labelinput">Date debut</label>
+                                    <div class="col-md">
+                                        <input type="text" name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="bottom left" />
+                                    </div>
+                                    <label class="col-md-3 text-left labelinput">Date Fin</label>
+                                    <div class="col-md">
+                                        <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="bottom left" />
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="membership" class="mr-3 labelinput">Number of People </label> <span id="nbp" class="text-warning mr-3 font-weight-bold">0</span><i class="fas fa-users "></i>
+                                    <input class="custom-range" id="NbPers" name="NbPers" min="1" max="@ViewBag.chambre.MaxNbPers" step="1" value="1" type="range">
+                                </div>
+                                <div class="row justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-between col-lg-12 px-0">
+                                    <div class="col-lg-8">
+                                        <input type="button" value="Next step" class="btn btn-info btn-block btn-Move  mb-1" />
+                                    </div>
+                                    <div class="col-lg-4 px-1">
+                                        <a href='@Url.Action("RoomListUser","Rooms")' class="btn btn-danger btn-block">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                AK Hotel
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 card p-0 ml-2  border rounded shadow my-0 my-md-4 my-sm-4 my-4" data-aos="fade-down">
+                        <div class="card-header">
+                            <h5>Room selected</h5>
+                        </div>
+                        <div class="d-flex card-body  bg-light p-4 flex-column flex-sm-column  flex-md-column  flex-lg-row " style="height:max-content !important">
+                            <div class="col-lg-6 gallery d-flex   justify-content-start align-items-center" data-aos="fade-in">
+                                @foreach (var img in ViewBag.ImagesRooms)
+                                {
+                                    if (ViewBag.chambre.ChambreId == img.RoomId)
+                                    {
+                                        <a href="~/pic/rooms_pic/@img.Name" class="h-100 w-100 " style="background:url(../../pic/rooms_pic/@img.Name) no-repeat center center/cover"></a>
+                                    }
+                                }
+                            </div>
+                            <div class="col-lg-6 d-flex px-1 flex-column justify-content-around ">
+                                <h5>@ViewBag.chambre.Titre</h5>
+                                <span style="font-size:.9rem" class="d-flex flex-column lead pb-1">
+                                    <span>bed type : @ViewBag.chambre.TypeDeLit </span>
+                                    <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                    <span>Available : @ViewBag.chambre.Disponibilité rooms</span>
+                                    <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                    <span>Max person : @ViewBag.chambre.MaxNbPers person</span>
+                                </span>
+                                <p class="pl-3 mt-1 py-2" style="border-left:2px solid #DF6C4F">
+                                    @ViewBag.chambre.LongDescription
+                                </p>
+                                <div class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row   justify-content-between">
+                                    <div class="d-flex h-50 mb-4">
+                                        <span style="width:25px">
+                                            <img src="~/pic/Icon-svg/coffee.svg" />
+                                        </span>
+                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                        <span style="width:25px">
+                                            <img src="~/pic/Icon-svg/wifi.svg" />
+                                        </span>
+                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                        <span style="width:25px">
+                                            <img src="~/pic/Icon-svg/tv.svg" />
+                                        </span>
+                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                        <span style="width:25px">
+                                            <img src="~/pic/Icon-svg/shower.svg" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
 
-
-                    <h4 class="card-title mb-4">Reservation</h4>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="row  mb-4">
-                        <label class="col-md-4 text-left">Name </label>
-                        <div class="col-md">
-                            <input type="text" name="Name" class="form-control">
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-
+            }
+        </div>
+        <div class="tabs__section">
+            <div class="container m-auto">
+                <div class="row m-auto justify-content-center">
+                    <div class="col-xs-12 col-md-5 col-md-offset-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row flex-column">
+                                    <h3 class="text-center">Payment Details</h3>
+                                    <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                                </div>
+                            </div>
+                            <div class="card-body px-0">
+                                <form role="form">
+                                    <div class="col-lg-12 p-0 mx-0 mb-2" >
+                                        <div class="col-lg-12 mx-0">
+                                            <label class="labelinput px-3">CARD NUMBER</label>
+                                            <div class="input-group  col-lg-12 mx-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-credit-card"></span></span>
+                                                </div>
+                                                <input type="number" class="form-control col-lg-12" placeholder="CARD NUMBER" aria-label="CARD NUMBER" aria-describedby="basic-addon1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-nowrap col-lg-12 mx-0">
+                                        <div class="col-lg-7 mx-0">
+                                            <div class="form-group">
+                                                <label class="labelinput"><span class="hidden-xs ">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                                <input type="date" class="form-control" placeholder="MM / YY" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 pull-right">
+                                            <div class="form-group">
+                                                <label class="labelinput">CV CODE</label>
+                                                <input type="number" class="form-control" placeholder="CVC" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-lg-12 mx-0">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="labelinput">CARD OWNER</label>
+                                                <input type="text" class="form-control" placeholder="Card Owner Names" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row justify-content-center">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-warning btn-lg btn-block">Process payment</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row  mb-4">
-                        <label class="col-md-4 text-left">Number of rooms </label>
-                        <div class="col-md">
-                            <input type="number" name="NbChambres" class="form-control " />
-                            @Html.ValidationMessageFor(model => model.NbChambres, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <label class="col-md-3 text-left">Date debut</label>
-                        <div class="col-md">
-                            <input type="text" name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="right top" />
-                            @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
-                        </div>
-
-                        <label class="col-md-3 text-left">Date Fin</label>
-                        <div class="col-md">
-                            <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="right top" />
-                            @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group mb-3">
-                        <label for="membership" class="mr-3">Number of People </label> <span id="nbp" class="text-warning mr-3 font-weight-bold">0</span><i class="fas fa-users "></i>
-                        <input class="custom-range" id="NbPers" name="NbPers" min="1" max="@room.MaxNbPers" step="1" value="1" type="range">
-                    </div>
-
-                    <div class="row justify-content-end p-3">
-                        <input type="submit" value="Confirm" class="btn btn-info btn-block" />
-                    </div>
-
-
                 </div>
-                <div class="card-footer text-muted">
-                    AK Hotel
-                </div>
-
-
             </div>
         </div>
-
-        <div class=" d-none d-md-block   p-4">
-            <img src="~/pic/reservation-pic/RESERVATIONPIC.jpg" class="img-fluid rounded" />
-            <span style="font-size:3.2rem !important;" class="display-4 font-weight-normal text-info text-justify">
-                Best Offers , Best Quality
-            </span>
-        </div>
-
     </div>
-
-
-}
-
-
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>
     document.getElementById('NbPers').addEventListener("change", onChange, false);
 

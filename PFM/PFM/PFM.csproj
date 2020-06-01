@@ -289,9 +289,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006010020276_reservation.cs" />
-    <Compile Include="Migrations\202006010020276_reservation.Designer.cs">
-      <DependentUpon>202006010020276_reservation.cs</DependentUpon>
+    <Compile Include="Migrations\202006010916433_init.cs" />
+    <Compile Include="Migrations\202006010916433_init.Designer.cs">
+      <DependentUpon>202006010916433_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006011024391_init1.cs" />
+    <Compile Include="Migrations\202006011024391_init1.Designer.cs">
+      <DependentUpon>202006011024391_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -404,6 +408,7 @@
     <Content Include="Content\style_eat_offers.css" />
     <Content Include="Content\style_eat_page.css" />
     <Content Include="Content\style_room_page.css" />
+    <Content Include="Content\tabs.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\tooltipster.bundle.min.css" />
     <Content Include="pic\Icon-svg\coffee.svg" />
@@ -424,6 +429,7 @@
     <Content Include="pic\rooms_pic\16256-116577-f64089999_3xl.jpg" />
     <Content Include="Scripts\flickity-docs.min.js" />
     <Content Include="Scripts\flickity.pkgd.min.js" />
+    <Content Include="Scripts\tabsSlider.js" />
     <Content Include="Scripts\tooltipster.bundle.min.js" />
     <Content Include="Views\Administration\roleList.cshtml" />
     <Content Include="Content\datepicker.min.css" />
@@ -835,8 +841,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006010020276_reservation.resx">
-      <DependentUpon>202006010020276_reservation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006010916433_init.resx">
+      <DependentUpon>202006010916433_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006011024391_init1.resx">
+      <DependentUpon>202006011024391_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

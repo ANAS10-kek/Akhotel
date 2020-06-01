@@ -15,7 +15,7 @@
     <link href="~/Content/simple-lightbox.css" rel="stylesheet" />
     <link href="~/Content/datepicker.min.css" rel="stylesheet" />
     <link href="~/Content/lightbox2/css/lightbox.min.css" rel="stylesheet" />
-
+    <link href="~/Content/tabs.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -35,32 +35,32 @@
 </head>
 <body>
     <div class="progress-bar fixed-top " id="myBar"></div>
-     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-0 px-2  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
-            <a class="a navbar-brand py-0" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
-                <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
-                    <li class="nav-item active pr-3">
-                        <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-                    </li>
-                    <li class="nav-item pr-3">
-                        <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
-                    </li>
-                    <li class="nav-item  pr-3">
-                        <a href='@Url.Action("About","Home")' class="nav-link">About</a>
-                    </li>
-                </ul>
-                @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-0 px-2  bg-dark d-flex align-self-center" style="background-color:#000000 !important" id="my_nav">
+        <a class="a navbar-brand py-0" href="@Url.Action( "Index", "Home")"> AK Hotel </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse links px-2" style="background-color:#000000 !important" id="navbarNav">
+            <ul class="navbar-nav bg-dark text-center" style="background-color:#000000 !important">
+                <li class="nav-item active pr-3">
+                    <a href='@Url.Action("Index","Home")' class="nav-link">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item  pr-3">
+                    <a href='@Url.Action("About","Home")' class="nav-link">About</a>
+                </li>
+            </ul>
+            @Html.Partial("_LoginPartial", new PFM.Models.ApplicationUser())
+        </div>
+    </nav>
     <div class="body-content m-0 p-0">
         @RenderBody()
     </div>
@@ -188,9 +188,10 @@
     <script src="~/Scripts/datepicker.fr.js"></script>
     <script src="~/Scripts/datepicker.en.js"></script>
     <script src="~/Content/lightbox2/js/lightbox.min.js"></script>
+    <script src="~/Scripts/tabsSlider.js"></script>
 
     <script>
-            window.onscroll = function () { myFunction() };
+        window.onscroll = function () { myFunction() };
 
         function myFunction() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -246,6 +247,19 @@
         $('#myPicker,#myPicker2').datepicker();
         // Access instance of plugin
         $('#myPicker,#myPicker2').data('datepicker');
+    </script>
+    <script>
+       new TabsSlider('.tabs');
+        $(".btn-Move").click(function () {
+            $(".tabs__section").first().hide();
+            $(".tabs__section").last().show();
+
+        })
+        var elem = document.querySelector('.tabs');
+
+        elem.addEventListener('tabChange', function (evt) {
+                console.log(evt.detail)
+            })
     </script>
 </body>
 </html>
