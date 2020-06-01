@@ -415,7 +415,6 @@ namespace PFM.Controllers
             db.SaveChanges();
 
 
-
             var ChambreReserved = from ro in db.Rooms
                                   join rea in db.Reservations on ro.ChambreId equals rea.RoomId
                                   where rea.Confirmation == true && ro.ChambreId == currentRes.RoomId
