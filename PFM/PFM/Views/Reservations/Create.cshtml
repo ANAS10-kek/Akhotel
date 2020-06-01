@@ -34,7 +34,6 @@
 
             @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formCreateReservation" }))
             {
-                @Html.AntiForgeryToken()
 
                 <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row justify-content-between">
                     <div class="col-md-6 px-0 shadow" data-aos="fade-down">

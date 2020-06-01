@@ -1,4 +1,5 @@
 ﻿
+
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -43,8 +44,8 @@ namespace PFM.Controllers
             ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View();
         }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation, int id)
         {
             if (ModelState.IsValid)

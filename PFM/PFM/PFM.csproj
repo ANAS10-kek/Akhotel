@@ -726,7 +726,6 @@
     <Content Include="Views\Administration\roomList.cshtml" />
     <Content Include="Views\Administration\CreateRoom.cshtml" />
     <Content Include="Views\Administration\DetailsRoom.cshtml" />
-    <Content Include="Views\Reservations\MessageDeReservation.cshtml" />
     <Content Include="Views\Administration\ListUserInRole.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Tables\TableUser.cshtml" />
