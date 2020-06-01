@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
-    <link href="~/Content/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/datatables/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/StyleAdminstration.css" rel="stylesheet" />
     <link href="~/Content/jquery.toast.min.css" rel="stylesheet" />
@@ -18,8 +17,8 @@
     <link href="~/Content/tooltipster.bundle.min.css" rel="stylesheet" />
     <link href="~/Content/StyleCreateView.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <link href="~/Content/Chart.js/Chart.css" rel="stylesheet" />
+    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Content/Chart.js/Chart.min.js"></script>
     <link href="~/Content/pretty-checkbox.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -61,8 +60,6 @@
                             <a href='@Url.Action("RoomListUser","Rooms")' class="nav-link">Rooms & Suites</a>
 
                             <a href='@Url.Action("Index","EatDrink")' class="nav-link">Eat & drinks</a>
-
-                            <a href='@Url.Action("Index","Offers")' class="nav-link">Offers</a>
 
                             <a href='@Url.Action("Gallery","Home")' class="nav-link">Gallery</a>
 
@@ -134,11 +131,11 @@
 
 
     @*scripts*@
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.toast.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
     <script src="~/Scripts/MyScripts/NewPasswordValidation_DSh.js"></script>
     <script src="~/Scripts/MyScripts/DeleteClient.js"></script>
     <script src="~/Scripts/jquery.fancybox.min.js"></script>
@@ -147,18 +144,17 @@
     <script src="~/Scripts/MyScripts/DeleteClient.js"></script>
     <script src="~/Scripts/tooltipster.bundle.min.js"></script>
     <script src="~/Scripts/MyScripts/CreateViewScript.js"></script>
-    <script src="~/Content/Chart.js/Chart.js"></script>
+    <script src="~/Content/Chart.js/Chart.min.js"></script>
 
     @*scripts DataTable*@
+    <script src="~/Content/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/datatables-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/pdfmake/pdfmake.min.js"></script>
 
-
-    <script src="~/Content/datatables/js/jquery.dataTables.js"></script>
-    <script src="~/Content/datatables-buttons/js/dataTables.buttons.js"></script>
-    <script src="~/Content/datatables-buttons/js/buttons.colVis.js"></script>
-    <script src="~/Content/datatables-buttons/js/buttons.html5.js"></script>
-    <script src="~/Content/datatables-buttons/js/buttons.flash.js"></script>
-    <script src="~/Content/datatables-buttons/js/buttons.print.js"></script>
-    <script src="~/Content/pdfmake/pdfmake.js"></script>
     <script>
         $(document).ready(function () {
             $('#tableUser, #tableRooms,#tableRoles,#tableUSerRole').DataTable({

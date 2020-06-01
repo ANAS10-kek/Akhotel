@@ -46,6 +46,10 @@ namespace PFM.Controllers
             }
         }
         private ApplicationDbContext db = new ApplicationDbContext();
+
+
+
+
         // GET: /Manage/Index
         public ActionResult Index()
         {
@@ -110,7 +114,7 @@ namespace PFM.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
-       //a
+
         // GET: /Manage/editEmail
         public ActionResult editEmail()
         {
@@ -163,6 +167,7 @@ namespace PFM.Controllers
             }
             return View("editEmail", "_LayoutManage");
         }
+
         // POST: /Manage/AddPhoneNumber
         public ActionResult editPhoneNumber()
         {
@@ -209,6 +214,7 @@ namespace PFM.Controllers
             }
             return View();
         }
+
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         public async Task<ActionResult> RemovePhoneNumber()
@@ -225,6 +231,7 @@ namespace PFM.Controllers
             }
             return RedirectToAction("editPhoneNumber",new { Message = ManageMessageId.RemovePhoneSuccess });
         }
+
         //// GET: /Manage/SetotherInfo
         public ActionResult SetotherInfo()
         {
@@ -266,6 +273,7 @@ namespace PFM.Controllers
             ViewBag.Countries = new SelectList(countries, "id", "name");
             return View("SetotherInfo", "_LayoutManage",model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SetotherInfo(ApplicationUser model)
@@ -331,6 +339,7 @@ namespace PFM.Controllers
             }
             return View(user);
         }
+
         [HttpPost]
         public JsonResult GetStatesList(string Countries_id)
         {
@@ -338,6 +347,7 @@ namespace PFM.Controllers
             var states = db.States.Where(m => m.Countries.id == id).ToList();
             return Json(new SelectList(states, "id", "name"));
         }
+
         [HttpPost]
         public JsonResult GetCitiesList(string State_id)
         {
@@ -385,6 +395,7 @@ namespace PFM.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -425,6 +436,7 @@ namespace PFM.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -448,49 +460,7 @@ namespace PFM.Controllers
           
             return View(model);
         }
-        //
-        // GET: /Manage/ManageLogins
-        public async Task<ActionResult> ManageLogins(ManageMessageId? message)
-        {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "La connexion externe a été supprimée."
-                : message == ManageMessageId.Error ? "Une erreur s'est produite."
-                : "";
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
-            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
-            ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
-            {
-                CurrentLogins = userLogins,
-                OtherLogins = otherLogins
-            });
-        }
-        //
-        // POST: /Manage/LinkLogin
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider)
-        {
-            // Demander une redirection vers le fournisseur de connexion externe afin de lier une connexion pour l'utilisateur actuel
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
-        //
-        // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback()
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
-            {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-            }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-        }
+       
         public ActionResult editUsername()
         {
             var model = db.Users.Find(User.Identity.GetUserId());
@@ -537,21 +507,22 @@ namespace PFM.Controllers
             db.SaveChanges();
             return View(model);
         }
+
         public ActionResult _MenuRightSide()
         {
             var model = db.Users.Find(User.Identity.GetUserId());
             return View(model);
         }
+
         public ActionResult info()
         {
             return View();
         } 
+
         public ActionResult GeneralSettingsSection()
         {
             return RedirectToAction("Index","Manage");
         }
-
-        //delete Account
         public ActionResult RemoveAccount()
         {
             if (User.Identity.GetUserId() == null)

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,28 +7,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PFM.Models;
-using System.Net.Mail;
-using System.Collections.Generic;
-using Microsoft.Ajax.Utilities;
 
 namespace PFM.Controllers
 {
     [RequireHttps]
     public class AccountController : Controller
-    {        ApplicationDbContext db = new ApplicationDbContext();
+    {   
+        ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
-
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -124,6 +117,8 @@ namespace PFM.Controllers
             var cities = db.Cities.Where(m => m.States.id == id).ToList();
             return Json(new SelectList(cities, "id", "name"));
         }
+
+
         // POST: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -152,6 +147,8 @@ namespace PFM.Controllers
                AddErrors(result);
             return View(model);
         }
+
+
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {

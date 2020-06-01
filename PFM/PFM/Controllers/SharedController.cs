@@ -1,6 +1,4 @@
 ﻿using PFM.Models;
-using System.Net;
-using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace PFM.Controllers

@@ -5,7 +5,6 @@ using PFM.Models;
 using PFM.Models.ModelsReservation;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,9 +19,7 @@ namespace PFM.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        public AdministrationController()
-        {
-        }
+        public AdministrationController() {}
         public AdministrationController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
             ApplicationRoleManager roleManager)
         {
@@ -56,11 +53,7 @@ namespace PFM.Controllers
             Session["CountResr"] = db.Reservations.ToList().Count;
             Session["CountRooms"] = db.Rooms.ToList().Count;
             Session["CountRoomReserved"] = 0;
-            ViewBag.data = this.db.Users
-                                   .Where(x => x.Id != null)
-                                   .GroupBy(s => new { date = s.Datesinup.Month })
-                                   .Select(x => new { count = x.Count(), date = x.Key.date })
-                                    .ToList();
+            ViewBag.data = this.db.Users.Where(x => x.Id != null).GroupBy(s => new { date = s.Datesinup.Month }).Select(x => new { count = x.Count(), date = x.Key.date }).ToList();
             ViewBag.EmailNotConfirmed = this.db.Users.Where(x => x.EmailConfirmed == false).ToList().Count;
             ViewBag.EmailConfirmed = this.db.Users.Where(x => x.EmailConfirmed == true).ToList().Count;
             return View();
@@ -172,15 +165,9 @@ namespace PFM.Controllers
             usr.PasswordHash = null;
             db.SaveChanges();
             var result = await UserManager.AddPasswordAsync(Session["id"].ToString(), model.NewPassword);
-            if (result.Succeeded)
-            {
-                ViewData["JavaScriptFunction"] = "successALert();";
-
-            }
             return RedirectToAction("Details/" + usr.Id, "Administration");
 
         }
-
         // POST: Administration/Delete/5
         [HttpPost]
         public JsonResult DeleteClient(string id)
@@ -296,6 +283,7 @@ namespace PFM.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+        //*******************************ROOMS****************************************
         //role List
         private static Random random = new Random();
         public static string RandomString(int length)
@@ -343,6 +331,7 @@ namespace PFM.Controllers
             var roles = db.IdentityRoles.ToList();
             return View(roles);
         }
+
         public ActionResult ListUserInRole(string id)
         {
             var currentRole = db.Roles.Find(id);
@@ -358,11 +347,13 @@ namespace PFM.Controllers
 
             return View();
         }
+
         public JsonResult addUserTorole(string id, string role)
         {
             UserManager.AddToRole(id, role);
             return Json(JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult deleteUserfromRole(string id, string role)
         {
             UserManager.RemoveFromRole(id, role);
@@ -401,6 +392,7 @@ namespace PFM.Controllers
             var reservation = db.Reservations.ToList();
             return View(reservation);
         }
+
         bool stateConfirm;
         public ActionResult DetailsReservation(int id)
         {
@@ -408,6 +400,7 @@ namespace PFM.Controllers
             stateConfirm = currentRes.Confirmation;
             return View(currentRes);
         }
+
         [HttpPost]
         public ActionResult DetailsReservation(Reservation res, int id)
         {

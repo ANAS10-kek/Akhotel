@@ -21,6 +21,14 @@
     {
       "library": "lightbox2@2.11.1",
       "destination": "Content/lightbox2/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "Content/sweetalert/"
+    },
+    {
+      "library": "animate.css@4.1.0",
+      "destination": "Content/animate.css/"
     }
   ]
 }
