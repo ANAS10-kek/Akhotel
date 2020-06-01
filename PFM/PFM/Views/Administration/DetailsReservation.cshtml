@@ -21,7 +21,7 @@
         </a>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DetailsReservation", "Administration", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formEditReservation" }))
     {
         @Html.AntiForgeryToken()
 
@@ -51,7 +51,7 @@
                             <div class="col-lg-12 pb-2 div-form">
                                 <label class="labelinput">end Date</label>
                                 <div class="col-lg-12 m-0 p-0">
-                                    @Html.EditorFor(model => model.DateFin, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.EditorFor(model => model.DateFin, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     <div class="col-lg-12 pb-2 div-form">
                                         <div class="col-md-10 row justify-content-center">
                                             <div class="pretty p-switch p-fill">
-                                               @Html.EditorFor(c=>c.Confirmation)
+                                                @Html.EditorFor(c => c.Confirmation)
 
                                                 <div class="state p-primary">
                                                     <label>Confirm</label>
@@ -99,3 +99,73 @@
         </div>
     }
 </div>
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+       
+        $('#formEditReservation').validate(
+            {
+                errorClass: 'help-block animation-slideDown text-danger',
+                errorElement: 'span',
+                errorPlacement: function (error, e) {
+                    e.parents('.div-form ').append(error);
+                },
+                highlight: function (e) {
+
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                    console.log("success " + max);
+                },
+                error: function (e) {
+                    console.log("err "+max);
+                },
+                rules: {
+                    'Name': {
+                        required: true
+                    },
+                    'NbChambres':
+                    {
+                        required: true,
+                    
+
+}, 'DateDebut':
+{
+    required: true
+}, 'DateFin':
+{
+    required: true
+}, 'NbPers':
+{
+    required: true
+}
+}, messages: {
+'Name': {
+    required: 'Name is required'
+},
+'NbChambres':
+{
+    required: 'Numbre of rooms is required',
+}, 'DateDebut':
+{
+    required: 'Date Debut is required'
+}, 'DateFin':
+{
+    required: 'Date check out is required'
+}, 'NbPers':
+{
+    required: 'Number of persons is required'
+}
+}
+});
+});
+</script>
