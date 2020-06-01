@@ -18,11 +18,30 @@ namespace PFM.Controllers
         // GET: Rooms    
         public ActionResult RoomListUser()
         {
+
+            var roomsOutdated = from ro in db.Rooms
+                                join rea in db.Reservations on ro.ChambreId equals rea.RoomId
+                                where rea.DateFin < DateTime.Today
+                                select new { RoomId = ro.ChambreId,nbChamber=rea.NbChambres};
+
             var rooms = db.Rooms.ToList();
+            foreach(var r in rooms)
+            {
+                foreach(var roomOut in roomsOutdated)
+                {
+                    if(r.ChambreId == roomOut.RoomId)
+                    {
+                        r.Disponibilité += roomOut.nbChamber;
+                    }
+                }
+            }
+
+            db.SaveChanges();
+      
             ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View(rooms);
         }
-        
+
         // GET: Rooms/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,9 +54,9 @@ namespace PFM.Controllers
             {
                 return HttpNotFound();
             }
-            
 
-            return RedirectToAction("Create","Reservations");
+
+            return RedirectToAction("Create", "Reservations");
         }
         // GET: Rooms/Create
         public ActionResult Create()
@@ -48,7 +67,7 @@ namespace PFM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ChambreId,Titre,ImageId,Prix,TypeDeLit,Disponibilité,NbChambres,ShortDescription,LongDescription")] Room room)
         {
-           
+
             if (ModelState.IsValid)
             {
 
@@ -56,7 +75,7 @@ namespace PFM.Controllers
                 db.SaveChanges();
                 int id = db.Rooms.ToList().Last().ChambreId;
 
-                return RedirectToAction("Create/"+id,"roomImages");
+                return RedirectToAction("Create/" + id, "roomImages");
             }
 
             return View(room);

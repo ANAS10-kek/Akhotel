@@ -289,13 +289,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006010916433_init.cs" />
-    <Compile Include="Migrations\202006010916433_init.Designer.cs">
-      <DependentUpon>202006010916433_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006011024391_init1.cs" />
-    <Compile Include="Migrations\202006011024391_init1.Designer.cs">
-      <DependentUpon>202006011024391_init1.cs</DependentUpon>
+    <Compile Include="Migrations\202006011607393_init.cs" />
+    <Compile Include="Migrations\202006011607393_init.Designer.cs">
+      <DependentUpon>202006011607393_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -841,11 +837,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006010916433_init.resx">
-      <DependentUpon>202006010916433_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006011024391_init1.resx">
-      <DependentUpon>202006011024391_init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006011607393_init.resx">
+      <DependentUpon>202006011607393_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

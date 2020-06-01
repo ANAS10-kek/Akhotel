@@ -52,16 +52,17 @@ namespace PFM.Controllers
         {
             if(ModelState.IsValid)
             {
+                var room = db.Rooms.Find(id);
                 reservation.RoomId = id;
                 reservation.Confirmation = "Non";
                 reservation.UserId = User.Identity.GetUserId();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                var room = db.Rooms.Find(id);
+                
                 room.Disponibilité -= reservation.NbChambres;
                 db.SaveChanges();
-               
-                
+
+
                 return RedirectToAction("RoomListUser", "Rooms");
             }
             else
