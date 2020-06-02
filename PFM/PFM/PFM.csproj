@@ -741,6 +741,7 @@
     <Content Include="Views\Rooms\RoomListUser.cshtml" />
     <Content Include="Views\Reservations\ConfirmedReservation.cshtml" />
     <None Include="Views\Tables\TableRooms.cshtml" />
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
