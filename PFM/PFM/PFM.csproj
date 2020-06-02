@@ -302,10 +302,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Data.mdf" />
-    <Content Include="App_Data\Data_log.ldf">
-      <DependentUpon>Data.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\animate.css\animate.compat.css" />
     <Content Include="Content\animate.css\animate.compat.min.css" />
     <Content Include="Content\animate.css\animate.css" />
