@@ -28,9 +28,10 @@ namespace PFM
             mm.Body = message.Body;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
+  
             smtp.UseDefaultCredentials = false;
-            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
+            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@@");
+            smtp.EnableSsl = true;
             smtp.Credentials = NetworkCred;
             smtp.Port = 587;
             return smtp.SendMailAsync(mm);
