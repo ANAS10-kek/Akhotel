@@ -15,27 +15,6 @@ namespace PFM.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Reservations
-        public ActionResult Index()
-        {
-            var reservations = db.Reservations.Include(r => r.Room);
-            return View(reservations.ToList());
-        }
-
-        // GET: Reservations/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reservation reservation = db.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(reservation);
-        }
 
         // GET: Reservations/Create
         public ActionResult Create(int id)
