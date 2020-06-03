@@ -21,7 +21,7 @@ namespace PFM
             // Indiquez votre service de messagerie ici pour envoyer un e-mail.
 
             MailAddress mail = new MailAddress("test123.Anas@gmail.com");
-            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
+        
             MailMessage mm = new MailMessage(mail.ToString(), message.Destination);
             mm.IsBodyHtml = true;
             mm.Subject = message.Subject;
@@ -29,7 +29,8 @@ namespace PFM
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
-            smtp.UseDefaultCredentials = true;
+            smtp.UseDefaultCredentials = false;
+            NetworkCredential NetworkCred = new NetworkCredential("test123.Anas@gmail.com", "essahl1@&");
             smtp.Credentials = NetworkCred;
             smtp.Port = 587;
             return smtp.SendMailAsync(mm);
