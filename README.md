@@ -19,4 +19,18 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 #Les technologies utilisée
 
-+ ASP.NET MVC (.NET FRAMEWORK)<small>MVC5</small>
++ ASP.NET MVC (.NET FRAMEWORK) <small> MVC5</small>
+
++ Javascript
+
++ Jquery 3.4.1
+
++ Bootstrap 4.4.1
+
++ Animate.css
+
++ Lightbox.js
+
++ AOS.js
+
++ Datatables
