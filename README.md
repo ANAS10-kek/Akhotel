@@ -9,8 +9,8 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 #caractéristiques
 
-+La gestion d'authentification et d’authorization
++ La gestion d'authentification et d’authorization
 
-+La gestion des reservations 
++ La gestion des reservations 
 
-+La gestion des roles
++ La gestion des roles
