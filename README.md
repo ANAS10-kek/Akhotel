@@ -17,11 +17,13 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 + La gestion des roles
 
-#Les technologies utilisée
+#Les languages utilisée
 
 + ASP.NET MVC (.NET FRAMEWORK) <small> MVC5</small>
 
 + Javascript
+
+#Les bibliothèques utilisée 
 
 + Jquery 3.4.1
 
