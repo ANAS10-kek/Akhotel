@@ -1,6 +1,8 @@
 AK Hotel Project
 ==========================
-#Description
+
+#Description 
+
 <p>
 <b>Le Projet</b> est une Application Web d’un <b style="color:red">Hotel-Restaurant</b> 
 appelé AK Hôtel ,qui vise à mettre en valeur les prestations 
@@ -14,3 +16,7 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 + La gestion des reservations 
 
 + La gestion des roles
+
+#Les technologies utilisée
+
++ ASP.NET MVC (.NET FRAMEWORK)<small>MVC5</small>
