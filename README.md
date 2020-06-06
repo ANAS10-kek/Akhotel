@@ -17,11 +17,13 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 + La gestion des roles
 
-#Les languages utilisée
+#Les technologies utilisée
 
 + ASP.NET MVC (.NET FRAMEWORK) <small> MVC5</small>
 
 + Javascript
+
++ EntityFramework 6.2
 
 #Les bibliothèques utilisée 
 
@@ -36,3 +38,15 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 + AOS.js
 
 + Datatables
+
+#L'installation
+
+1. Changer la chaine de connection (ConnectionString) par votre chaine dans fichier web.config .
+<pre>
+<configuration>
+  <connectionStrings>
+    <add name="myConnectionString" connectionString="server=localhost;database=myDb;uid=myUser;password=myPass;" />
+  </connectionStrings>
+</configuration>  
+</pre>
+
