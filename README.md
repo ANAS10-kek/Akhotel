@@ -11,7 +11,7 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 #caractéristiques
 
-+ La gestion d'authentification et d’authorization
++ La gestion d'authentification et d’authorisation
 
 + La gestion des reservations 
 
