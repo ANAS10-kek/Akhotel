@@ -41,7 +41,7 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
 
 #L'installation
 
-1. Changer la chaine de connection (ConnectionString) par votre chaine dans fichier web.config .
+- Changer la chaine de connection (ConnectionString) par votre chaine dans fichier web.config 
 <pre>
 <configuration>
   <connectionStrings>
@@ -49,4 +49,6 @@ d’accueil dans la quelle on cite les informations ,les photos même les résea
   </connectionStrings>
 </configuration>  
 </pre>
+
+
 
