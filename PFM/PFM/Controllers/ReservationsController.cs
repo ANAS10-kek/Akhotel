@@ -17,25 +17,26 @@ namespace PFM.Controllers
 
 
         // GET: Reservations/Create
+        int idRoom;
         public ActionResult Create(int id)
         {
+            idRoom = id;
             ViewBag.chambre = db.Rooms.Where(c => c.ChambreId == id).Single();
             ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation, int id)
+        public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                var room = db.Rooms.Find(id);
-                reservation.RoomId = id;
+                var room = db.Rooms.Find(idRoom);
+                reservation.RoomId = idRoom;
                 reservation.Confirmation = false;
                 reservation.UserId = User.Identity.GetUserId();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
-                
                 return RedirectToAction("ConfirmedReservation");
             }
             else
