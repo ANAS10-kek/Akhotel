@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -27,11 +28,15 @@ namespace PFM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Reservation reservation)
+        public ActionResult Create(DateTime DateDebut, DateTime DateFin,int NbChambres,int NbPers)
         {
             if (ModelState.IsValid)
             {
-                var room = db.Rooms.Find(idRoom);
+                Reservation reservation = new Reservation();
+                reservation.DateDebut = DateDebut;
+                reservation.DateFin = DateFin;
+                reservation.NbChambres = NbChambres;
+                reservation.NbPers = NbPers;
                 reservation.RoomId = idRoom;
                 reservation.Confirmation = false;
                 reservation.UserId = User.Identity.GetUserId();
