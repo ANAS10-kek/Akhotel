@@ -32,11 +32,12 @@
     <div class="tabs__content p-0">
         <div class="tabs__section">
 
-            @using (Html.BeginForm("Create", "Reservations",FormMethod.Post,htmlAttributes: new { @id = "formCreateReservation" }))
-            {
 
-                <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row justify-content-between">
-                    <div class="col-md-6 px-0 shadow" data-aos="fade-down">
+
+            <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row justify-content-between">
+                <div class="col-md-6 px-0 shadow" data-aos="fade-down">
+                    @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, htmlAttributes: new { @id = "formCreateReservation" }))
+                    {
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="text-center">Fill the form</h5>
@@ -95,59 +96,60 @@
                             <div class="card-footer text-center text-muted">
                                 AK Hotel
                             </div>
+
                         </div>
+                    }
+                </div>
+                <div class="col-md-6 card p-0 ml-2  border rounded shadow my-0 my-md-4 my-sm-4 my-4" data-aos="fade-down">
+                    <div class="card-header">
+                        <h5>Room selected</h5>
                     </div>
-                    <div class="col-md-6 card p-0 ml-2  border rounded shadow my-0 my-md-4 my-sm-4 my-4" data-aos="fade-down">
-                        <div class="card-header">
-                            <h5>Room selected</h5>
-                        </div>
-                        <div class="d-flex card-body  bg-light p-4 flex-column flex-sm-column  flex-md-column  flex-lg-row " style="height:max-content !important">
-                            <div class="col-lg-6 gallery d-flex   justify-content-start align-items-center" data-aos="fade-in">
-                                @foreach (var img in ViewBag.ImagesRooms)
+                    <div class="d-flex card-body  bg-light p-4 flex-column flex-sm-column  flex-md-column  flex-lg-row " style="height:max-content !important">
+                        <div class="col-lg-6 gallery d-flex   justify-content-start align-items-center" data-aos="fade-in">
+                            @foreach (var img in ViewBag.ImagesRooms)
+                            {
+                                if (ViewBag.chambre.ChambreId == img.RoomId)
                                 {
-                                    if (ViewBag.chambre.ChambreId == img.RoomId)
-                                    {
-                                        <a href="~/pic/rooms_pic/@img.Name" class="h-100 w-100 " style="background:url(../../pic/rooms_pic/@img.Name) no-repeat center center/cover"></a>
-                                    }
+                                    <a href="~/pic/rooms_pic/@img.Name" class="h-100 w-100 " style="background:url(../../pic/rooms_pic/@img.Name) no-repeat center center/cover"></a>
                                 }
-                            </div>
-                            <div class="col-lg-6 d-flex px-1 flex-column justify-content-around ">
-                                <h5>@ViewBag.chambre.Titre</h5>
-                                <span style="font-size:.9rem" class="d-flex flex-column lead pb-1">
-                                    <span>bed type : @ViewBag.chambre.TypeDeLit </span>
+                            }
+                        </div>
+                        <div class="col-lg-6 d-flex px-1 flex-column justify-content-around ">
+                            <h5>@ViewBag.chambre.Titre</h5>
+                            <span style="font-size:.9rem" class="d-flex flex-column lead pb-1">
+                                <span>bed type : @ViewBag.chambre.TypeDeLit </span>
+                                <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                <span>Available : @ViewBag.chambre.Disponibilité rooms</span>
+                                <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                <span>Max person : @ViewBag.chambre.MaxNbPers person</span>
+                            </span>
+                            <p class="pl-3 mt-1 py-2" style="border-left:2px solid #DF6C4F">
+                                @ViewBag.chambre.LongDescription
+                            </p>
+                            <div class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row   justify-content-between">
+                                <div class="d-flex h-50 mb-4">
+                                    <span style="width:25px">
+                                        <img src="~/pic/Icon-svg/coffee.svg" />
+                                    </span>
                                     <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
-                                    <span>Available : @ViewBag.chambre.Disponibilité rooms</span>
+                                    <span style="width:25px">
+                                        <img src="~/pic/Icon-svg/wifi.svg" />
+                                    </span>
                                     <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
-                                    <span>Max person : @ViewBag.chambre.MaxNbPers person</span>
-                                </span>
-                                <p class="pl-3 mt-1 py-2" style="border-left:2px solid #DF6C4F">
-                                    @ViewBag.chambre.LongDescription
-                                </p>
-                                <div class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row   justify-content-between">
-                                    <div class="d-flex h-50 mb-4">
-                                        <span style="width:25px">
-                                            <img src="~/pic/Icon-svg/coffee.svg" />
-                                        </span>
-                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
-                                        <span style="width:25px">
-                                            <img src="~/pic/Icon-svg/wifi.svg" />
-                                        </span>
-                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
-                                        <span style="width:25px">
-                                            <img src="~/pic/Icon-svg/tv.svg" />
-                                        </span>
-                                        <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
-                                        <span style="width:25px">
-                                            <img src="~/pic/Icon-svg/shower.svg" />
-                                        </span>
-                                    </div>
+                                    <span style="width:25px">
+                                        <img src="~/pic/Icon-svg/tv.svg" />
+                                    </span>
+                                    <span class="h-100 bg-secondary mx-3" style="width:1px"></span>
+                                    <span style="width:25px">
+                                        <img src="~/pic/Icon-svg/shower.svg" />
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-            }
         </div>
         <div class="tabs__section">
             <div class="container m-auto">
