@@ -27,7 +27,7 @@ namespace PFM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Name,DateDebut,DateFin,NbChambres,NbPers")] Reservation reservation)
+        public ActionResult Create(Reservation reservation)
         {
             if (ModelState.IsValid)
             {
