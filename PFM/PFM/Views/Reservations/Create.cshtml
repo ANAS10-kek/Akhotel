@@ -32,7 +32,7 @@
     <div class="tabs__content p-0">
         <div class="tabs__section">
 
-            @using (Html.BeginForm("Create", "Reservations", new { @id = "formCreateReservation" }))
+            @using (Html.BeginForm("Create", "Reservations",FormMethod.Post,htmlAttributes: new { @id = "formCreateReservation" }))
             {
 
                 <div class="d-flex flex-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-lg-row justify-content-between">
