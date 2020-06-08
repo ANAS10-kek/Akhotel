@@ -123,9 +123,17 @@ namespace PFM.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var countries = db.Countries.ToList();
-            ViewBag.Countries = new SelectList(countries, "id", "name");
-            return View();
+            if(Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index","Home");
+            }
+            else
+            {
+                var countries = db.Countries.ToList();
+                ViewBag.Countries = new SelectList(countries, "id", "name");
+                return View();
+            }
+         
         }
         [HttpPost]
         [AllowAnonymous]
@@ -186,12 +194,14 @@ namespace PFM.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                if(User!=null)
+                {
+                    string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                await  UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
-            }
+                    await UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
+                    return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                }            }
             return View(model);
         }
 
