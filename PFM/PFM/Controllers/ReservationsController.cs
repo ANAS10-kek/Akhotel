@@ -28,15 +28,15 @@ namespace PFM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DateTime DateDebut, DateTime DateFin,int NbChambres,int NbPers)
+        public ActionResult Create(string DateDebut, string DateFin,string NbChambres,string NbPers)
         {
             if (ModelState.IsValid)
             {
                 Reservation reservation = new Reservation();
-                reservation.DateDebut = DateDebut;
-                reservation.DateFin = DateFin;
-                reservation.NbChambres = NbChambres;
-                reservation.NbPers = NbPers;
+                reservation.DateDebut =DateTime.Parse(DateDebut.ToString().Trim());
+                reservation.DateFin = DateTime.Parse(DateFin.ToString().Trim());
+                reservation.NbChambres =int.Parse(NbChambres);
+                reservation.NbPers = int.Parse(NbPers);
                 reservation.RoomId = idRoom;
                 reservation.Confirmation = false;
                 reservation.UserId = User.Identity.GetUserId();
