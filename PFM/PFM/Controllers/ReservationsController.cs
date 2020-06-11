@@ -32,15 +32,11 @@ namespace PFM.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if(Session["IdRoom"].ToString()== null)
-                //{
-                //    return RedirectToAction("ConfirmedReservation");
-                //}
                 Reservation reservation = new Reservation
                 {
                     RoomId =int.Parse(Session["IdRoom"].ToString()),
-                    DateDebut = DateTime.Parse(DateDebut.ToString().Trim()),
-                    DateFin = DateTime.Parse(DateFin.ToString().Trim()),
+                    DateDebut = DateTime.ParseExact(DateDebut, "dd/MM/yyyy", null),
+                    DateFin = DateTime.ParseExact(DateFin, "dd/MM/yyyy", null),
                     NbChambres = int.Parse(NbChambres),
                     NbPers = int.Parse(NbPers),
                     Confirmation = false,
