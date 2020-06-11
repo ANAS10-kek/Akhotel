@@ -194,14 +194,20 @@ namespace PFM.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                if(User!=null)
+                if(user==null)
+                {
+                    ModelState.AddModelError("", "Email not registred");
+                    return View(model);
+                }
+                else if (User!=null)
                 {
                     string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(user.Id, "Reset Password AK Hotel", "Reset your password by clicking <a href=\"" + callbackUrl + "\">Here</a>");
                     return RedirectToAction("ForgotPasswordConfirmation", "Account");
-                }            }
+                }            
+            }
             return View(model);
         }
 
@@ -243,10 +249,14 @@ namespace PFM.Controllers
         {
           
             var user = await UserManager.FindByEmailAsync(model.Email);
-           
+            if(user==null)
+            {
+                ModelState.AddModelError("", "Email no valid");
+                return View(model);
+            }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             
-            return View("Login");
+            return View("ForgotPasswordConfirmation");
         }
 
         //
