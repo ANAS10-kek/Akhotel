@@ -60,15 +60,14 @@ namespace PFM.Models
                 .HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId })
             .ToTable("AspNetUserLogins");
 
-            modelBuilder.Entity<Reservation>().HasRequired(r => r.Room)
-           .WithMany(r => r.Reservations).HasForeignKey(c=>c.RoomId);
+            modelBuilder.Entity<Room>().HasMany(r => r.Reservations)
+           .WithRequired(r => r.Room).HasForeignKey(c=>c.RoomId);
 
 
         }
 
         public System.Data.Entity.DbSet<PFM.Models.ModelsReservation.Reservation> Reservations { get; set; }
 
-        //public System.Data.Entity.DbSet<PFM.Models.ModelsReservation.Caracteristique> Caracteristiques { get; set; }
 
         public System.Data.Entity.DbSet<PFM.Models.ApplicationRole> IdentityRoles { get; set; }
 

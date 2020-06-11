@@ -18,28 +18,35 @@ namespace PFM.Controllers
 
 
         // GET: Reservations/Create
-        int idRoom;
+        int idRoom=0;
         public ActionResult Create(int id)
         {
-            idRoom = id;
+            Session["IdRoom"] = id;
             ViewBag.chambre = db.Rooms.Where(c => c.ChambreId == id).Single();
             ViewBag.ImagesRooms = db.RoomImages.ToList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(string DateDebut, string DateFin,string NbChambres,string NbPers)
+        public ActionResult Create(string DateDebut, string DateFin, string NbChambres, string NbPers)
         {
             if (ModelState.IsValid)
             {
-                Reservation reservation = new Reservation();
-                reservation.DateDebut =DateTime.Parse(DateDebut.ToString().Trim());
-                reservation.DateFin = DateTime.Parse(DateFin.ToString().Trim());
-                reservation.NbChambres =int.Parse(NbChambres);
-                reservation.NbPers = int.Parse(NbPers);
-                reservation.RoomId = idRoom;
-                reservation.Confirmation = false;
-                reservation.UserId = User.Identity.GetUserId();
+                //if(Session["IdRoom"].ToString()== null)
+                //{
+                //    return RedirectToAction("ConfirmedReservation");
+                //}
+                Reservation reservation = new Reservation
+                {
+                    RoomId =int.Parse(Session["IdRoom"].ToString()),
+                    DateDebut = DateTime.Parse(DateDebut.ToString().Trim()),
+                    DateFin = DateTime.Parse(DateFin.ToString().Trim()),
+                    NbChambres = int.Parse(NbChambres),
+                    NbPers = int.Parse(NbPers),
+                    Confirmation = false,
+                    UserId = User.Identity.GetUserId(),
+                };
+                db.Entry(reservation).State = EntityState.Added;
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
                 return RedirectToAction("ConfirmedReservation");
