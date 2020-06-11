@@ -18,7 +18,6 @@ namespace PFM.Controllers
 
 
         // GET: Reservations/Create
-        int idRoom=0;
         public ActionResult Create(int id)
         {
             Session["IdRoom"] = id;

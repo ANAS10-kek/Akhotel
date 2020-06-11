@@ -552,6 +552,7 @@
     <Content Include="Content\lightbox2\js\lightbox.min.map" />
     <Content Include="pic\rooms_pic\16256-116577-f64089915_3xl.webp" />
     <Content Include="Content\animate.css\animate.compat.min.css.map" />
+    <Content Include="Content\Menu-Pdf\menu-jantar-a4.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

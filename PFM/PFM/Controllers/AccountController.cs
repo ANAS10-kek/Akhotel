@@ -256,7 +256,7 @@ namespace PFM.Controllers
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             
-            return View("ForgotPasswordConfirmation");
+            return View("ResetPasswordConfirmation");
         }
 
         //

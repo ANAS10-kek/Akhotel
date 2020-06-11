@@ -8,28 +8,35 @@
             <button class="btn btn-secondary" type="button" style=" font-weight: bold;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @User.Identity.GetUserName().Substring(0, 2).ToUpper()
             </button>
-            <div class="dropdown-menu" style="left: -250% !important;" aria-labelledby="dropdownMenuButton">
-                <span class="d-flex px-1 py-0 mx-0 align-items-center">
-                    <a class="dropdown-item px-1 d-flex justify-content-between" title="Manage" href='@Url.Action("Index","Manage",routeValues: User.Identity.GetUserId().ToString())'>
-                        <i class="far fa-2x px-2 fa-id-badge"></i>
-                        <span>Mange profil</span>
+            <div class="dropdown-menu col-lg-12" style="left: -250% !important;" aria-labelledby="dropdownMenuButton">
+                <span class="d-flex col-lg-12 px-1 py-0 align-items-center">
+                    <a class="dropdown-item col-lg-12  d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-lg-content-between  px-1" title="Manage" href='@Url.Action("Index","Manage",routeValues: User.Identity.GetUserId().ToString())'>
+                        <i class="far fa-2x fa-id-badge"></i>
+                        <span class=" px-2 d-flex justify-content-start">
+                            <span class="">Mange profil</span>
+                        </span>
+
                     </a>
                 </span>
                 @if (User.IsInRole("Administrator"))
                 {
                     <div class="dropdown-divider my-0"></div>
                     <span class="d-flex px-1 py-0 align-items-center">
-                        <a class="dropdown-item  d-flex justify-content-betwee px-1" title="Logout" href='@Url.Action("Index","Administration")'>
-                            <i class="fas fa-2x px-2 fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
+                        <a class="dropdown-item col-lg-12  d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-lg-content-between  px-1" title="Logout" href='@Url.Action("Index","Administration")'>
+                            <i class="fas fa-2x fa-tachometer-alt"></i>
+                            <span class=" px-2 d-flex justify-content-start">
+                                <span>Dashboard</span>
+                            </span>
                         </a>
                     </span>
                 }
                 <div class="dropdown-divider my-0"></div>
                 <span class="d-flex px-1 py-0 align-items-center">
-                    <a class="dropdown-item d-flex justify-content-betwee px-1" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">
-                    <i class="fas fa-2x px-2 fa-sign-out-alt"></i>
-                    <span>Logout</span>
+                    <a class="dropdown-item col-lg-12  d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-lg-content-between  px-1" title="Logout" href="javascript:document.getElementById('logoutForm').submit()">
+                        <i class="fas fa-2x px-2 fa-sign-out-alt"></i>
+                        <span class="px-2 d-flex justify-content-start">
+                            <span>Logout</span>
+                        </span>
                     </a>
                 </span>
             </div>

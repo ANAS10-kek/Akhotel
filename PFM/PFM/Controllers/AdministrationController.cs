@@ -166,7 +166,6 @@ namespace PFM.Controllers
             db.SaveChanges();
             var result = await UserManager.AddPasswordAsync(Session["id"].ToString(), model.NewPassword);
             return RedirectToAction("Details/" + usr.Id, "Administration");
-
         }
         // POST: Administration/Delete/5
         [HttpPost]
