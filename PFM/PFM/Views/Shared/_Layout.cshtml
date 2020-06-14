@@ -21,7 +21,7 @@
     <script src="https://kit.fontawesome.com/2d05dd57ce.js" crossorigin="anonymous"></script>
     <script src="~/Content/sweetalert/sweetalert.min.js"></script>
     <link href="~/Content/animate.css/animate.min.css" rel="stylesheet" />
-
+    <link href="~/Content/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" />
     <style>
         .progress-bar {
             content: ' ';
@@ -188,6 +188,8 @@
     <script src="~/Scripts/datepicker.fr.js"></script>
     <script src="~/Content/lightbox2/js/lightbox.min.js"></script>
     <script src="~/Scripts/tabsSlider.js"></script>
+    <script src="~/Content/bootstrap-daterangepicker/moment.min.js"></script>
+    <script src="~/Content/bootstrap-daterangepicker/daterangepicker.min.js"></script>
 
     <script>
         window.onscroll = function () { myFunction() };
@@ -243,9 +245,15 @@
         })(document, window, 'Chatra');
     </script>
     <script>
-        $('#myPicker,#myPicker2').datepicker();
-        // Access instance of plugin
-        $('#myPicker,#myPicker2').data('datepicker');
+        var start = new Date();
+        start = moment().format('L');
+        console.log(start);
+        $('input[name="dates_From_To"]').daterangepicker({
+            minDate: start
+        });
+        $('input[name="dates_From_To"]').on('change', function () {
+            console.log($(this).val().split(" - "));
+        });
     </script>
     <script>
         new TabsSlider('.tabs');

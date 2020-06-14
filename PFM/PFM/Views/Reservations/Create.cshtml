@@ -61,17 +61,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center flex-nowrap col-lg-12 mb-4 px-0 mx-0">
-                                    <div class=" col-lg-6 mx-0 px-0 mr-1">
-                                        <label class="col-lg-6 text-left px-0 labelinput">Date debut</label>
-                                        <div class="col-md  px-0 div-form">
-                                            <input type="text" name="DateDebut" class="form-control " id="myPicker" data-language="fr" data-position="bottom left" />
-                                        </div>
-                                    </div>
-                                    <div class=" col-lg-6 mx-0 px-0">
-                                        <label class="col-lg-6 text-left px-0 labelinput">Date Fin</label>
-                                        <div class="col-md  px-0 div-form">
-                                            <input type="text" name="DateFin" class="form-control " id="myPicker2" data-language="fr" data-position="bottom left" />
+                                <div class="mb-4 ">
+                                    <div class="row">
+                                        <label class="col-md-4 text-left labelinput">From...To</label>
+                                        <div class="col-md div-form">
+                                            <input type="text" name="dates_From_To" class="form-control " />
+
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +223,7 @@
 
 <script>
     $(document).ready(function () {
-        var max=@ViewBag.chambre.NbChambres;
+        var max =@ViewBag.chambre.NbChambres;
         $('#formCreateReservation').validate(
             {
                 errorClass: 'help-block animation-slideDown text-danger',
@@ -246,9 +241,6 @@
                     e.closest('.help-block').remove();
                     console.log("success " + max);
                 },
-                error: function (e) {
-                    console.log("err "+max);
-                },
                 rules: {
                     'Name': {
                         required: true
@@ -256,37 +248,31 @@
                     'NbChambres':
                     {
                         required: true,
-                        range: [0,max]
+                        range: [0, max]
 
-}, 'DateDebut':
-{
-    required: true
-}, 'DateFin':
-{
-    required: true
-}, 'NbPers':
-{
-    required: true
-}
-}, messages: {
-'Name': {
-    required: 'Name is required'
-},
-'NbChambres':
-{
-    required: 'Numbre of rooms is required',
-}, 'DateDebut':
-{
-    required: 'Date Debut is required'
-}, 'DateFin':
-{
-    required: 'Date check out is required'
-}, 'NbPers':
-{
-    required: 'Number of persons is required'
-}
-}
-});
-});
+                    }, 'dates_From_To':
+                    {
+                        required: true
+                    }, 'NbPers':
+                    {
+                        required: true
+                    }
+                }, messages: {
+                    'Name': {
+                        required: 'Name is required'
+                    },
+                    'NbChambres':
+                    {
+                        required: 'Numbre of rooms is required',
+                    }, 'dates_From_To':
+                    {
+                        required: 'Date Debut is required'
+                    }, 'NbPers':
+                    {
+                        required: 'Number of persons is required'
+                    }
+                }
+            });
+    });
 </script>
 

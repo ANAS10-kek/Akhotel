@@ -29,6 +29,10 @@
     {
       "library": "animate.css@4.1.0",
       "destination": "Content/animate.css/"
+    },
+    {
+      "library": "bootstrap-daterangepicker@3.0.5",
+      "destination": "Content/bootstrap-daterangepicker/"
     }
   ]
 }

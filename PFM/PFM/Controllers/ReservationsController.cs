@@ -3,6 +3,7 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -27,15 +28,17 @@ namespace PFM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string DateDebut, string DateFin, string NbChambres, string NbPers)
+        public ActionResult Create(string dates_From_To, string NbChambres, string NbPers)
         {
             if (ModelState.IsValid)
             {
+                string[] Dates = dates_From_To.Split('-');
                 Reservation reservation = new Reservation
                 {
-                    RoomId =int.Parse(Session["IdRoom"].ToString()),
-                    DateDebut = DateTime.ParseExact(DateDebut, "dd/MM/yyyy", null),
-                    DateFin = DateTime.ParseExact(DateFin, "dd/MM/yyyy", null),
+                    RoomId = int.Parse(Session["IdRoom"].ToString()),
+                    Name=User.Identity.GetUserName(),
+                    DateDebut = DateTime.ParseExact(Dates[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                    DateFin = DateTime.ParseExact(Dates[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
                     NbChambres = int.Parse(NbChambres),
                     NbPers = int.Parse(NbPers),
                     Confirmation = false,

@@ -298,6 +298,11 @@
     <Content Include="Content\animate.css\animate.compat.min.css" />
     <Content Include="Content\animate.css\animate.css" />
     <Content Include="Content\animate.css\animate.min.css" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.min.css" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.min.js" />
+    <Content Include="Content\bootstrap-daterangepicker\moment.min.js" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\BtnSignUp.css" />
@@ -553,6 +558,8 @@
     <Content Include="pic\rooms_pic\16256-116577-f64089915_3xl.webp" />
     <Content Include="Content\animate.css\animate.compat.min.css.map" />
     <Content Include="Content\Menu-Pdf\menu-jantar-a4.pdf" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.min.css.map" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
