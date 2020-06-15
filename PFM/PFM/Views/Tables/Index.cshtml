@@ -1,7 +1,6 @@
 ﻿
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tables";
     Layout = "~/Views/Shared/_administrationLayout.cshtml";
 }
 <div class="card mb-4">
@@ -13,7 +12,7 @@
     </div>
     <div class="card-body">
         <div class="pl-1 py-1 pr-2 overflow-auto">
-            @Html.Partial("TableUser", ViewBag.listUsers as IEnumerable<PFM.Models.ApplicationUser>)
+            @Html.Partial("~/Views/Tables/TableUser.cshtml", ViewBag.listUsers as IEnumerable<PFM.Models.ApplicationUser>)
            
         </div>
     </div>
@@ -29,7 +28,7 @@
     <div class="card-body">
         <div class="pl-1 py-1 pr-2 overflow-auto">
            
-            @Html.Partial("TableRooms", ViewBag.listRooms as IEnumerable<PFM.Models.ModelsReservation.Room>)
+            @Html.Partial("~/Views/Tables/TableRooms.cshtml", ViewBag.listRooms as IEnumerable<PFM.Models.ModelsReservation.Room>)
         </div>
     </div>
 </div>
